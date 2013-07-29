@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>About flyout</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.1.0/css/ui-light.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+</head>
+<body>
+    <div data-win-control="WinJS.UI.SettingsFlyout" aria-label="About flyout" data-win-options="{settingsCommandId:'about'}">
+        <div class="win-ui-dark win-header" style="background-color: #242C37">
+            <button type="button" onclick="WinJS.UI.SettingsFlyout.show()" class="win-backbutton"></button>
+            <div class="win-label">About</div>
+            <img src="/images/smalllogo.png" style="position: absolute; right: 40px;" />
+        </div>
+        <div class="win-content ">
+            <div class="win-settings-section">
+                <div style="margin-top:34px;margin-right:44px;margin-left:44px;">
+                <h3>Learn almost anything for free.</h3>
+                <p>With a library of over 4,000 videos on everything from arithmetic to physics, finance, and history and hundreds of skills to practice, we're on a mission to help you learn what you want, when you want, at your own pace. </p>
+                <p>We are a donor-supported not-for-profit and would not be possible without the generous support of users everywhere. In particular, we'd like to thank The Bill and Melinda Gates Foundation, Ann & John Doerr, the O'Sullivan Foundation, Reed Hastings, Google, and the Windsong Trust for their strong support of our mission. </p>
+                <p><a style="color:#7fac05" href="http://www.khanacademy.org/about">More about Khan Academy</a></p>
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

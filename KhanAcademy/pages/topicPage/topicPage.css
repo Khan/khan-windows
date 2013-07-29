@@ -1,0 +1,219 @@
+﻿#topicPagePanel {
+	-ms-grid-rows:1fr;
+	-ms-grid-columns:530px 1fr;
+}
+
+#topicPagePanel header {
+	color:white;
+}
+
+#topicPagePanel .win-backbutton {
+    background-color: transparent;
+    border-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+}
+
+#topicPagePanel header h1 {
+	padding-right:30px;
+}
+
+#topicPagePanel header p {
+	font-size:14pt;
+}
+
+#topicPagePanel section[role=main] {
+    -ms-grid-row: 1;
+	-ms-grid-column:2;
+}
+
+#topicPagePanel .mainGrid{
+	display:-ms-grid;
+	-ms-grid-rows:100px 1fr;
+	-ms-grid-columns:1fr;
+	height:100%;
+}
+
+#topicPagePanel #childrenLv{
+	-ms-grid-row: 2;
+	-ms-grid-column:1;
+	height:100%;
+}
+
+#topicPagePanel #childrenLv .win-surface{
+	margin-left: 70px;
+}
+
+#topicPagePanel #childrenLv .win-container:not(.win-footprint) {
+    background-color: transparent;
+}
+
+.tutorialItem {
+	width:624px;
+	height:293px;
+	background-color:#fff;
+	margin-right:7px;
+	margin-bottom:7px;
+	display:-ms-grid;
+	-ms-grid-rows:1fr 14px;
+	-ms-grid-columns:346px 1fr;
+	border:solid 1px #ccc;
+}
+
+.tutorialItem .content {
+    margin: 14px;
+	margin-top:6px;
+	-ms-grid-row: 1;
+	-ms-grid-column:1;
+	overflow:hidden;
+}
+
+.tutorialItem .title {
+	margin:0px 0 8px;
+	font-size:14pt;
+	color:#297395;
+	font-weight:400;
+}
+
+.tutorialItem .descrip {		
+	font-size:10pt;
+}
+
+.tutorialItem .playlist {    
+	-ms-grid-row: 1;
+	-ms-grid-column:2;
+	border-left:solid 1px #ccc;
+	font-size:10pt;
+	-ms-grid-row-span: 2;
+}
+
+.tutorialItem .playlist div {    
+	height:20px;
+	padding:10px 10px 10px 39px;
+	text-overflow:ellipsis;
+	white-space:nowrap; 
+	overflow:hidden;
+	border-top:solid 1px #ccc;
+	color:#297395;
+	background-image: url('/images/playlistItem-mid.png');
+	background-repeat: no-repeat;
+	background-position-x: -10px;
+}
+
+.tutorialItem .playlist .pItem:first-child {    
+	border-top:none;
+	background-image: url('/images/playlistItem-top.png');
+	background-position: -11px 4px;
+}
+
+.tutorialItem .playlist .pEndItem {    
+	background-image: url('/images/playlistItem-bot.png');
+    background-position: -11px -2px;
+}
+
+.tutorialItem .playlist .pSoloItem {    
+	background-image: url('/images/playlistItem-solo.png');
+    background-position: -11px -2px;
+}
+
+.tutorialItem .playlist .mItem {    
+    color:#999;
+	background-image: url('/images/playlistItem-more.png');
+    background-position: -11px -6px;
+}
+
+.tutorialItem .playlist .pItem:hover, .tutorialItem .playlist .pEndItem:hover, .tutorialItem .playlist .pSoloItem:hover {
+    background-color:#e3f5fd;	
+}
+
+@media screen and (-ms-view-state: snapped) {
+	#topicPagePanel {
+		-ms-grid-rows:auto 1fr;
+		-ms-grid-columns:1fr;
+	}
+	
+	#topicPagePanel header {
+		margin-left:0;
+		padding-left:12px;
+        padding-bottom:10px;
+	}
+	
+	#topicPagePanel header p {
+		display:none;
+	}
+	
+	#topicPagePanel section[role=main] {
+		-ms-grid-row: 2;
+		-ms-grid-column:1;
+	}
+	
+	#topicPagePanel .mainGrid{
+		-ms-grid-rows:1fr;
+	}
+	
+	#topicPagePanel #childrenLv{
+		-ms-grid-row: 1;
+	}
+	
+	#topicPagePanel #childrenLv .win-surface{
+		margin-left: 0;
+	}
+	
+	.tutorialItem {
+		width:280px;
+		height:300px;
+		margin-right:0;		
+		display:-ms-grid;
+		-ms-grid-rows:0.55fr 0.45fr;
+		-ms-grid-columns:1fr;
+	}
+	
+	.tutorialItem .content {
+		margin: 12px;
+		overflow:hidden;
+		text-overflow:ellipsis;
+	}
+	
+	.tutorialItem .title {
+		margin:0px 0 8px;
+		font-size:12pt;
+	}
+	
+	.tutorialItem .playlist {    
+		-ms-grid-row: 2;
+		-ms-grid-column:1;
+		-ms-grid-row-span: 1;
+		border-left:0;
+		border-top:solid 1px #ccc;
+	}
+}
+
+@media all and (-ms-view-state: fullscreen-portrait) {
+	#topicPagePanel {
+		-ms-grid-rows:150px 1fr;
+		-ms-grid-columns:1fr;
+	}
+
+	#topicPagePanel header h1 {
+		margin-top:60px;
+		padding-right:30px;
+		font-size:24pt;
+	}
+
+	#topicPagePanel header p {
+		display:none;
+	}
+
+	#topicPagePanel section[role=main] {
+		-ms-grid-row: 2;
+		-ms-grid-column:1;
+	}
+
+	#topicPagePanel .mainGrid{
+		display:-ms-grid;
+		-ms-grid-rows:20px 1fr;
+	}
+	
+	#topicPagePanel #childrenLv .win-surface{
+		margin-left: 100px;
+	}
+}

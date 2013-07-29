@@ -1,0 +1,195 @@
+﻿#subjectPagePanel {
+	-ms-grid-rows:1fr;
+	-ms-grid-columns:530px 1fr;
+}
+
+#subjectPagePanel header {
+	color:white;
+}
+
+#subjectPagePanel .win-backbutton {
+    background-color: transparent;
+    border-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+}
+
+#subjectPagePanel header h1 {
+	padding-right:30px;
+}
+
+#subjectPagePanel header p {
+	font-size:14pt;
+    overflow:hidden;
+    padding-bottom:20px;
+}
+
+#subjectPagePanel section[role=main] {
+    -ms-grid-row: 1;
+	-ms-grid-column:2;
+}
+
+#subjectPagePanel .mainGrid{
+	display:-ms-grid;
+	-ms-grid-rows:100px 1fr;
+	-ms-grid-columns:1fr;
+	height:100%;
+}
+
+#subjectPagePanel #childrenLv{
+	-ms-grid-row: 2;
+	-ms-grid-column:1;
+	height:100%;
+}
+
+#subjectPagePanel #childrenLv .win-surface{
+	margin-left: 70px;
+}
+
+#subjectPagePanel #childrenLv .win-container:not(.win-footprint) {
+    background-color: transparent;
+}
+
+.topicItem {
+	width:490px;
+	height:182px;
+	background-color:#fff;
+	margin-right:7px;
+	margin-bottom:7px;
+	display:-ms-grid;
+	-ms-grid-rows:1fr 14px;
+	-ms-grid-columns:152px 1fr 14px;
+    border:solid 1px #ccc;
+}
+
+.topicItem .count {
+	color: #AAA;
+	font-size: 10pt;
+	-ms-grid-column: 2;
+	-ms-grid-column-align: end;
+	-ms-grid-row-align: start;
+	margin-top: 18px;
+	padding-left: 18px;
+	background-image: url('/images/ico_camera.png');
+	background-repeat: no-repeat;
+	background-position-y: 4px;    	
+}
+
+.topicItem .image {
+	-ms-grid-row: 1;
+	-ms-grid-column:1;
+	width: 120px;
+	height: 90px;
+	margin-top: 14px;
+	margin-left: 14px;
+	background-size: cover;
+}
+
+.topicItem .content {
+	-ms-grid-row: 1;
+	-ms-grid-column:2;
+	overflow:hidden;	
+}
+
+.topicItem .title {
+	margin:14px 0 8px 0;
+	font-size:14pt;
+	color:#297395;
+	font-weight:400;
+	padding-right: 35px;
+}
+
+.topicItem .descrip {	
+	font-size:10pt;
+}
+
+@media screen and (-ms-view-state: snapped) {
+	#subjectPagePanel {
+		-ms-grid-rows:auto 1fr;
+		-ms-grid-columns:1fr;
+	}
+	
+	#subjectPagePanel header {
+		margin-left:0;
+		padding-left:12px;
+        padding-bottom:10px;
+	}
+	
+	#subjectPagePanel header p {
+		display:none;
+	}
+	
+	#subjectPagePanel section[role=main] {
+		-ms-grid-row: 2;
+		-ms-grid-column:1;
+	}
+	
+	#subjectPagePanel .mainGrid{
+		-ms-grid-rows:1fr;
+	}
+	
+	#subjectPagePanel #childrenLv{
+		-ms-grid-row: 1;
+	}
+	
+	#subjectPagePanel #childrenLv .win-surface{
+		margin-left: 0;
+	}
+	
+	.topicItem {
+		width:280px;
+		height:210px;
+		-ms-grid-columns:94px 1fr 14px;
+	}
+	
+	.topicItem .image {
+		width: 73px;
+		height: 49px;
+		margin-top: 12px;
+		margin-left: 12px;
+	}
+	
+	.topicItem .title {
+		margin:12px 0 6px 0;
+		font-size:12pt;
+	}
+	
+	.topicItem .descrip {	
+		overflow:hidden;
+		text-overflow:ellipsis;
+	}
+	
+	.topicItem .count {
+		margin-top: 12px;
+	}
+}
+
+@media all and (-ms-view-state: fullscreen-portrait) {
+	#subjectPagePanel {
+		-ms-grid-rows:150px 1fr;
+		-ms-grid-columns:1fr;
+	}
+
+	#subjectPagePanel header h1 {
+		margin-top:60px;
+		padding-right:30px;
+		font-size:24pt;
+	}
+
+	#subjectPagePanel header p {
+		display:none;
+	}
+
+	#subjectPagePanel section[role=main] {
+		-ms-grid-row: 2;
+		-ms-grid-column:1;
+	}
+
+	#subjectPagePanel .mainGrid{
+		display:-ms-grid;
+		-ms-grid-rows:20px 1fr;
+	}
+	
+	#subjectPagePanel #childrenLv .win-surface{
+		margin-left: 100px;
+	}
+}

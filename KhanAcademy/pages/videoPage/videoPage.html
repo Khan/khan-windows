@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>videoPage</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.1.0/css/ui-light.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+
+    <link href="videoPage.css" rel="stylesheet" />
+    <script src="videoPage.js"></script>
+</head>
+<body>
+    <div id="videoPagePanel" class="fragment">
+        <header aria-label="Header content" role="banner">
+            <button class="win-backbutton" aria-label="Back" disabled type="button"></button>
+            <div id="titleGrid">
+                <div id="pageTitle" class="pagetitle"></div>
+                <div id="videoDelete">Delete video</div>
+                <div id="videoDownload">Download video<br />
+                    <progress id="downloadProgress" value="0"></progress>
+                </div>
+                <div id="pageDescDivider">|</div>
+                <div id="pageDesc"></div>                
+            </div>
+        </header>
+        <section aria-label="Main content" role="main">
+            <div class="mainGrid">
+                <video id="vidPlayer" controls="controls"></video>
+                <div id="tmbDiv"></div>
+                <div id="offlineDiv">
+                    Network connection not available. Download the video next time you're online to watch the video offline.
+                </div>
+                <div id="tutDiv">
+					<div id="tutGrid">
+						<div id="tutTitleBgd"></div>
+						<div id="tutDownload" title="Download all videos in this list"></div>
+						<div id="tutTitle"></div>
+						<div id="tutList"></div>
+					</div>
+                </div>
+                <div id="transcriptDiv">
+                    <div id="transcriptList"></div>
+                </div>
+                <div id="noTranscriptDiv">
+                    No transcript available.
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="appBar" data-win-control="WinJS.UI.AppBar" data-win-options="">
+        <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmdDelete',label:'Delete',icon:'delete',section:'global',tooltip:'Delete video'}">
+        </button>
+        <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmdDownload',label:'Download',icon:'download',section:'global',tooltip:'Download video'}">
+        </button>
+    </div>
+</body>
+</html>

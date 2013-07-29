@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "KhanAcademy", "KhanAcademy\KhanAcademy.jsproj", "{154AF414-344A-4BC9-B43B-80943099E7D1}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://adkinn.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = KhanAcademy\\KhanAcademy.jsproj
+		SccProjectName1 = KhanAcademy
+		SccLocalPath1 = KhanAcademy
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Debug|ARM.ActiveCfg = Debug|ARM
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Debug|ARM.Build.0 = Debug|ARM
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Debug|ARM.Deploy.0 = Debug|ARM
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Debug|x64.ActiveCfg = Debug|x64
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Debug|x64.Build.0 = Debug|x64
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Debug|x64.Deploy.0 = Debug|x64
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Debug|x86.ActiveCfg = Debug|x86
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Debug|x86.Build.0 = Debug|x86
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Debug|x86.Deploy.0 = Debug|x86
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Release|ARM.ActiveCfg = Release|ARM
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Release|ARM.Build.0 = Release|ARM
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Release|ARM.Deploy.0 = Release|ARM
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Release|x64.ActiveCfg = Release|x64
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Release|x64.Build.0 = Release|x64
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Release|x64.Deploy.0 = Release|x64
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Release|x86.ActiveCfg = Release|x86
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Release|x86.Build.0 = Release|x86
+		{154AF414-344A-4BC9-B43B-80943099E7D1}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

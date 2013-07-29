@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>searchResults</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.1.0/css/ui-light.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+
+    <link href="searchResults.css" rel="stylesheet" />
+    <script src="searchResults.js"></script>
+</head>
+<body>
+    <div id="searchResultsPanel" class="fragment">
+        <header aria-label="Header content" role="banner">
+            <button class="win-backbutton" aria-label="Back" disabled type="button"></button>
+            <h1 class="titlearea win-type-ellipsis">
+                <span id="pageTitle" class="pagetitle">Search Results</span>
+                <span id="resultsCount"></span>
+            </h1>
+        </header>
+        <section aria-label="Main content" role="main">
+            <div id="resultsGrid">
+                <div id="filterList">
+                    <select id="categorySelect">
+                        <option>All categories</option>
+                    </select>
+                </div>                
+                <div id="resultsLv" data-win-control="WinJS.UI.ListView" data-win-options="{ selectionMode: 'none' }" ></div> 
+                <div id="noResults">
+                    No results.
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
