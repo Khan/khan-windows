@@ -246,9 +246,13 @@
                 if (isDomainMenuOpen) {
                     WinJS.UI.Animation.exitContent(domainMenus[curDomainMenuIndex]).done(function () {
                         domainMenuClickEater.style.visibility = 'collapse';
-                        domainMenus[curDomainMenuIndex].style.visibility = 'collapse';
-                        isDomainMenuOpen = false;
-                        curDomainMenuIndex = -1;
+                        // This extra check is needed because 2 async operations can be queued before
+                        // either one is processed.
+                        if (isDomainMenuOpen) {
+                            domainMenus[curDomainMenuIndex].style.visibility = 'collapse';
+                            isDomainMenuOpen = false;
+                            curDomainMenuIndex = -1;
+                        }
                         c();
                     });
                 } else {
