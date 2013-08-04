@@ -29,13 +29,15 @@
     background-color: transparent;
 }
 
-#searchResultsPanel #resultsLv .win-surface{
+#searchResultsPanel #resultsLv .win-surface {
 	margin-left:115px;
 	margin-bottom:100px;
 }
 
 #searchResultsPanel #noResults {
     display:none;
+    -ms-grid-row:2;
+    margin-left:120px;
 }
 
 @media screen and (-ms-view-state: snapped) {
@@ -67,11 +69,14 @@
 	#searchResultsPanel #filterList {
 		margin-left:20px;
 	}	
-	
-	#searchResultsPanel #resultsLv .win-surface{
+	#searchResultsPanel #resultsLv .win-surface {
 		margin-left:0;
 		margin-bottom:0;
 	}
+
+    #searchResultsPanel #noResults {
+        margin-left:20px;
+    }
 }
 
 @media all and (-ms-view-state: fullscreen-portrait) {
@@ -88,7 +93,11 @@
 		margin-left:100px;
 	}
 
-    #searchResultsPanel #resultsLv .win-surface{
-	    margin-left:100px;
+    #searchResultsPanel #resultsLv .win-surface {
+        margin-left:100px;
+    }
+
+    #searchResultsPanel #noResults {
+        margin-left:100px;
     }
 }
