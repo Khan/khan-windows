@@ -51,7 +51,7 @@
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
     <TargetPlatformVersion>8.0</TargetPlatformVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile>KhanAcademy_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile />
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
   </PropertyGroup>
   <ItemGroup>
@@ -86,19 +86,52 @@
     <Content Include="images\x7626d097.png" />
     <Content Include="images\widelogo.png" />
     <TypeScriptCompile Include="js\base.ts" />
+    <Content Include="js\base.js">
+      <DependentUpon>base.ts</DependentUpon>
+    </Content>
     <TypeScriptCompile Include="js\data\data.ts" />
+    <Content Include="js\data\data.js">
+      <DependentUpon>data.ts</DependentUpon>
+    </Content>
     <TypeScriptCompile Include="js\data\downloads.ts" />
+    <Content Include="js\data\downloads.js">
+      <DependentUpon>downloads.ts</DependentUpon>
+    </Content>
     <TypeScriptCompile Include="js\data\models.ts" />
+    <Content Include="js\data\models.js">
+      <DependentUpon>models.ts</DependentUpon>
+    </Content>
     <TypeScriptCompile Include="js\data\user.ts" />
+    <Content Include="js\data\user.js">
+      <DependentUpon>user.ts</DependentUpon>
+    </Content>
     <TypeScriptCompile Include="js\default.ts" />
+    <Content Include="js\default.js">
+      <DependentUpon>default.ts</DependentUpon>
+    </Content>
     <TypeScriptCompile Include="js\extensions.ts" />
+    <Content Include="js\extensions.js">
+      <DependentUpon>extensions.ts</DependentUpon>
+    </Content>
     <Content Include="css\default.css" />
     <TypeScriptCompile Include="js\navigator.ts" />
+    <Content Include="js\navigator.js">
+      <DependentUpon>navigator.ts</DependentUpon>
+    </Content>
     <TypeScriptCompile Include="js\settings.ts" />
+    <Content Include="js\settings.js">
+      <DependentUpon>settings.ts</DependentUpon>
+    </Content>
     <TypeScriptCompile Include="js\utilities.ts" />
+    <Content Include="js\utilities.js">
+      <DependentUpon>utilities.ts</DependentUpon>
+    </Content>
     <Content Include="pages\downloadsPage\downloadsPage.css" />
     <Content Include="pages\downloadsPage\downloadsPage.html" />
     <TypeScriptCompile Include="pages\downloadsPage\downloadsPage.ts" />
+    <Content Include="pages\downloadsPage\downloadsPage.js">
+      <DependentUpon>downloadsPage.ts</DependentUpon>
+    </Content>
     <Content Include="pages\flyouts\about.html" />
     <Content Include="pages\flyouts\feedback.html" />
     <Content Include="pages\flyouts\privacy.html" />
@@ -106,27 +139,58 @@
     <Content Include="pages\mainHub\mainHub.css" />
     <Content Include="pages\mainHub\mainHub.html" />
     <TypeScriptCompile Include="pages\mainHub\mainHub.ts" />
+    <Content Include="pages\mainHub\mainHub.js">
+      <DependentUpon>mainHub.ts</DependentUpon>
+    </Content>
     <Content Include="pages\newsPage\newsPage.css" />
     <Content Include="pages\newsPage\newsPage.html" />
     <TypeScriptCompile Include="pages\newsPage\newsPage.ts" />
+    <Content Include="pages\newsPage\newsPage.js">
+      <DependentUpon>newsPage.ts</DependentUpon>
+    </Content>
     <Content Include="pages\searchResults\searchResults.css" />
     <Content Include="pages\searchResults\searchResults.html" />
     <TypeScriptCompile Include="pages\searchResults\searchResults.ts" />
+    <Content Include="pages\searchResults\searchResults.js">
+      <DependentUpon>searchResults.ts</DependentUpon>
+    </Content>
     <Content Include="pages\subjectPage\subjectPage.css" />
     <Content Include="pages\subjectPage\subjectPage.html" />
     <TypeScriptCompile Include="pages\subjectPage\subjectPage.ts" />
+    <Content Include="pages\subjectPage\subjectPage.js">
+      <DependentUpon>subjectPage.ts</DependentUpon>
+    </Content>
     <Content Include="pages\topicPage\topicPage.css" />
     <Content Include="pages\topicPage\topicPage.html" />
     <TypeScriptCompile Include="pages\topicPage\topicPage.ts" />
+    <Content Include="pages\topicPage\topicPage.js">
+      <DependentUpon>topicPage.ts</DependentUpon>
+    </Content>
     <Content Include="pages\videoPage\videoPage.css" />
     <Content Include="pages\videoPage\videoPage.html" />
     <TypeScriptCompile Include="pages\videoPage\videoPage.ts" />
-    <None Include="KhanAcademy_TemporaryKey.pfx" />
+    <Content Include="pages\videoPage\videoPage.js">
+      <DependentUpon>videoPage.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="scripts\typings\winjs.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\winrt.d.ts" />    
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="Microsoft.WinJS.1.0, Version=1.0" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.VisualStudio.$(WMSJSProject).targets" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptIncludeComments>true</TypeScriptIncludeComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptIncludeComments>false</TypeScriptIncludeComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" />
   <!-- To modify your build process, add your task inside one of the targets below then uncomment
        that target and the DisableFastUpToDateCheck PropertyGroup. 
        Other similar extension points exist, see Microsoft.Common.targets.
