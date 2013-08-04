@@ -1,7 +1,8 @@
-﻿/// <reference path="//Microsoft.WinJS.1.0/js/base.js" />
-/// <reference path="//Microsoft.WinJS.1.0/js/ui.js" />
-/// <reference path="/js/base.js" />
-/// <reference path="/js/settings.js" />
+﻿/// <reference path="navigator.ts" />
+/// <reference path="data/user.ts" />
+/// <reference path="base.ts" />
+/// <reference path="../scripts/typings/winrt.d.ts" />
+/// <reference path="../scripts/typings/winjs.d.ts" />
 
 (function () {
     "use strict";
@@ -13,12 +14,12 @@
     var activation = Windows.ApplicationModel.Activation;
     var nav = WinJS.Navigation;
 
-    app.onactivated = function (args) {
+    app.onactivated = function (args:any) {
         if (args.detail.kind === Windows.ApplicationModel.Activation.ActivationKind.launch) {
             args.setPromise(WinJS.UI.processAll().then(function () {
-                KA.init().done(function () {
+                KA.Global.init().done(function () {
                     //initial offline check
-                    KA.showNetworkStatus();
+                    KA.Global.showNetworkStatus();
 
                     if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
                         if (nav.location) {
@@ -36,9 +37,9 @@
             }));
         } else if (args.detail.kind === Windows.ApplicationModel.Activation.ActivationKind.search) {
             args.setPromise(WinJS.UI.processAll().then(function () {
-                KA.init().done(function () {
+                KA.Global.init().done(function () {
                     //initial offline check
-                    KA.showNetworkStatus();
+                    KA.Global.showNetworkStatus();
 
                     if (args.detail.queryText && args.detail.queryText != "") {
                         return nav.navigate("/pages/searchResults/searchResults.html", { searchDetails: args.detail.queryText });
@@ -54,7 +55,7 @@
         WinJS.Navigation.navigate("/pages/searchResults/searchResults.html", { searchDetails: args.queryText });
     };
 
-    app.oncheckpoint = function (args) {
+    app.oncheckpoint = function (args: any) {
         var shutdownPromises = [];
 
         //var pageControl = KA.id('contenthost').winControl.pageControl;

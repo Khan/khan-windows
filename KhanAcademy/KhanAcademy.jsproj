@@ -88,11 +88,14 @@
     <TypeScriptCompile Include="js\base.ts" />
     <TypeScriptCompile Include="js\data\data.ts" />
     <TypeScriptCompile Include="js\data\downloads.ts" />
+    <TypeScriptCompile Include="js\data\models.ts" />
     <TypeScriptCompile Include="js\data\user.ts" />
     <TypeScriptCompile Include="js\default.ts" />
+    <TypeScriptCompile Include="js\extensions.ts" />
     <Content Include="css\default.css" />
     <TypeScriptCompile Include="js\navigator.ts" />
-    <Content Include="js\settings.ts" />
+    <TypeScriptCompile Include="js\settings.ts" />
+    <TypeScriptCompile Include="js\utilities.ts" />
     <Content Include="pages\downloadsPage\downloadsPage.css" />
     <Content Include="pages\downloadsPage\downloadsPage.html" />
     <TypeScriptCompile Include="pages\downloadsPage\downloadsPage.ts" />

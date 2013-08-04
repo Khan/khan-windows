@@ -1,21 +1,21 @@
-﻿/// <reference path="//Microsoft.WinJS.1.0/js/base.js" />
-/// <reference path="//Microsoft.WinJS.1.0/js/ui.js" />
-/// <reference path="/js/base.js" />
-/// <reference path="/js/settings.js" />
+﻿/// <reference path="data.ts" />
+/// <reference path="../settings.ts" />
+/// <reference path="../utilities.ts" />
+/// <reference path="../../scripts/typings/winrt.d.ts" />
+/// <reference path="../../scripts/typings/winjs.d.ts" />
 
-(function () {
+module KA {
     'use strict';
     var app = WinJS.Application;
 
-    var service;
+    var service: Downloads;
     var downloadedVideos = [];
     var trackedDownloads = [];
     var downloadOperations = [];
     var savedDateFileName = 'tracked.json';
 
-    WinJS.Namespace.define("KA.Downloads", {
-
-        deleteVideo: function (videoId) {
+    export class Downloads {
+        deleteVideo(videoId) {
             return new WinJS.Promise(function (c, e) {
                 var fileName = videoId + '.mp4';
                 var photoFileName = videoId + '.jpg';
@@ -53,16 +53,16 @@
                                     })
                                 });
                                 c();
-                            }, e);                            
+                            }, e);
                         } else {
                             c();
                         }
                     });
                 });
             });
-        },
+        }
 
-        downloadVideo: function (videoId, videoUrl) {
+        downloadVideo(videoId, videoUrl) {
             var videoFound = false;
 
             //check to make sure its not already downloading
@@ -75,7 +75,7 @@
 
             //check previously downloaded videos
             if (!videoFound) {
-                videoFound = service.isVideoDownloaded(videoId);
+                videoFound = this.isVideoDownloaded(videoId);
             }
 
             if (!videoFound) {
@@ -93,21 +93,21 @@
                 // Persist the download operation in the global array.
                 downloadOperations.push(newDownload);
             }
-        },
+        }
 
-        getDownloadedVideoCount: function () {
+        getDownloadedVideoCount() {
             return downloadedVideos.length;
-        },
+        }
 
-        getDownloadedVideoList: function (maxCount) {
+        getDownloadedVideoList(maxCount?) {
             if (maxCount && downloadedVideos.length > maxCount) {
                 return downloadedVideos.slice(0, maxCount);
             } else {
                 return downloadedVideos;
             }
-        },
+        }
 
-        getTranscript: function (video, isVideoDownloaded) {
+        getTranscript(video, isVideoDownloaded) {
             return new WinJS.Promise(function (c, e) {
                 if (KA.Settings.isInDesigner) {
                     var url = new Windows.Foundation.Uri("ms-appx:///transcript.json");
@@ -144,9 +144,9 @@
                     }
                 }
             });
-        },
+        }
 
-        getTranscriptFromWeb: function(video){
+        getTranscriptFromWeb(video) {
             return new WinJS.Promise(function (c, e) {
                 //check to see if transcript has been cached in temporary
                 var scriptFileName = video.id + '.script';
@@ -182,12 +182,12 @@
                                 e();
                             }
                         });
-                });
+                    });
             });
-        },        
+        }
 
-        init: function () {
-            service = this;
+        static init() {
+            service = new Downloads();
             return new WinJS.Promise(function (c, e) {
                 //load tracked video downloads
                 app.local.exists(savedDateFileName).done(function (fileExists) {
@@ -203,9 +203,53 @@
                     }
                 });
             });
-        },        
+        }
 
-        isVideoDownloaded: function (videoId) {
+        static recordNewDownload(videoId, guid) {
+            service.recordNewDownload(videoId, guid);
+        }
+
+        static recordProgress(guid, bytes, total) {
+            service.recordProgress(guid, bytes, total);
+        }
+
+        static recordDownloadSuccess(guid) {
+            service.recordDownloadSuccess(guid);
+        }
+
+        static save() {
+            return service.save();
+        }
+
+        static getDownloadedVideoCount() {
+            return service.getDownloadedVideoCount();
+        }
+
+        static getDownloadedVideoList(maxCount?: number) {
+            return service.getDownloadedVideoList(maxCount);
+        }
+
+        static isVideoDownloaded(videoId: string) {
+            return service.isVideoDownloaded(videoId);
+        }
+
+        static deleteVideo(videoId) {
+            return service.deleteVideo(videoId);
+        }
+
+        static downloadVideo(videoId, videoUrl) {
+            service.downloadVideo(videoId, videoUrl);
+        }
+
+        static isVideoDownloadInProgress(videoId) {
+            return service.isVideoDownloadInProgress(videoId);
+        }
+
+        static getTranscript(video, isVideoDownloaded) {
+            return service.getTranscript(video, isVideoDownloaded);
+        }
+
+        isVideoDownloaded(videoId) {
             var result = false;
 
             for (var i = 0; i < downloadedVideos.length; i++) {
@@ -216,9 +260,9 @@
             }
 
             return result;
-        },
+        }
 
-        isVideoDownloadInProgress: function (videoId) {
+        isVideoDownloadInProgress(videoId) {
             var result = false;
 
             for (var i = 0; i < trackedDownloads.length; i++) {
@@ -229,9 +273,9 @@
             }
 
             return result;
-        },
+        }
 
-        loadDownloadedVideos: function(){
+        loadDownloadedVideos() {
             return new WinJS.Promise(function (c, e) {
                 //verify photos and scripts folder exists
                 app.local.folder.createFolderAsync('photos', Windows.Storage.CreationCollisionOption.openIfExists);
@@ -285,9 +329,9 @@
                     c();
                 });
             });
-        },
+        }
 
-        recordDownloadSuccess: function (guid) {
+        recordDownloadSuccess(guid) {
             trackedDownloads.forEach(function (trackInfo, index) {
                 if (trackInfo.g == guid) {
 
@@ -320,110 +364,110 @@
                     app.queueEvent({ type: "downloadComplete", videoId: trackInfo.videoId });
                 }
             });
-        },
+        }
 
-        recordNewDownload: function (videoId, guid) {
+        recordNewDownload(videoId, guid) {
             trackedDownloads.push({ videoId: videoId, g: guid });
             app.queueEvent({ type: "newDownloadStarted", videoId: videoId });
-        },
+        }
 
-        recordProgress: function (guid, bytes, total) {
+        recordProgress(guid, bytes, total) {
             trackedDownloads.forEach(function (trackInfo, index) {
                 if (trackInfo.g == guid) {
                     app.queueEvent({ type: "downloadProgress", videoId: trackInfo.videoId, bytes: bytes, total: total });
                 }
             });
-        },
+        }
 
-        save: function(){
+        save() {
             return new WinJS.Promise(function (c, e) {
                 //save data
                 var content = JSON.stringify({ trackedDownloads: trackedDownloads });
                 app.local.writeText(savedDateFileName, content).done(c, e);
             });
         }
-    });
+    }
 
     // Class associated with each download.
-    function DownloadOperation() {
-        var download = null;
-        var promise = null;
-        var videoStream = null;
+    class DownloadOperation {
+        private download: Windows.Networking.BackgroundTransfer.DownloadOperation = null;
+        private promise = null;
+        private videoStream = null;
 
-        this.start = function (uri, videoId) {
-            app.local.folder.getFolderAsync('videos').done(function (folder) {
-               folder.createFileAsync(videoId + '.mp4', Windows.Storage.CreationCollisionOption.replaceExisting).done(function (newFile) {
-                    var downloader = new Windows.Networking.BackgroundTransfer.BackgroundDownloader();                    
+        start(uri, videoId) {
+            app.local.folder.getFolderAsync('videos').done(folder => {
+                folder.createFileAsync(videoId + '.mp4', Windows.Storage.CreationCollisionOption.replaceExisting).done(newFile => {
+                    var downloader = new Windows.Networking.BackgroundTransfer.BackgroundDownloader();
 
                     // Create a new download operation.
-                    download = downloader.createDownload(uri, newFile);
-                    KA.Downloads.recordNewDownload(videoId, download.guid);
+                    this.download = downloader.createDownload(uri, newFile);
+                    KA.Downloads.recordNewDownload(videoId, this.download.guid);
 
-                    console.log("Using URI: " + uri.absoluteUri + ', download guid: ' + download.guid);
+                    console.log("Using URI: " + uri.absoluteUri + ', download guid: ' + this.download.guid);
 
                     // Start the download and persist the promise to be able to cancel the download
-                    promise = download.startAsync().done(complete, error, progress);
-                }, error);
+                    this.promise = this.download.startAsync().done(() => { this.complete(); }, error => { this.error(error); }, () => { this.progress(); });
+                }, this.error);
             });
         };
 
         // On application activation, reassign callbacks for a download
         // operation persisted from previous application state.
-        this.load = function (loadedDownload) {
-            download = loadedDownload;
-            console.log("Found download: " + download.guid + " from previous application run.");
-            promise = download.attachAsync().then(complete, error, progress);
+        load(loadedDownload) {
+            this.download = loadedDownload;
+            console.log("Found download: " + this.download.guid + " from previous application run.");
+            this.promise = this.download.attachAsync().then(() => { this.complete(); }, error => { this.error(error); }, () => { this.progress(); });
         };
 
-        // Cancel download.
-        this.cancel = function () {
-            if (promise) {
-                promise.cancel();
-                promise = null;
-                console.log("Canceling download: " + download.guid);
-                if (videoStream) {
-                    videoStream.close();
-                    videoStream = null;
+            // Cancel download.
+        cancel() {
+            if (this.promise) {
+                this.promise.cancel();
+                this.promise = null;
+                console.log("Canceling download: " + this.download.guid);
+                if (this.videoStream) {
+                    this.videoStream.close();
+                    this.videoStream = null;
                 }
             }
             else {
-                console.log("Download " + download.guid + " already canceled.");
+                console.log("Download " + this.download.guid + " already canceled.");
             }
         };
 
-        // Resume download - download will restart if server does not allow range-requests.
-        this.resume = function () {
-            if (download) {
-                if (download.progress.status === Windows.Networking.BackgroundTransfer.BackgroundTransferStatus.pausedByApplication) {
-                    download.resume();
-                    console.log("Resuming download: " + download.guid);
+            // Resume download - download will restart if server does not allow range-requests.
+        resume() {
+            if (this.download) {
+                if (this.download.progress.status === Windows.Networking.BackgroundTransfer.BackgroundTransferStatus.pausedByApplication) {
+                    this.download.resume();
+                    console.log("Resuming download: " + this.download.guid);
                 }
                 else {
-                    console.log("Download " + download.guid + " is not paused, it may be running, completed, canceled or in error.");
+                    console.log("Download " + this.download.guid + " is not paused, it may be running, completed, canceled or in error.");
                 }
             }
         };
 
-        // Pause download.
-        this.pause = function () {
-            if (download) {
-                if (download.progress.status === Windows.Networking.BackgroundTransfer.BackgroundTransferStatus.running) {
-                    download.pause();
-                    console.log("Pausing download: " + download.guid);
+            // Pause download.
+        pause() {
+            if (this.download) {
+                if (this.download.progress.status === Windows.Networking.BackgroundTransfer.BackgroundTransferStatus.running) {
+                    this.download.pause();
+                    console.log("Pausing download: " + this.download.guid);
                 }
                 else {
-                    console.log("Download " + download.guid + " is not running, it may be paused, completed, canceled or in error.");
+                    console.log("Download " + this.download.guid + " is not running, it may be paused, completed, canceled or in error.");
                 }
             }
         };
 
         // Returns true if this is the download identified by the guid.
-        this.hasGuid = function (guid) {
-            return download.guid === guid;
-        };
+        hasGuid(guid) {
+            return this.download.guid === guid;
+        }
 
         // Removes download operation from global array.
-        function removeDownload(guid) {
+        removeDownload(guid) {
             downloadOperations.forEach(function (operation, index) {
                 if (operation.hasGuid(guid)) {
                     downloadOperations.splice(index, 1);
@@ -432,44 +476,44 @@
         }
 
         // Progress callback.
-        function progress() {
-            console.log('progress, download guid: ' + download.guid);
-            var currentProgress = download.progress;
+        progress() {
+            console.log('progress, download guid: ' + this.download.guid);
+            var currentProgress = this.download.progress;
             if (currentProgress.bytesReceived != undefined && currentProgress.totalBytesToReceive != undefined) {
                 console.log('progress:: bytes: ' + currentProgress.bytesReceived + ' / total: ' + currentProgress.totalBytesToReceive);
-                KA.Downloads.recordProgress(download.guid, currentProgress.bytesReceived, currentProgress.totalBytesToReceive);
+                KA.Downloads.recordProgress(this.download.guid, currentProgress.bytesReceived, currentProgress.totalBytesToReceive);
             }
 
             // Handle various pause status conditions.
             if (currentProgress.status === Windows.Networking.BackgroundTransfer.BackgroundTransferStatus.pausedByApplication) {
-                console.log("Download " + download.guid + " paused by application");
+                console.log("Download " + this.download.guid + " paused by application");
             } else if (currentProgress.status === Windows.Networking.BackgroundTransfer.BackgroundTransferStatus.pausedCostedNetwork) {
-                console.log("Download " + download.guid + " paused because of costed network");
+                console.log("Download " + this.download.guid + " paused because of costed network");
             } else if (currentProgress.status === Windows.Networking.BackgroundTransfer.BackgroundTransferStatus.pausedNoNetwork) {
-                console.log("Download " + download.guid + " paused because network is unavailable.");
+                console.log("Download " + this.download.guid + " paused because network is unavailable.");
             }
         }
 
         // Completion callback.
-        function complete() {
-            removeDownload(download.guid);
+        complete() {
+            this.removeDownload(this.download.guid);
 
             try {
                 //var responseInfo = download.getResponseInformation();
                 //console.log(download.guid + " - download complete. Status code: " + responseInfo.statusCode);
-                KA.Downloads.recordDownloadSuccess(download.guid);
+                KA.Downloads.recordDownloadSuccess(this.download.guid);
             } catch (err) {
                 console.log(err);
             }
         }
 
         // Error callback.
-        function error(err) {
-            if (download) {
-                removeDownload(download.guid);
-                console.log(download.guid + " - download completed with error.");
+        error(err) {
+            if (this.download) {
+                this.removeDownload(this.download.guid);
+                console.log(this.download.guid + " - download completed with error.");
             }
             console.log(err);
         }
     }
-})();
+}

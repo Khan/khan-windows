@@ -1,42 +1,41 @@
-﻿/// <reference path="//Microsoft.WinJS.1.0/js/base.js" />
-/// <reference path="//Microsoft.WinJS.1.0/js/ui.js" />
-/// <reference path="/js/base.js" />
-/// <reference path="/js/settings.js" />
-
-(function () {
+﻿/// <reference path="models.ts" />
+/// <reference path="../settings.ts" />
+/// <reference path="../../scripts/typings/winrt.d.ts" />
+/// <reference path="../../scripts/typings/winjs.d.ts" />
+module KA {
     'use strict';
-    var service;      
+
+    var service: User;
     var authWeb = Windows.Security.Authentication.Web;
     var savedDateFileName = 'user.json';
     var baseUrl = 'http://khanacademy-us.cloudapp.net:50025/api/';
     var userInfo;
 
-    WinJS.Namespace.define("KA.User", {
-        authToken: null,
-        playbackList: null,
+    export class User {
+        authToken: KA.AuthToken = null;
+        playbackList: KA.ResumeInfo[] = null;
 
-        getAppCallBackUrl: function(){            
+        getAppCallBackUrl() {
             return authWeb.WebAuthenticationBroker.getCurrentApplicationCallbackUri().absoluteUri;
-        },
+        }
 
-        getParameterByName: function (queryString, name)
-        {
+        getParameterByName(queryString, name) {
             name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
             var regexS = "[\\?&]" + name + "=([^&#]*)";
             var regex = new RegExp(regexS);
             var results = regex.exec(queryString);
-            if(results == null)
+            if (results == null)
                 return "";
             else
                 return decodeURIComponent(results[1].replace(/\+/g, " "));
-        },
+        }
 
-        getUserInfo: function () {
+        getUserInfo() {
             return userInfo;
-        },
+        }
 
-        fetchUserInfo: function () {
-            return new WinJS.Promise(function (c, e) {                
+        fetchUserInfo() {
+            return new WinJS.Promise(function (c, e) {
 
                 //ensure token is valid
                 if (service.authToken && service.authToken.key && service.authToken.secret) {
@@ -61,16 +60,16 @@
                     WinJS.Application.queueEvent({ type: "userInfoUpdated" });
                 }
             });
-        },
+        }
 
-        init: function () {
-            service = this;
+        static init() {
+            service = new User();
 
             service.authToken = null;
             service.playbackList = [];
             return new WinJS.Promise(function (c, e) {
                 //check if data exists
-                var app = WinJS.Application;                
+                var app: any = WinJS.Application;
                 app.roaming.exists(savedDateFileName).done(function (fileExists) {
                     if (fileExists) {
                         app.roaming.readText(savedDateFileName).done(function (text) {
@@ -91,9 +90,29 @@
                     }
                 });
             });
-        },
+        }
 
-        isVideoPlaybackTracked: function (videoId) {
+        static logIn() {
+            service.logIn();
+        }
+
+        static logOut() {
+            service.logOut();
+        }
+
+        static save() {
+            return service.save();
+        }
+
+        static trackPlayback(videoId, currentTime) {
+            service.trackPlayback(videoId, currentTime);
+        }
+
+        static isVideoPlaybackTracked(videoId) {
+            return service.isVideoPlaybackTracked(videoId);
+        }
+
+        isVideoPlaybackTracked(videoId) {
             if (userInfo && userInfo.id) {
                 var foundVideoIdx = -1;
 
@@ -110,10 +129,10 @@
                     return null;
                 }
             }
-        },
+        }
 
-        logIn: function () {
-            var logInUrl = baseUrl +  'user/signinurl?callback=' + service.getAppCallBackUrl();
+        logIn() {
+            var logInUrl = baseUrl + 'user/signinurl?callback=' + service.getAppCallBackUrl();
 
             var response = service.sendRequest(logInUrl);
 
@@ -127,7 +146,7 @@
                     .done(function (result) {
                         if (result.responseStatus === authWeb.WebAuthenticationStatus.success) {
                             //parse url
-                            var token = {};
+                            var token: any = {};
                             var verifier = null;
 
                             var returnUri = new Windows.Foundation.Uri(result.responseData);
@@ -161,25 +180,26 @@
             } else {
                 WinJS.Application.queueEvent({ type: "userInfoUpdated" });
             }
-        },
+        }
 
-        logOut: function () {
+        logOut() {
             //clear values
             userInfo = null;
-            service.authToken = "";
+            service.authToken = {};
             service.save();
             WinJS.Application.queueEvent({ type: "userInfoUpdated" });
-        },
+        }
 
-        save: function () {
+        save() {
             return new WinJS.Promise(function (c, e) {
                 //save data
                 var content = JSON.stringify({ authToken: service.authToken, playbackList: service.playbackList });
-                WinJS.Application.roaming.writeText(savedDateFileName, content).done(c, e);
-            });            
-        },
+                var roaming: any = WinJS.Application.roaming;
+                roaming.writeText(savedDateFileName, content).done(c, e);
+            });
+        }
 
-        sendRequest: function (url) {
+        sendRequest(url) {
             var base64str = 'dgAxAC4AMgA7ADAAMwAwADAARAAwADEANQAwADMAMAAwAEUAMgAyADAAMAAzADAAMAAyAEEANQA4ADAAMwAwADAARQA0ADgAOAAwADMAMAAwADMAMgBCADgAMAA4ADAAMAAyADkAQwBGADAANQAwADAAMABBADIANQAwADUAMAAwADcANgBGAEYAMAA2ADAAMAAwADEAMAAwADAANAAwADAARQA0ADEANwAwADQAMAAwADIAMAAyADIAMAA0ADAAMABGAEMANQA0ADAANAAwADAAMABEADUARAAwADEAMAAwADEAOABEADQAMAAyADAAMABEADIANAAyADAAOQAwADAARAA2ADAAQgA7AFUAbgBrAG4AbwB3AG4AOwBVAG4AawBuAG8AdwBuADsAVwBpAG4AZABvAHcAcwA4AA==';
 
             try {
@@ -191,14 +211,14 @@
                 if (request.status == 200) {
                     return request.responseText;
                 } else {
-                    return false;
+                    return null;
                 }
             } catch (err) {
                 WinJS.log("Error sending request: " + err, "Web Authentication SDK Sample", "error");
             }
-        },
+        }
 
-        trackPlayback: function (videoId, currentTime) {
+        trackPlayback(videoId, currentTime) {
             if (userInfo && userInfo.id) {
                 var foundVideoIdx = -1;
 
@@ -218,5 +238,5 @@
                 }
             }
         }
-    });
-})();
+    }
+}

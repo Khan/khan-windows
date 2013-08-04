@@ -1,36 +1,39 @@
-﻿/// <reference path="//Microsoft.WinJS.1.0/js/base.js" />
-/// <reference path="//Microsoft.WinJS.1.0/js/ui.js" />
-/// <reference path="/js/base.js" />
-/// <reference path="/js/settings.js" />
+﻿/// <reference path="../utilities.ts" />
+/// <reference path="../extensions.ts" />
+/// <reference path="models.ts" />
+/// <reference path="../../scripts/typings/winjs.d.ts" />
+/// <reference path="../../scripts/typings/winrt.d.ts" />
+/// <reference path="../settings.ts" />
 
-(function () {
+module KA {
     'use strict';
-    var app = WinJS.Application;
-    var networkInfo = Windows.Networking.Connectivity.NetworkInformation;
+    var app : any = WinJS.Application;
+    var networkInfo : any = Windows.Networking.Connectivity.NetworkInformation;
 
-    var service;
+    var service : Data;
     var topicUrl = 'http://www.khanacademy.org/api/v1/topictree';
     var savedDateFileName = 'data.json';
     var isConnected = null;
 
-    WinJS.Namespace.define("KA.Data", {
-        newAndNoteworthyId: 'x29232c6b',
-        coachResId: 'x6a4a5e33',
-        partnerContentId:'x54390c7e',
-        domains: null,
-        videos: null,
-        lastSyncETag: null,
-        lastSyncDate: null,
+    export class Data {
+        static newAndNoteworthyId = 'x29232c6b';
+        static coachResId = 'x6a4a5e33';
+        static partnerContentId = 'x54390c7e';
 
-        getIsConnected: function(){
-            if(isConnected == null){
+        domains = null;
+        videos = null;
+        lastSyncETag = null;
+        lastSyncDate = null;
+
+        getIsConnected() {
+            if (isConnected == null) {
                 isConnected = service.updateIsConnected();
             }
             return isConnected;
             //return false;
-        },
+        }
 
-        getSubject: function (subjectId) {
+        getSubject(subjectId) {
             var result;
 
             for (var i = 0; i < this.domains.length; i++) {
@@ -50,9 +53,9 @@
             }
 
             return result;
-        },
+        }
 
-        getSubjectByTitle: function (subjectTitle) {
+        getSubjectByTitle(subjectTitle) {
             var result;
 
             for (var i = 0; i < this.domains.length; i++) {
@@ -72,9 +75,9 @@
             }
 
             return result;
-        },
+        }
 
-        getTopic: function (subjectId, topicId) {
+        getTopic(subjectId, topicId) {
             var sub = this.getSubject(subjectId);
             var top = null;
 
@@ -95,9 +98,9 @@
             }
 
             return top;
-        },
+        }
 
-        getTutorial: function (subjectId, topicId, tutorialId) {
+        getTutorial(subjectId, topicId, tutorialId) {
             var top = this.getTopic(subjectId, topicId);
             var tut = null;
 
@@ -116,9 +119,9 @@
             }
 
             return tut;
-        },
+        }
 
-        getVideo: function (videoId) {
+        getVideo(videoId) {
             var vid = null;
 
             for (var i = 0; i < service.videos.length; i++) {
@@ -129,10 +132,10 @@
             }
 
             return vid;
-        },
+        }
 
-        getVideoInSubject: function (subjectId, videoId) {
-            var vid = this.getVideo(videoId);
+        getVideoInSubject(subjectId, videoId) {
+            var vid = Data.getVideo(videoId);
 
             if (vid) {
                 //check to make sure requested parented video is returned
@@ -150,10 +153,10 @@
             } else {
                 return null;
             }
-        },
+        }
 
-        getVideoInTopic: function (topicId, videoId) {
-            var vid = this.getVideo(videoId);
+        getVideoInTopic(topicId, videoId) {
+            var vid = Data.getVideo(videoId);
 
             if (vid) {
                 //check to make sure requested parented video is returned
@@ -171,10 +174,10 @@
             } else {
                 return null;
             }
-        },
+        }
 
-        getVideoInTutorial: function (tutorialId, videoId) {
-            var vid = this.getVideo(videoId);
+        getVideoInTutorial(tutorialId, videoId) {
+            var vid = Data.getVideo(videoId);
 
             if (vid) {
                 //check to make sure requested parented video is returned
@@ -192,9 +195,9 @@
             } else {
                 return null;
             }
-        },
+        }
 
-        getVideoList: function (videoId) {
+        getVideoList(videoId) {
             var videos = [];
 
             for (var i = 0; i < service.videos.length; i++) {
@@ -204,20 +207,20 @@
             }
 
             return videos;
-        },
+        }
 
-        handleNetworkStatusChange: function () {
+        handleNetworkStatusChange() {
             //reset isConnected variable and check for change
-            var statusChange;            
+            var statusChange;
             var lastIsConnected = isConnected;
             isConnected = null;
             statusChange = lastIsConnected != service.getIsConnected();
 
             app.queueEvent({ type: "networkStatusChanged", statusChange: statusChange });
-        },
+        }
 
-        init: function () {
-            service = this;
+        static init() {
+            service = new KA.Data();
 
             //register for network change
             networkInfo.addEventListener("networkstatuschanged", service.handleNetworkStatusChange);
@@ -263,11 +266,11 @@
                                 c();
 
                             }, function (err) {
-                                KA.logError(err);
-                                if (e) {
-                                    e();
-                                }
-                            });
+                                    KA.logError(err);
+                                    if (e) {
+                                        e();
+                                    }
+                                });
                         });
 
                         //queue up data refresh
@@ -275,9 +278,57 @@
                     }
                 });
             });
-        },
+        }
 
-        loadDataFromUrl: function () {
+        static getIsConnected() {
+            return service.getIsConnected();
+        }
+
+        static getVideo(videoId) {
+            return service.getVideo(videoId);
+        }
+
+        static save() {
+            return service.save();
+        }
+
+        static searchVideos(query) {
+            return service.searchVideos(query);
+        }
+
+        static getSubject(subjectId) {
+            return service.getSubject(subjectId);
+        }
+
+        static getSubjectByTitle(subjectTitle) {
+            return service.getSubjectByTitle(subjectTitle);
+        }
+
+        static getTopic(subjectId, topicId) {
+            return service.getTopic(subjectId, topicId);
+        }
+
+        static getVideoInTutorial(tutorialId, videoId) {
+            return service.getVideoInTutorial(tutorialId, videoId);
+        }
+
+        static getVideoInTopic(topicId, videoId) {
+            return service.getVideoInTopic(topicId, videoId);
+        }
+
+        static getVideoInSubject(subjectId, videoId) {
+            return service.getVideoInSubject(subjectId, videoId);
+        }
+        
+        static getTutorial(subjectId, topicId, tutorialId) {
+            return service.getTutorial(subjectId, topicId, tutorialId);
+        }
+
+        static get domains() {
+            return service.domains;
+        }
+
+        loadDataFromUrl() {
             return new WinJS.Promise(function (c, e) {
                 if (!KA.Settings.isInDesigner) {
                     WinJS.Application.queueEvent({ type: "newDataCheckRequested" });
@@ -296,7 +347,7 @@
                                 service.parseTopicTree(newData).done(function () {
                                     //raise event when completed   
                                     WinJS.Application.queueEvent({ type: "newDataCheckCompleted", newDataAvailable: true });
-                                });                                
+                                });
                             } else {
                                 //no new data
                                 WinJS.Application.queueEvent({ type: "newDataCheckCompleted", newDataAvailable: false });
@@ -306,11 +357,11 @@
                             WinJS.Application.queueEvent({ type: "newDataCheckCompleted", newDataAvailable: false });
                         }
                     }, function (err) {
-                        KA.logError(err);
-                        if (e) {
-                            e();
-                        }
-                    });
+                            KA.logError(err);
+                            if (e) {
+                                e();
+                            }
+                        });
 
                     //run complete function so UI can continue while waiting
                     if (c) {
@@ -318,9 +369,9 @@
                     }
                 }
             });
-        },
+        }
 
-        parseTopicTree: function (parsedObject) {
+        parseTopicTree(parsedObject) {
             return new WinJS.Promise(function (c, e) {
                 var obj, obj2, obj3, obj4;
                 var domain, subject, topic, tutorial;
@@ -330,7 +381,7 @@
                     obj = parsedObject.children[i];
 
                     //skip coach resources and partner content
-                    if (obj.id != service.coachResId && obj.id != service.partnerContentId) {
+                    if (obj.id != Data.coachResId && obj.id != Data.partnerContentId) {
                         domain = {};
                         domain.type = KA.ObjectType.domain;
                         domain.id = obj.id;
@@ -342,7 +393,7 @@
                             //videos only
                             for (var j = 0; j < obj.children.length; j++) {
                                 if (obj.children[j].kind == 'Video') {
-                                    domain.children.push(service.parseVideo(obj.children[j], domain.id != service.newAndNoteworthyId, domain.id));
+                                    domain.children.push(service.parseVideo(obj.children[j], domain.id != Data.newAndNoteworthyId, domain.id));
                                 }
                             }
                         } else {
@@ -430,17 +481,17 @@
 
                 c();
             });
-        },
+        }
 
-        parseVideo: function (sourceObj, saveToVideoList, domainId, subjectId, topicId, tutorialId) {
-            var vidInfo = null;            
+        parseVideo(sourceObj, saveToVideoList, domainId, subjectId?, topicId?, tutorialId?) {
+            var vidInfo = null;
 
             if (sourceObj != null) {
                 var imgUrl = 'http://i.ytimg.com/vi/' + sourceObj.youtube_id + '/0.jpg';
                 var vidInfo = { id: sourceObj.id, title: sourceObj.title, type: KA.ObjectType.video, imgUrl: imgUrl };
 
                 if (saveToVideoList) {
-                    var video = {};
+                    var video: any = {};
                     video.id = sourceObj.id;
                     video.description = sourceObj.description;
                     video.title = sourceObj.title;
@@ -479,9 +530,9 @@
             }
 
             return vidInfo;
-        },
+        }
 
-        save: function () {
+        save() {
             return new WinJS.Promise(function (c, e) {
                 //save data
                 if (service.domains && service.domains.length > 0) {
@@ -491,9 +542,9 @@
                     c();
                 }
             });
-        },
+        }
 
-        searchVideos: function (searchTerm) {
+        searchVideos(searchTerm) {
             var results = [], title, videoFound;
 
             for (var i = 0; i < service.videos.length; i++) {
@@ -515,15 +566,15 @@
             }
 
             return results;
-        },
+        }
 
-        updateIsConnected: function () {
-            var cx = new Windows.Networking.Connectivity.NetworkInformation.getInternetConnectionProfile();
+        updateIsConnected() {
+            var cx = Windows.Networking.Connectivity.NetworkInformation.getInternetConnectionProfile();
             if ((!('getNetworkConnectivityLevel' in cx)) || ((cx.getNetworkConnectivityLevel()) < 3)) {
                 return false;
             } else {
                 return true;
             }
         }
-    });
-})();
+    }
+}
