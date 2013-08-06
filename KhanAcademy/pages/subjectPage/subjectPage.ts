@@ -28,7 +28,7 @@ module SubjectPage {
 
             KA.id('pageTitle').innerText = subject.title;
             KA.id('pageDesc').innerHTML = subject.description;
-            KA.id('subjectHeader').className = subject.domainId + '-subject';
+            KA.id('subjectHeader').className = 'domainItemSubject ' + subject.domainId + '-subject';
 
             //does the subject have children?
             if (subject.children && subject.children.length > 0) {

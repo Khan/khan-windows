@@ -300,6 +300,12 @@ a:hover {
     transform:scale(0.96, 0.96);
 }
 
+/* Default colors for unknown domains */
+
+.domainItem, .domainItemSubject, .domainMenu {
+    background-color: #13967e;
+}
+
 /* math */
 .x7a488390{
 	background-color: #347192;	
