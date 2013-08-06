@@ -9,9 +9,9 @@ module KA {
     var app = WinJS.Application;
 
     var service: Downloads;
-    var downloadedVideos = [];
-    var trackedDownloads = [];
-    var downloadOperations = [];
+    var downloadedVideos: VideoDownload[] = [];
+    var trackedDownloads: TrackedDownload[] = [];
+    var downloadOperations: DownloadOperation[] = [];
     var savedDateFileName = 'tracked.json';
 
     export class Downloads {
@@ -307,7 +307,7 @@ module KA {
                         //sort by download date
                         if (downloadedVideos.length > 0) {
                             downloadedVideos.sort(function (a, b)
-                            { return b.dateDownloaded - a.dateDownloaded }
+                            { return +(b.dateDownloaded) - +(a.dateDownloaded) }
                             );
                         }
 
@@ -333,7 +333,7 @@ module KA {
 
         recordDownloadSuccess(guid) {
             trackedDownloads.forEach(function (trackInfo, index) {
-                if (trackInfo.g == guid) {
+                if (trackInfo.guid == guid) {
 
                     //grab accompanying image
                     var video = KA.Data.getVideo(trackInfo.videoId);
@@ -367,13 +367,13 @@ module KA {
         }
 
         recordNewDownload(videoId, guid) {
-            trackedDownloads.push({ videoId: videoId, g: guid });
+            trackedDownloads.push({ videoId: videoId, guid: guid });
             app.queueEvent({ type: "newDownloadStarted", videoId: videoId });
         }
 
         recordProgress(guid, bytes, total) {
             trackedDownloads.forEach(function (trackInfo, index) {
-                if (trackInfo.g == guid) {
+                if (trackInfo.guid == guid) {
                     app.queueEvent({ type: "downloadProgress", videoId: trackInfo.videoId, bytes: bytes, total: total });
                 }
             });

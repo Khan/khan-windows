@@ -7,10 +7,10 @@
 
 module KA {
     'use strict';
-    var app : any = WinJS.Application;
-    var networkInfo : any = Windows.Networking.Connectivity.NetworkInformation;
+    var app: any = WinJS.Application;
+    var networkInfo: any = Windows.Networking.Connectivity.NetworkInformation;
 
-    var service : Data;
+    var service: Data;
     var topicUrl = 'http://www.khanacademy.org/api/v1/topictree';
     var savedDateFileName = 'data.json';
     var isConnected = null;
@@ -20,8 +20,8 @@ module KA {
         static coachResId = 'x6a4a5e33';
         static partnerContentId = 'x54390c7e';
 
-        domains = null;
-        videos = null;
+        private domains: Domain[] = null;
+        private videos: Video[] = null;
         lastSyncETag = null;
         lastSyncDate = null;
 
@@ -34,14 +34,14 @@ module KA {
         }
 
         getSubject(subjectId) {
-            var result;
+            var result: Subject;
 
             for (var i = 0; i < this.domains.length; i++) {
                 //does the domain have children that are subjects
                 if (this.domains[i].children && this.domains[i].children.length > 0 && this.domains[i].children[0].type == KA.ObjectType.subject) {
                     for (var j = 0; j < this.domains[i].children.length; j++) {
                         if (this.domains[i].children[j].id == subjectId) {
-                            result = this.domains[i].children[j];
+                            result = <Subject>this.domains[i].children[j];
                             result.domainId = this.domains[i].id;
                             break;
                         }
@@ -56,14 +56,14 @@ module KA {
         }
 
         getSubjectByTitle(subjectTitle) {
-            var result;
+            var result:Subject;
 
             for (var i = 0; i < this.domains.length; i++) {
                 //does the domain have children that are subjects
                 if (this.domains[i].children && this.domains[i].children.length > 0 && this.domains[i].children[0].type == KA.ObjectType.subject) {
                     for (var j = 0; j < this.domains[i].children.length; j++) {
                         if (this.domains[i].children[j].title == subjectTitle) {
-                            result = this.domains[i].children[j];
+                            result = <Subject>this.domains[i].children[j];
                             result.domainId = this.domains[i].id;
                             break;
                         }
@@ -79,12 +79,12 @@ module KA {
 
         getTopic(subjectId, topicId) {
             var sub = this.getSubject(subjectId);
-            var top = null;
+            var top: Topic = null;
 
             if (sub != null) {
                 for (var i = 0; i < sub.children.length; i++) {
                     if (sub.children[i].id == topicId) {
-                        top = sub.children[i];
+                        top = <Topic>sub.children[i];
                         break;
                     }
                 }
@@ -102,12 +102,12 @@ module KA {
 
         getTutorial(subjectId, topicId, tutorialId) {
             var top = this.getTopic(subjectId, topicId);
-            var tut = null;
+            var tut: Tutorial = null;
 
             if (top != null) {
                 for (var i = 0; i < top.children.length; i++) {
                     if (top.children[i].id == tutorialId) {
-                        tut = top.children[i];
+                        tut = <Tutorial>top.children[i];
                         break;
                     }
                 }
@@ -122,11 +122,11 @@ module KA {
         }
 
         getVideo(videoId) {
-            var vid = null;
+            var vid: Video = null;
 
             for (var i = 0; i < service.videos.length; i++) {
-                if (service.videos[i].id == videoId) {
-                    vid = service.videos[i];
+                if (this.videos[i].id == videoId) {
+                    vid = this.videos[i];
                     break;
                 }
             }
@@ -135,7 +135,7 @@ module KA {
         }
 
         getVideoInSubject(subjectId, videoId) {
-            var vid = Data.getVideo(videoId);
+            var vid = this.getVideo(videoId);
 
             if (vid) {
                 //check to make sure requested parented video is returned
@@ -198,10 +198,10 @@ module KA {
         }
 
         getVideoList(videoId) {
-            var videos = [];
+            var videos:Video[] = [];
 
-            for (var i = 0; i < service.videos.length; i++) {
-                if (service.videos[i].id == videoId) {
+            for (var i = 0; i < this.videos.length; i++) {
+                if (this.videos[i].id == videoId) {
                     videos.push(service.videos[i]);
                 }
             }
@@ -266,11 +266,11 @@ module KA {
                                 c();
 
                             }, function (err) {
-                                    KA.logError(err);
-                                    if (e) {
-                                        e();
-                                    }
-                                });
+                                KA.logError(err);
+                                if (e) {
+                                    e();
+                                }
+                            });
                         });
 
                         //queue up data refresh
@@ -319,7 +319,7 @@ module KA {
         static getVideoInSubject(subjectId, videoId) {
             return service.getVideoInSubject(subjectId, videoId);
         }
-        
+
         static getTutorial(subjectId, topicId, tutorialId) {
             return service.getTutorial(subjectId, topicId, tutorialId);
         }
@@ -357,11 +357,11 @@ module KA {
                             WinJS.Application.queueEvent({ type: "newDataCheckCompleted", newDataAvailable: false });
                         }
                     }, function (err) {
-                            KA.logError(err);
-                            if (e) {
-                                e();
-                            }
-                        });
+                        KA.logError(err);
+                        if (e) {
+                            e();
+                        }
+                    });
 
                     //run complete function so UI can continue while waiting
                     if (c) {
@@ -374,7 +374,7 @@ module KA {
         parseTopicTree(parsedObject) {
             return new WinJS.Promise(function (c, e) {
                 var obj, obj2, obj3, obj4;
-                var domain, subject, topic, tutorial;
+                var domain: Domain, subject: Subject, topic: Topic, tutorial: Tutorial;
 
                 //domains
                 for (var i = 0; i < parsedObject.children.length; i++) {
@@ -382,11 +382,12 @@ module KA {
 
                     //skip coach resources and partner content
                     if (obj.id != Data.coachResId && obj.id != Data.partnerContentId) {
-                        domain = {};
-                        domain.type = KA.ObjectType.domain;
-                        domain.id = obj.id;
-                        domain.title = obj.title;
-                        domain.children = [];
+                        domain = {
+                            type: KA.ObjectType.domain,
+                            id: obj.id,
+                            title: obj.title,
+                            children: []
+                        };
 
                         //check for subjects or just videos, example News and Noteworthy
                         if (obj.children && obj.children.length > 0 && obj.children[0].kind == 'Video') {
@@ -400,16 +401,18 @@ module KA {
                             //subjects
                             for (var j = 0; j < obj.children.length; j++) {
                                 obj2 = obj.children[j];
-                                subject = {};
-                                subject.type = KA.ObjectType.subject;
-                                subject.id = obj2.id;
-                                subject.description = obj2.description;
-                                subject.title = obj2.title;
+                                subject = {
+                                    type: KA.ObjectType.subject,
+                                    id: obj2.id,
+                                    description: obj2.description,
+                                    title: obj2.title,
+                                    kaUrl: obj2.ka_url,
+                                    children: [],
+                                };
+
                                 if (!obj2.title) {
                                     subject.title = obj2.standalone_title;
                                 }
-                                subject.kaUrl = obj2.ka_url;
-                                subject.children = [];
 
                                 //check for topics or just videos, example Science & Economics > Computer Science
                                 if (obj2.children && obj2.children.length > 0 && obj2.children[0].kind == 'Video') {
@@ -425,16 +428,18 @@ module KA {
                                         obj3 = obj2.children[k];
 
                                         if (obj3.render_type != 'ExerciseOnlyTutorial' && obj3.kind != 'Exercise') {
-                                            topic = {};
-                                            topic.type = KA.ObjectType.topic;
-                                            topic.id = obj3.id;
-                                            topic.description = obj3.description;
-                                            topic.title = obj3.title;
+                                            topic = {
+                                                type: KA.ObjectType.topic,
+                                                id: obj3.id,
+                                                description: obj3.description,
+                                                title: obj3.title,
+                                                kaUrl: obj3.ka_url,
+                                                children: [],
+                                            };
+
                                             if (!obj3.title) {
                                                 topic.title = obj3.standalone_title;
                                             }
-                                            topic.kaUrl = obj3.ka_url;
-                                            topic.children = [];
 
                                             //check for tutorials or just videos, example Math > Geometry > Quadrilaterals
                                             if (obj3.children && obj3.children.length > 0 && obj3.children[0].kind == 'Video') {
@@ -449,14 +454,15 @@ module KA {
                                                 for (var m = 0; m < obj3.children.length; m++) {
                                                     obj4 = obj3.children[m];
                                                     if (obj4.render_type == 'Tutorial') {
-                                                        tutorial = {};
-                                                        tutorial.type = KA.ObjectType.tutorial;
-                                                        tutorial.id = obj4.id;
-                                                        tutorial.domainId = domain.id;
-                                                        tutorial.description = obj4.description;
-                                                        tutorial.title = obj4.standalone_title;
-                                                        tutorial.kaUrl = obj4.ka_url;
-                                                        tutorial.children = [];
+                                                        tutorial = {
+                                                            type: KA.ObjectType.tutorial,
+                                                            id: obj4.id,
+                                                            domainId: domain.id,
+                                                            description: obj4.description,
+                                                            title: obj4.standalone_title,
+                                                            kaUrl: obj4.ka_url,
+                                                            children: [],
+                                                        };
 
                                                         //videos
                                                         for (var n = 0; n < obj4.children.length; n++) {
@@ -483,21 +489,23 @@ module KA {
             });
         }
 
-        parseVideo(sourceObj, saveToVideoList, domainId, subjectId?, topicId?, tutorialId?) {
+        parseVideo(sourceObj, saveToVideoList: bool, domainId: string, subjectId?: string, topicId?: string, tutorialId?: string): VideoInfo {
             var vidInfo = null;
 
             if (sourceObj != null) {
                 var imgUrl = 'http://i.ytimg.com/vi/' + sourceObj.youtube_id + '/0.jpg';
-                var vidInfo = { id: sourceObj.id, title: sourceObj.title, type: KA.ObjectType.video, imgUrl: imgUrl };
+                var vidInfo: VideoInfo = { id: sourceObj.id, title: sourceObj.title, type: KA.ObjectType.video, imgUrl: imgUrl };
 
                 if (saveToVideoList) {
-                    var video: any = {};
-                    video.id = sourceObj.id;
-                    video.description = sourceObj.description;
-                    video.title = sourceObj.title;
-                    video.kaUrl = sourceObj.ka_url;
-                    video.dateAdded = sourceObj.date_added;
-                    video.youTubeId = sourceObj.youtube_id;
+                    var video: Video = {
+                        id: sourceObj.id,
+                        description: sourceObj.description,
+                        title: sourceObj.title,
+                        kaUrl: sourceObj.ka_url,
+                        dateAdded: sourceObj.date_added,
+                        youTubeId: sourceObj.youtube_id,
+                        imgUrl: imgUrl
+                    }
 
                     if (sourceObj.download_urls) {
                         video.vidUrl = sourceObj.download_urls.mp4;
@@ -522,7 +530,6 @@ module KA {
                         video.parents.push(tutorialId);
                     }
 
-                    video.imgUrl = imgUrl;
                     service.videos.push(video);
                 }
             } else {
@@ -545,7 +552,7 @@ module KA {
         }
 
         searchVideos(searchTerm) {
-            var results = [], title, videoFound;
+            var results: Video[] = [], title, videoFound;
 
             for (var i = 0; i < service.videos.length; i++) {
                 title = service.videos[i].title.toLowerCase()
@@ -568,7 +575,7 @@ module KA {
             return results;
         }
 
-        updateIsConnected() {
+        updateIsConnected(): bool {
             var cx = Windows.Networking.Connectivity.NetworkInformation.getInternetConnectionProfile();
             if (!cx || !('getNetworkConnectivityLevel' in cx) || cx.getNetworkConnectivityLevel() < 3) {
                 return false;

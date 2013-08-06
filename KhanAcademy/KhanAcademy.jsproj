@@ -172,8 +172,8 @@
     <Content Include="pages\videoPage\videoPage.js">
       <DependentUpon>videoPage.ts</DependentUpon>
     </Content>
-    <TypeScriptCompile Include="scripts\typings\winjs.d.ts" />
-    <TypeScriptCompile Include="scripts\typings\winrt.d.ts" />    
+    <None Include="scripts\typings\winjs.d.ts" />
+    <None Include="scripts\typings\winrt.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="Microsoft.WinJS.1.0, Version=1.0" />

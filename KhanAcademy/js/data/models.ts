@@ -17,4 +17,54 @@
         videoId: string;
         currentTime: number;
     }
+
+    export interface Item {
+        id: string;
+        title: string;
+        type: ObjectType;
+    }
+
+    export interface Domain extends Item {
+        children: Item[];
+    }
+
+    export interface Subject extends Domain {
+        description: string;
+        kaUrl: string;
+        domainId?: string;
+    }
+
+    export interface Topic extends Subject {
+    }
+
+    export interface Tutorial extends Topic {
+        domainId: string;
+    }
+
+    export interface VideoInfo extends Item {
+        imgUrl: string;
+    }
+
+    export interface Video {
+        id: string;
+        description: string;
+        title: string;
+        kaUrl: string;
+        dateAdded: Date;
+        youTubeId: string;
+        imgUrl: string;
+        vidUrl?: string;
+        imgHiUrl?: string;
+        parents?: string[];
+    }
+
+    export interface VideoDownload {
+        videoId: string;
+        dateDownloaded: Date;
+    }
+
+    export interface TrackedDownload {
+        videoId: string;
+        guid: string;
+    }
 }
