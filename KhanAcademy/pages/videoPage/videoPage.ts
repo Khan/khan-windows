@@ -278,7 +278,8 @@ module VideoPage {
             }
 
             //get transcript
-            KA.Downloads.getTranscript(video, isVideoDownloaded).done(renderTranscript);
+            KA.Downloads.getTranscript(video, isVideoDownloaded).done(renderTranscript, function () {
+            });
 
             if (firstRun) {
                 //check if parent object was passed during page init

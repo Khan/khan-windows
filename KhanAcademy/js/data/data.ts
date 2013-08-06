@@ -570,7 +570,7 @@ module KA {
 
         updateIsConnected() {
             var cx = Windows.Networking.Connectivity.NetworkInformation.getInternetConnectionProfile();
-            if ((!('getNetworkConnectivityLevel' in cx)) || ((cx.getNetworkConnectivityLevel()) < 3)) {
+            if (!cx || !('getNetworkConnectivityLevel' in cx) || cx.getNetworkConnectivityLevel() < 3) {
                 return false;
             } else {
                 return true;
