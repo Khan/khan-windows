@@ -65,9 +65,10 @@
 }
 
 .domainItem div{
-	color:#fff;
-	margin-left: 8px;
-	margin-top: 136px;
+    color:#fff;
+    margin-left: 8px;
+    position:absolute;
+    bottom:12px;
 }
 
 #domainMenuClickEater {
