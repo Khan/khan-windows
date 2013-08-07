@@ -363,7 +363,7 @@ module VideoPage {
 
     function renderVideoList() {
         KA.id('tutTitle').innerText = parent.title;
-        KA.id('tutTitleBgd').className = parent.domainId + '-subject';
+        KA.id('tutTitleBgd').className = 'domainItemSubject ' + parent.domainId + '-subject';
         var tutDownload = KA.id('tutDownload');
 
         var tutList = KA.id('tutList'), tutItem;

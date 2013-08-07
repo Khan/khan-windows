@@ -29,7 +29,7 @@ module TopicPage {
 
             KA.id('pageTitle').innerText = topic.title;
             KA.id('pageDesc').innerHTML = topic.description;
-            KA.id('topicHeader').className = topic.domainId + '-subject';
+            KA.id('topicHeader').className = 'domainItemSubject ' + topic.domainId + '-subject';
 
             //does tutorial have children?
             if (topic.children && topic.children.length > 0) {

@@ -300,6 +300,12 @@ a:hover {
     transform:scale(0.96, 0.96);
 }
 
+/* Default colors for unknown domains */
+
+.domainItem, .domainItemSubject, .domainMenu {
+    background-color: #13967e;
+}
+
 /* math */
 .x7a488390{
 	background-color: #347192;	
@@ -343,6 +349,15 @@ a:hover {
 
 .xd1039e22-subject{
 	background-color: #13967e;
+}
+
+/* Projects & Discovery Lab */
+.xae887ec6 {
+    background-color: #13967e;
+}
+
+.xae887ec6-subject{
+    background-color: #13967e;
 }
 
 /* partner content */
