@@ -49,17 +49,17 @@
 
 #domainList{
 	display: -ms-flexbox;
-	width: 354px;
+	width: 384px;
 	-ms-flex-wrap: wrap;
 }
 
 .domainItem {
-	width: 165px;
-	height: 165px;
-	margin-right: 12px;
-	margin-bottom: 12px;
-	z-index: 100;
-	position: relative;	
+    width: 180px;
+    height: 165px;
+    margin-right: 12px;
+    margin-bottom: 12px;
+    z-index: 100;
+    position: relative;
     background-repeat:no-repeat;
     background-position:50% 40%;
 }
