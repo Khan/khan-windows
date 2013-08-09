@@ -163,5 +163,5 @@ module SearchResults {
         }
     }
 
-    KA.definePage("/pages/searchResults/searchResults", ready, unload, updateLayout);
+    KA.definePage("/pages/searchResults/searchResults.html", ready, unload, updateLayout);
 }
