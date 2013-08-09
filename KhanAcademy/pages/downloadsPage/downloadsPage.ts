@@ -173,5 +173,5 @@ module DownloadsPage {
         }
     }
 
-    KA.definePage("/pages/mainHub/mainHub.html", ready, unload, updateLayout);
+    KA.definePage("/pages/downloadsPage/downloadsPage.html", ready, unload, updateLayout);
 }
