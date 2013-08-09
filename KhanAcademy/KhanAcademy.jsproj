@@ -51,8 +51,9 @@
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
     <TargetPlatformVersion>8.0</TargetPlatformVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile />
+    <PackageCertificateKeyFile>KhanAcademyTemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <PackageCertificateThumbprint>1D84063862DA064A8F506EB7C4AE21B6259A7679</PackageCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -127,6 +128,7 @@
     <Content Include="js\utilities.js">
       <DependentUpon>utilities.ts</DependentUpon>
     </Content>
+    <None Include="KhanAcademyTemporaryKey.pfx" />
     <Content Include="pages\downloadsPage\downloadsPage.css" />
     <Content Include="pages\downloadsPage\downloadsPage.html" />
     <TypeScriptCompile Include="pages\downloadsPage\downloadsPage.ts" />
