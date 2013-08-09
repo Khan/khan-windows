@@ -489,12 +489,12 @@ module KA {
             });
         }
 
-        parseVideo(sourceObj, saveToVideoList: bool, domainId: string, subjectId?: string, topicId?: string, tutorialId?: string): VideoInfo {
-            var vidInfo = null;
+        parseVideo(sourceObj, saveToVideoList: boolean, domainId: string, subjectId?: string, topicId?: string, tutorialId?: string): VideoInfo {
+            var vidInfo: VideoInfo = null;
 
             if (sourceObj != null) {
                 var imgUrl = 'http://i.ytimg.com/vi/' + sourceObj.youtube_id + '/0.jpg';
-                var vidInfo: VideoInfo = { id: sourceObj.id, title: sourceObj.title, type: KA.ObjectType.video, imgUrl: imgUrl };
+                vidInfo = { id: sourceObj.id, title: sourceObj.title, type: KA.ObjectType.video, imgUrl: imgUrl };
 
                 if (saveToVideoList) {
                     var video: Video = {
@@ -575,7 +575,7 @@ module KA {
             return results;
         }
 
-        updateIsConnected(): bool {
+        updateIsConnected(): boolean {
             var cx = Windows.Networking.Connectivity.NetworkInformation.getInternetConnectionProfile();
             if (!cx || !('getNetworkConnectivityLevel' in cx) || cx.getNetworkConnectivityLevel() < 3) {
                 return false;

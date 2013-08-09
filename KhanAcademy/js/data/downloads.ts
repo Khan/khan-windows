@@ -409,7 +409,7 @@ module KA {
                     this.promise = this.download.startAsync().done(() => { this.complete(); }, error => { this.error(error); }, () => { this.progress(); });
                 }, this.error);
             });
-        };
+        }
 
         // On application activation, reassign callbacks for a download
         // operation persisted from previous application state.
@@ -417,7 +417,7 @@ module KA {
             this.download = loadedDownload;
             console.log("Found download: " + this.download.guid + " from previous application run.");
             this.promise = this.download.attachAsync().then(() => { this.complete(); }, error => { this.error(error); }, () => { this.progress(); });
-        };
+        }
 
             // Cancel download.
         cancel() {
@@ -433,7 +433,7 @@ module KA {
             else {
                 console.log("Download " + this.download.guid + " already canceled.");
             }
-        };
+        }
 
             // Resume download - download will restart if server does not allow range-requests.
         resume() {
@@ -446,7 +446,7 @@ module KA {
                     console.log("Download " + this.download.guid + " is not paused, it may be running, completed, canceled or in error.");
                 }
             }
-        };
+        }
 
             // Pause download.
         pause() {
@@ -459,7 +459,7 @@ module KA {
                     console.log("Download " + this.download.guid + " is not running, it may be paused, completed, canceled or in error.");
                 }
             }
-        };
+        }
 
         // Returns true if this is the download identified by the guid.
         hasGuid(guid) {

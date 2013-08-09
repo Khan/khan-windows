@@ -3,7 +3,7 @@
 module VideoPage {
     "use strict";
     var appBar, vidPlayer, firstRun, curIndex, tmbDiv, shadeDiv, isPlaying, isTmbShown, isDwldShown, downloadProgress;
-    var noTranscriptDiv, transcriptDiv, transcriptList, script, selectedScriptIndex, previousScriptIndex, nextScriptEndTime, currentScriptStartTime, subTitleBlocks;
+    var noTranscriptDiv, transcriptDiv, transcriptList, script, selectedScriptIndex: number, previousScriptIndex, nextScriptEndTime, currentScriptStartTime, subTitleBlocks;
     var isConnected, isVideoDownloaded, isAutoAdvanced;
 
     var video = null, parent = null;

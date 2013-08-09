@@ -27,7 +27,7 @@ module KA {
     }
 
     export function handleError(event) {
-        var ex
+        var ex: string;
         if (event.detail) {
             if (event.detail.error) {
                 if (event.detail.error.responseText) {

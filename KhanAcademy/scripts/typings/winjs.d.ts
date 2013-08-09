@@ -14,206 +14,210 @@ and limitations under the License.
 ***************************************************************************** */
 
 declare module WinJS {
-    export function strictProcessing(): void;
-    export function log(message: string, tags: string, type: string): void;
-    export module Binding {
-        export function as(data: any): any;
-        export var optimizeBindingReferences: bool;
-        export class List {
+    function strictProcessing(): void;
+    function log(message: string, tags: string, type: string): void;
+    module Binding {
+        function as(data: any): any;
+        var optimizeBindingReferences: boolean;
+        class List {
             constructor(data: any[]);
             public push(item: any): any;
             public indexOf(item: any): number;
             public splice(index: number, count: number, newelems: any[]): any[];
             public splice(index: number, count: number): any[];
             public splice(index: number): any[];
-            public createFiltered(predicate: (x: any) => bool): List;
+            public createFiltered(predicate: (x: any) => boolean): List;
             public createGrouped(keySelector: (x: any) => any, dataSelector: (x: any) => any): List;
             public groups: any;
             public dataSource: any;
             public getAt: any;
         }
     }
-    export module Namespace {
-        export var define: any;
-        export var defineWithParent: any;
+    module Namespace {
+        var define: any;
+        var defineWithParent: any;
     }
-    export module Class {
-        export function define(constructor: any, instanceMembers: any): any;
-        export function derive(baseClass: any, constructor: any, instanceMembers: any): any;
-        export function mix(constructor: any, mixin: any): any;
+    module Class {
+        function define(constructor: any, instanceMembers: any): any;
+        function derive(baseClass: any, constructor: any, instanceMembers: any): any;
+        function mix(constructor: any, mixin: any): any;
     }
-    export function xhr(options: { type?: string; url: string; user?: string; password?: string; headers?: any; data?: any; responseType?: string; }): WinJS.Promise;
-    export module Application {
-        export interface IOHelper {
-            exists(filename: string): WinJS.Promise;
-            readText(fileName: string, def: string): WinJS.Promise;
-            readText(fileName: string): WinJS.Promise;
-            writeText(fileName: string, text: string): WinJS.Promise;
-            remove(fileName: string): WinJS.Promise;
+    function xhr(options: { type?: string; url?: string; user?: string; password?: string; headers?: any; data?: any; responseType?: string; }): WinJS.Promise<XMLHttpRequest>;
+    module Application {
+        interface IOHelper {
+            exists(filename: string): WinJS.Promise<boolean>;
+            readText(fileName: string, def: string): WinJS.Promise<string>;
+            readText(fileName: string): WinJS.Promise<string>;
+            writeText(fileName: string, text: string): WinJS.Promise<void>;
+            remove(fileName: string): WinJS.Promise<void>;
             folder: any;
         }
-        export var local: IOHelper;
-        export var temp: IOHelper;
-        export var roaming: IOHelper;
-        export var onactivated: EventListener;
-        export var sessionState: any;
-        export var onerror: any;
-        export var onsettings: any;
-        export interface ApplicationActivationEvent extends Event {
+        var local: IOHelper;
+        var roaming: IOHelper;
+        var onactivated: EventListener;
+        var sessionState: any;
+        var temp: IOHelper;
+        var onerror: any;
+        var onsettings: any;
+        interface ApplicationActivationEvent extends Event {
             detail: any;
-            setPromise(p: Promise): any;
+            setPromise(p: Promise<any>): any;
         }
-        export function addEventListener(type: string, listener: EventListener, capture?: bool): void;
-        export var oncheckpoint: EventListener;
-        export function start(): void;
-        export function stop(): void;
-        export function queueEvent(eventRecord: {}): void;
-        export function removeEventListener(type, listener, useCapture?): void;
+        function addEventListener(type: string, listener: EventListener, capture?: boolean): void;
+        var oncheckpoint: EventListener;
+        function start(): void;
+        function stop(): void;
+        function queueEvent(eventRecord: {}): void;
+        function removeEventListener(type, listener, useCapture?): void;
+
     }
-    export class Promise {
-        constructor(init: (c: any, e: any, p: any) => void );
-        public then: any;
-        public done: any;
+    class Promise<T> {
+        constructor(init: (c: any, e: any, p: any) => void);
+        then<U>(success?: (value: T) => Promise<U>, error?: (error: any) => Promise<U>, progress?: (progress: any) => void): Promise<U>;
+        then<U>(success?: (value: T) => Promise<U>, error?: (error: any) => U, progress?: (progress: any) => void): Promise<U>;
+        then<U>(success?: (value: T) => U, error?: (error: any) => Promise<U>, progress?: (progress: any) => void): Promise<U>;
+        then<U>(success?: (value: T) => U, error?: (error: any) => U, progress?: (progress: any) => void): Promise<U>;
+        done<U>(success?: (value: T) => any, error?: (error: any) => any, progress?: (progress: any) => void): void;
         public cancel: any;
         static onerror: any;
         static join: any;
         static timeout: any;
         static as(): Promise;
     }
-    export module Navigation {
-        export var history: any;
-        export var canGoBack: bool;
-        export var canGoForward: bool;
-        export var location: string;
-        export var state: any;
-        export function addEventListener(type: string, listener: EventListener, capture: bool): void;
-        export function back(): void;
-        export function forward(): void;
-        export function navigate(location: any, initialState: any);
-        export function navigate(location: any);
-        export function removeEventListener(type: string, listener: EventListener, capture: bool): void;
-        export var onbeforenavigate: CustomEvent;
-        export var onnavigated: CustomEvent;
-        export var onnavigating: CustomEvent;
+    module Navigation {
+        var history: any;
+        var canGoBack: boolean;
+        var canGoForward: boolean;
+        var location: string;
+        var state: any;
+        function addEventListener(type: string, listener: EventListener, capture: boolean): void;
+        function back(): void;
+        function forward(): void;
+        function navigate(location: any, initialState: any);
+        function navigate(location: any);
+        function removeEventListener(type: string, listener: EventListener, capture: boolean): void;
+        var onbeforenavigate: CustomEvent;
+        var onnavigated: CustomEvent;
+        var onnavigating: CustomEvent;
     }
-    export module Utilities {
-        export function markSupportedForProcessing(obj: any): void;
-        export function removeClass(e: any, name: string): HTMLElement;
-        export function addClass(e: any, name: string): HTMLElement;
-        export function getPosition(item): any;
-        export function query(selector: string, element?: any): any;
-        export function startLog(options: {}): void;
-        export enum Key {
-            backspace = 8,
-            tab = 9,
-            enter = 13,
-            shift = 16,
-            ctrl = 17,
-            alt = 18,
-            pause = 19,
-            capsLock = 20,
-            escape = 27,
-            space = 32,
-            pageUp = 33,
-            pageDown = 34,
-            end = 35,
-            home = 36,
-            leftArrow = 37,
-            upArrow = 38,
-            rightArrow = 39,
-            downArrow = 40,
-            insert = 45,
-            deleteKey = 46,
-            num0 = 48,
-            num1 = 49,
-            num2 = 50,
-            num3 = 51,
-            num4 = 52,
-            num5 = 53,
-            num6 = 54,
-            num7 = 55,
-            num8 = 56,
-            num9 = 57,
-            a = 65,
-            b = 66,
-            c = 67,
-            d = 68,
-            e = 69,
-            f = 70,
-            g = 71,
-            h = 72,
-            i = 73,
-            j = 74,
-            k = 75,
-            l = 76,
-            m = 77,
-            n = 78,
-            o = 79,
-            p = 80,
-            q = 81,
-            r = 82,
-            s = 83,
-            t = 84,
-            u = 85,
-            v = 86,
-            w = 87,
-            x = 88,
-            y = 89,
-            z = 90,
-            leftWindows = 91,
-            rightWindows = 92,
-            numPad0 = 96,
-            numPad1 = 97,
-            numPad2 = 98,
-            numPad3 = 99,
-            numPad4 = 100,
-            numPad5 = 101,
-            numPad6 = 102,
-            numPad7 = 103,
-            numPad8 = 104,
-            numPad9 = 105,
-            multiply = 106,
-            add = 107,
-            subtract = 109,
-            decimalPoint = 110,
-            divide = 111,
-            f1 = 112,
-            f2 = 113,
-            f3 = 114,
-            f4 = 115,
-            f5 = 116,
-            f6 = 117,
-            f7 = 118,
-            f8 = 119,
-            f9 = 120,
-            f10 = 121,
-            f11 = 122,
-            f12 = 123,
-            numLock = 144,
-            scrollLock = 145,
-            semicolon = 186,
-            equal = 187,
-            comma = 188,
-            dash = 189,
-            period = 190,
-            forwardSlash = 191,
-            graveAccent = 192,
-            openBracket = 219,
-            backSlash = 220,
-            closeBracket = 221,
-            singleQuote = 222
+    module Utilities {
+        function markSupportedForProcessing(obj: any): void;
+        function removeClass(e: any, name: string): HTMLElement;
+        function addClass(e: any, name: string): HTMLElement;
+        function getPosition(item): any;
+        function query(selector: string, element?: any): any;
+        function startLog(options: {}): void;
+        enum Key {
+            backspace,
+            tab,
+            enter,
+            shift,
+            ctrl,
+            alt,
+            pause,
+            capsLock,
+            escape,
+            space,
+            pageUp,
+            pageDown,
+            end,
+            home,
+            leftArrow,
+            upArrow,
+            rightArrow,
+            downArrow,
+            insert,
+            deleteKey,
+            num0,
+            num1,
+            num2,
+            num3,
+            num4,
+            num5,
+            num6,
+            num7,
+            num8,
+            num9,
+            a,
+            b,
+            c,
+            d,
+            e,
+            f,
+            g,
+            h,
+            i,
+            j,
+            k,
+            l,
+            m,
+            n,
+            o,
+            p,
+            q,
+            r,
+            s,
+            t,
+            u,
+            v,
+            w,
+            x,
+            y,
+            z,
+            leftWindows,
+            rightWindows,
+            numPad0,
+            numPad1,
+            numPad2,
+            numPad3,
+            numPad4,
+            numPad5,
+            numPad6,
+            numPad7,
+            numPad8,
+            numPad9,
+            multiply,
+            add,
+            subtract,
+            decimalPoint,
+            divide,
+            f1,
+            f2,
+            f3,
+            f4,
+            f5,
+            f6,
+            f7,
+            f8,
+            f9,
+            f10,
+            f11,
+            f12,
+            numLock,
+            scrollLock,
+            semicolon,
+            equal,
+            comma,
+            dash,
+            period,
+            forwardSlash,
+            graveAccent,
+            openBracket,
+            backSlash,
+            closeBracket,
+            singleQuote
         }
     }
-    export module UI {
-        export var process: any;
-        export var processAll: any;
-        export var ListLayout: any;
-        export var GridLayout: any;
-        export var Pages: any;
-        export var Menu: any;
-        export var setOptions: any;
-        export var Animation: any;
-        export var SettingsFlyout: any;
+    module UI {
+        var process: any;
+        var processAll: any;
+        var ListLayout: any;
+        var GridLayout: any;
+        var Pages: any;
+        var Menu: any;
+        var setOptions: any;
+        var Animation: any;
+        var SettingsFlyout: any;
     }
 }
 

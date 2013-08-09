@@ -1,5 +1,5 @@
 ﻿interface Array {
-    contains(element): bool;
+    contains(element): boolean;
 }
 
 Array.prototype.contains = function (element) {

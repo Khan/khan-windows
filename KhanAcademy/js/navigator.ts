@@ -11,7 +11,7 @@ module KA {
     export class PageControlNavigator {
         home: string = "";
         _element: HTMLElement = null;
-        _lastNavigationPromise: WinJS.Promise = WinJS.Promise.as();
+        _lastNavigationPromise: WinJS.Promise<any> = WinJS.Promise.as();
         _lastViewstate: number = 0;
 
         // Define the constructor function for the PageControlNavigator.
