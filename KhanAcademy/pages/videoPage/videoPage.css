@@ -68,18 +68,11 @@
     color:#242c37;
 }
 
-#videoPagePanel #tmbDiv {
-    -ms-grid-column: 2;
-    background-size: cover; 
-    margin-bottom:40px;   
-}
-
 #videoPagePanel #offlineDiv {
 	color:#666;
 	font-size: 10pt;
-	-ms-grid-row: 1;
+	-ms-grid-row: 2;
 	-ms-grid-column: 2;
-	margin-top: 381px;
 }
 
 #videoPagePanel #vidPlayer {

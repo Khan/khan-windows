@@ -2,7 +2,7 @@
 
 module VideoPage {
     "use strict";
-    var appBar, vidPlayer, firstRun, curIndex, tmbDiv, shadeDiv, isPlaying, isTmbShown, isDwldShown, downloadProgress;
+    var appBar, vidPlayer, firstRun, curIndex, shadeDiv, isPlaying, isDwldShown, downloadProgress;
     var noTranscriptDiv, transcriptDiv, transcriptList, script, selectedScriptIndex: number, previousScriptIndex, nextScriptEndTime, currentScriptStartTime, subTitleBlocks;
     var isConnected, isVideoDownloaded, isAutoAdvanced;
 
@@ -52,7 +52,6 @@ module VideoPage {
         firstRun = true;
 
         //init control variables
-        tmbDiv = KA.id('tmbDiv');
         shadeDiv = KA.id('shadeDiv');
         downloadProgress = KA.id('downloadProgress');
         noTranscriptDiv = KA.id('noTranscriptDiv');
@@ -64,22 +63,16 @@ module VideoPage {
             isAutoAdvanced = false;
         });
 
-        //video image
-        tmbDiv.addEventListener('MSPointerDown', function (e) {
-            togglePlayPause();
-        });
-
         //video player
         vidPlayer = KA.id('vidPlayer');
         vidPlayer.addEventListener('play', function (e) {
             isPlaying = true;
-            if (isTmbShown) {
-                isTmbShown = false;
-                WinJS.UI.Animation.fadeOut(tmbDiv).done(function () {
-                    tmbDiv.style.display = 'none';
-                });
-            }
         });
+
+        vidPlayer.addEventListener('MSPointerDown', function(e) {
+          togglePlayPause();
+        });
+
         vidPlayer.addEventListener('pause', function (e) {
             KA.User.trackPlayback(video.id, vidPlayer.currentTime);
             isPlaying = false;
@@ -215,10 +208,6 @@ module VideoPage {
     function renderControls() {
         //ensure video object
         if (video != null) {
-            //clear previous video, image and offline status
-            if (isTmbShown) {
-                WinJS.UI.Animation.fadeOut(tmbDiv);
-            }
             vidPlayer.src = '';
             script = null;
             selectedScriptIndex = -1;
@@ -226,7 +215,6 @@ module VideoPage {
             KA.hide(KA.id('offlineDiv'));
 
             //reset status variables
-            isTmbShown = true;
             isPlaying = false;
             isDwldShown = false;
             isAutoAdvanced = true;
@@ -271,7 +259,6 @@ module VideoPage {
                     showImage('ms-appdata:///local/photos/' + video.id + '.jpg');
                 } else {
                     //show offline warning                        
-                    KA.hide(vidPlayer);
                     showImage('/images/offline_image_full.png');
                     KA.show(KA.id('offlineDiv'));
                 }
@@ -445,12 +432,7 @@ module VideoPage {
     }
 
     function showImage(imgUrl) {
-        if (isTmbShown) {
-            tmbDiv.style.display = 'block';
-            tmbDiv.style.opacity = '0';
-            tmbDiv.style.backgroundImage = 'url(' + imgUrl + ')';
-            WinJS.UI.Animation.fadeIn(tmbDiv);
-        }
+        vidPlayer.poster = imgUrl;
     }
 
     function showNewDownloadStarted() {
