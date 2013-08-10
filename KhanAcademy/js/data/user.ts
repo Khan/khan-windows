@@ -213,8 +213,8 @@ module KA {
                 } else {
                     return null;
                 }
-            } catch (err) {
-                WinJS.log("Error sending request: " + err, "Web Authentication SDK Sample", "error");
+            } catch (ex) {
+                WinJS.log && WinJS.log(ex, "Khan Academy", "error");
             }
         }
 
