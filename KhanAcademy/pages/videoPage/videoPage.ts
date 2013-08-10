@@ -435,6 +435,10 @@ module VideoPage {
 
     function showDownloadProgress() {
         if (!isDwldShown) {
+            // If the download progress was previously faded out with
+            // WinJS.UI.Animation.fadeOut , then its opacity is 0.
+            downloadProgress.style.opacity = '1';
+
             KA.show(downloadProgress);
             isDwldShown = true;
         }
