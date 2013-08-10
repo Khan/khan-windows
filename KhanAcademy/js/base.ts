@@ -78,6 +78,10 @@ module KA {
 
         static init() {
             service = new KA.Global();
+
+            // start WinJS logging as there is other code which might fail and try to log errors
+            WinJS.Utilities.startLog({ type: "error", tags: "Khan Academy" });
+
             return new WinJS.Promise(function (c, e) {
                 //init user log in menu
 
@@ -105,7 +109,6 @@ module KA {
                         window.onerror = function (err) {
                             KA.handleError(err);
                         };
-                        WinJS.Utilities.startLog({ type: "error", tags: "Khan Academy" });
                         c();
                     });
             });
