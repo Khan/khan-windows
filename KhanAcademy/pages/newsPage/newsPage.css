@@ -1,9 +1,9 @@
 ﻿#newsPagePanel section[role=main] {
-	overflow-x: auto;
-	overflow-y: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
-#newsPagePanel #newsLv {	
+#newsPagePanel #newsLv {
     height:100%;
 }
 
@@ -11,29 +11,29 @@
     background-color: transparent;
 }
 
-#newsPagePanel #newsLv .win-surface{
-	margin-left:115px;
-	margin-bottom:100px;
+#newsPagePanel #newsLv .win-surface {
+    margin-left:115px;
+    margin-bottom:100px;
 }
 
 @media screen and (-ms-view-state: snapped) {
-	#newsPagePanel header {
-		margin-left:0;
-		padding-left:12px;
-	}
-	
-	#newsPagePanel h1{
-		margin-top:40px;
-	}
-	
-	#newsPagePanel #newsLv .win-surface{
-		margin-left:0;
-		margin-bottom:0;
-	}
+    #newsPagePanel header {
+        margin-left:0;
+        padding-left:12px;
+    }
+
+    #newsPagePanel h1 {
+        margin-top:40px;
+    }
+
+    #newsPagePanel #newsLv .win-surface {
+        margin-left:0;
+        margin-bottom:0;
+    }
 }
 
 @media all and (-ms-view-state: fullscreen-portrait) {
-    #newsPagePanel #newsLv .win-surface{
-	    margin-left:100px;
+    #newsPagePanel #newsLv .win-surface {
+        margin-left:100px;
     }
 }

@@ -44,8 +44,8 @@
                     if (args.detail.queryText && args.detail.queryText != "") {
                         return nav.navigate("/pages/searchResults/searchResults.html", { searchDetails: args.detail.queryText });
                     } else {
-                        return nav.navigate(KA.navigator.home);                    
-                    }                
+                        return nav.navigate(KA.navigator.home);
+                    }
                 });
             }));
         }

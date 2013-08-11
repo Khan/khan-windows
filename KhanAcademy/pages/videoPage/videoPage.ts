@@ -237,6 +237,7 @@ module VideoPage {
             KA.id('pageTitle').innerText = video.title;
             if (video.description) {
                 KA.id('pageDesc').innerHTML = video.description;
+                KA.id('pageDesc').title = video.description;
                 KA.show(KA.id('pageDescDivider'));
             } else {
                 KA.id('pageDesc').innerHTML = '';
@@ -258,7 +259,7 @@ module VideoPage {
                     vidPlayer.src = 'ms-appdata:///local/videos/' + video.id + '.mp4';
                     showImage('ms-appdata:///local/photos/' + video.id + '.jpg');
                 } else {
-                    //show offline warning                        
+                    //show offline warning
                     showImage('/images/offline_image_full.png');
                     KA.show(KA.id('offlineDiv'));
                 }
