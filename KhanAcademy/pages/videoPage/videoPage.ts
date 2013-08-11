@@ -259,7 +259,7 @@ module VideoPage {
                     vidPlayer.src = 'ms-appdata:///local/videos/' + video.id + '.mp4';
                     showImage('ms-appdata:///local/photos/' + video.id + '.jpg');
                 } else {
-                    //show offline warning                        
+                    //show offline warning
                     showImage('/images/offline_image_full.png');
                     KA.show(KA.id('offlineDiv'));
                 }

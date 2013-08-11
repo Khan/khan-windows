@@ -345,7 +345,7 @@ module KA {
                                 service.domains = [];
                                 service.videos = [];
                                 service.parseTopicTree(newData).done(function () {
-                                    //raise event when completed   
+                                    //raise event when completed
                                     WinJS.Application.queueEvent({ type: "newDataCheckCompleted", newDataAvailable: true });
                                 });
                             } else {
