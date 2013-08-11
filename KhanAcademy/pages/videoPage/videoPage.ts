@@ -237,6 +237,7 @@ module VideoPage {
             KA.id('pageTitle').innerText = video.title;
             if (video.description) {
                 KA.id('pageDesc').innerHTML = video.description;
+                KA.id('pageDesc').title = video.description;
                 KA.show(KA.id('pageDescDivider'));
             } else {
                 KA.id('pageDesc').innerHTML = '';
