@@ -354,7 +354,8 @@ module MainHub {
                 dItem = domainItems[domainMenus[i].attributes['data-index']];
                 dPos = WinJS.Utilities.getPosition(dItem);
                 domainMenus[i].style.left = (dPos.left + (i % 2 == 0 ? offsetLeft : offsetOddLeft)) + 'px';
-                domainMenus[i].style.top = (dPos.top + offsetTop) + 'px';
+                var menuTop = Math.min(dPos.top + offsetTop, window.innerHeight - domainMenus[i].clientHeight);
+                domainMenus[i].style.top = menuTop + 'px';
             }
         }
     }
