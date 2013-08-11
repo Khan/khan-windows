@@ -337,18 +337,18 @@ module KA {
 
                     //grab accompanying image
                     var video = KA.Data.getVideo(trackInfo.videoId);
-                    var uri = new Windows.Foundation.Uri(video.imgUrl);
+                    var imgUri = new Windows.Foundation.Uri(video.imgUrl);
                     app.local.folder.getFolderAsync('photos').done(function (folder) {
                         folder.createFileAsync(video.id + '.jpg', Windows.Storage.CreationCollisionOption.replaceExisting).done(function (newFile) {
                             //not tracking because files are so small
                             var downloader = new Windows.Networking.BackgroundTransfer.BackgroundDownloader();
-                            var download = downloader.createDownload(uri, newFile);
+                            var download = downloader.createDownload(imgUri, newFile);
                             download.startAsync();
                         })
                     });
 
                     //grab accompanying transcript
-                    uri = new Windows.Foundation.Uri('http://khanacademy.org/api/v1/videos/' + video.youTubeId + '/transcript');
+                    var uri = new Windows.Foundation.Uri('http://khanacademy.org/api/v1/videos/' + video.youTubeId + '/transcript');
                     app.local.folder.getFolderAsync('scripts').done(function (folder) {
                         folder.createFileAsync(video.id + '.json', Windows.Storage.CreationCollisionOption.replaceExisting).done(function (newFile) {
                             //not tracking because files are so small
