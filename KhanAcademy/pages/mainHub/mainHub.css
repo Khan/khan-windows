@@ -184,7 +184,7 @@
 
     #mainHubPanel .mainGrid {
         -ms-grid-columns:20px auto 20px;
-        -ms-grid-rows:100px 500px auto 2100px;
+        -ms-grid-rows:100px 500px auto auto;
     }
 
     #mainHubPanel .mainGrid #banner {
