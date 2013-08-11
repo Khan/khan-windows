@@ -1,19 +1,19 @@
 ﻿#downloadsPagePanel section[role=main] {
-	overflow-x: auto;
-	overflow-y: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 #downloadsPagePanel #downloadsLv .win-container:not(.win-footprint) {
     background-color: transparent;
 }
 
-#downloadsPagePanel #downloadsLv .win-surface{
-	margin-left:120px;
-	margin-bottom:100px;
+#downloadsPagePanel #downloadsLv .win-surface {
+    margin-left:120px;
+    margin-bottom:100px;
 }
 
 #downloadsPagePanel #downloadsLv {
-	height:100%;
+    height:100%;
 }
 
 #downloadsPagePanel #noDownloads {
@@ -23,20 +23,20 @@
 }
 
 #downloadsPagePanel #downloadCount {
-	color: #666;
+    color: #666;
     font-weight:normal;
-	font-size:20pt;
+    font-size:20pt;
 }
 
 @media screen and (-ms-view-state: snapped) {
-	#downloadsPagePanel header {
-		margin-left:0;
-		padding-left:12px;
-	}
-	
-	#downloadsPagePanel h1{
-		margin-top:40px;
-	}
+    #downloadsPagePanel header {
+        margin-left:0;
+        padding-left:12px;
+    }
+
+    #downloadsPagePanel h1 {
+        margin-top:40px;
+    }
 
     #downloadCount {
         display:none;
@@ -45,15 +45,15 @@
     #downloadsPagePanel #noDownloads {
         margin-left:20px;
     }
-	
-	#downloadsPagePanel #downloadsLv .win-surface{
-		margin-left:0;
-		margin-bottom:0;
-	}
+
+    #downloadsPagePanel #downloadsLv .win-surface {
+        margin-left:0;
+        margin-bottom:0;
+    }
 }
 
 @media all and (-ms-view-state: fullscreen-portrait) {
-    #downloadsPagePanel #downloadsLv .win-surface{
-	    margin-left:100px;
+    #downloadsPagePanel #downloadsLv .win-surface {
+        margin-left:100px;
     }
 }

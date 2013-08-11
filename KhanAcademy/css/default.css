@@ -1,4 +1,4 @@
-﻿body {    
+﻿body {
     background-color: #242C37;
 }
 
@@ -45,13 +45,13 @@ button[aria-checked=true]:-ms-keyboard-active .win-commandring {
     background-color: transparent;
     border-color: rgb(255, 255, 255);
 }
-button[aria-checked=true]:disabled .win-commandring, 
+button[aria-checked=true]:disabled .win-commandring,
 button[aria-checked=true]:disabled:active .win-commandring {
     background-color: rgba(255, 255, 255, 0.4);
     border-color: rgba(255, 255, 255, 0.4);
 }
 
-button[aria-checked=true]:disabled .win-commandring, 
+button[aria-checked=true]:disabled .win-commandring,
 button[aria-checked=true]:disabled:active .win-commandring {
     background-color: rgba(255, 255, 255, 0.4);
     border-color: rgba(255, 255, 255, 0.4);
@@ -100,50 +100,50 @@ button.win-command:focus {
 }
 
 #userPane {
-	position: absolute;
-	top: 32px;
-	right: 76px;
-	display:-ms-grid;
-	-ms-grid-columns:auto auto auto;
-	-ms-grid-rows: 1fr;
-	font-size:10pt;
+    position: absolute;
+    top: 32px;
+    right: 76px;
+    display:-ms-grid;
+    -ms-grid-columns:auto auto auto;
+    -ms-grid-rows: 1fr;
+    font-size:10pt;
 }
 
 #userProgress {
-	margin-top:4px;
-	color:#7fac05;
-	display:none;
+    margin-top:4px;
+    color:#7fac05;
+    display:none;
 }
 
 #userNameDiv {
-	-ms-grid-column:2;
-	padding:6px;
-	font-weight:bold;
+    -ms-grid-column:2;
+    padding:6px;
+    font-weight:bold;
     display:none;
 }
 
 #loginOptionsDiv {
-	-ms-grid-column:2;
+    -ms-grid-column:2;
 }
 
 #loginOptionsContainer {
-	display: -ms-flexbox;
+    display: -ms-flexbox;
 }
 
-#loginOrDiv{
-	padding:6px 2px;
+#loginOrDiv {
+    padding:6px 2px;
 }
 
 #loginDiv, #registerDiv {
-	padding:6px;
-	font-weight:bold;
+    padding:6px;
+    font-weight:bold;
 }
 
 #userIconDiv {
-	-ms-grid-column:3;
-	padding:6px 6px 6px 0px;
-	font-weight:bold;
-	font-family:'segoe ui symbol'
+    -ms-grid-column:3;
+    padding:6px 6px 6px 0px;
+    font-weight:bold;
+    font-family:'segoe ui symbol'
 }
 
 #userMenuClickEater {
@@ -155,57 +155,57 @@ button.win-command:focus {
     left: 0px;
 }
 
-#userMenu {	
-	position: absolute;
-	top: 64px;
-	right: 70px;
-	background-color:#fff;
-	border:solid 1px #999;
-	font-size:10pt;
-	visibility: collapse;
+#userMenu {
+    position: absolute;
+    top: 64px;
+    right: 70px;
+    background-color:#fff;
+    border:solid 1px #999;
+    font-size:10pt;
+    visibility: collapse;
     z-index: 102;
 }
 
-#userMenuGrid {	
-	display:-ms-grid;
-	-ms-grid-columns: 1fr;
-	-ms-grid-rows: 1fr 40px;
-	width:140px;
-	height:90px;
-	text-align:right;
+#userMenuGrid {
+    display:-ms-grid;
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: 1fr 40px;
+    width:140px;
+    height:90px;
+    text-align:right;
 }
 
-#userPtsDiv{
-	font-size:12pt;
-	padding:10px;
+#userPtsDiv {
+    font-size:12pt;
+    padding:10px;
 }
 
-#userPtsDiv span{
-	font-size:8pt;
-	color:#666;
+#userPtsDiv span {
+    font-size:8pt;
+    color:#666;
 }
 
-#logOutBtn{	
-	padding:10px;
-	background-color:#ddd;
-	-ms-grid-row: 2;
+#logOutBtn {
+    padding:10px;
+    background-color:#ddd;
+    -ms-grid-row: 2;
 }
 
 #noConnectionPane {
-	position: absolute;
-	top: 0px;
-	left: 50%;
+    position: absolute;
+    top: 0px;
+    left: 50%;
     display:none;
 }
 
 #noConnectionPane div {
-	width:84px;
-	padding:4px;
-	margin-left:-44px;
-	background-color:lightgrey;
-	color: #898989;
-	font-size: 10pt;
-	text-align:center;
+    width:84px;
+    padding:4px;
+    margin-left:-44px;
+    background-color:lightgrey;
+    color: #898989;
+    font-size: 10pt;
+    text-align:center;
 }
 
 #noDataPane {
@@ -218,18 +218,18 @@ button.win-command:focus {
 }
 
 #noDataGrid {
-	display: -ms-grid;
-	height:100%;
-	-ms-grid-columns: 1fr;
-	-ms-grid-rows: 1fr;
+    display: -ms-grid;
+    height:100%;
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: 1fr;
 }
 
 #noDataGrid div {
-	-ms-grid-column-align: center;
-	-ms-grid-row-align: center;
-	margin-top: 345px;
+    -ms-grid-column-align: center;
+    -ms-grid-row-align: center;
+    margin-top: 345px;
     color:#ccc;
-	text-align:center;
+    text-align:center;
 }
 
 #noDataGrid progress {
@@ -247,7 +247,7 @@ button.win-command:focus {
     -ms-grid-rows: 128px 1fr;
     display: -ms-grid;
     height: 100%;
-    width: 100%;    
+    width: 100%;
 }
 
 .fragment header[role=banner] {
@@ -307,48 +307,48 @@ a:hover {
 }
 
 /* math */
-.x7a488390{
-	background-color: #347192;	
+.x7a488390 {
+    background-color: #347192;
 }
 
-.x7a488390-subject{
-	background-color: #30a7de;
+.x7a488390-subject {
+    background-color: #30a7de;
 }
 
 /* science and economics */
-.xb92336a2{
-	background-color: #ba3d66;
+.xb92336a2 {
+    background-color: #ba3d66;
 }
 
-.xb92336a2-subject{
-	background-color: #ba3d66;
+.xb92336a2-subject {
+    background-color: #ba3d66;
 }
 
 /* humanities */
-.x905db83d{
-	background-color: #4e55a1;
+.x905db83d {
+    background-color: #4e55a1;
 }
 
-.x905db83d-subject{
-	background-color: #4e55a1;
+.x905db83d-subject {
+    background-color: #4e55a1;
 }
 
 /* test prep */
-.x7626d097{
-	background-color: #8e4c9b;
+.x7626d097 {
+    background-color: #8e4c9b;
 }
 
-.x7626d097-subject{
-	background-color: #8e4c9b;
+.x7626d097-subject {
+    background-color: #8e4c9b;
 }
 
 /* talks and interviews */
-.xd1039e22{
-	background-color: #13967e;
+.xd1039e22 {
+    background-color: #13967e;
 }
 
-.xd1039e22-subject{
-	background-color: #13967e;
+.xd1039e22-subject {
+    background-color: #13967e;
 }
 
 /* Projects & Discovery Lab */
@@ -356,17 +356,17 @@ a:hover {
     background-color: #d44c28;
 }
 
-.xae887ec6-subject{
+.xae887ec6-subject {
     background-color: #d44c28;
 }
 
 /* partner content */
-.x54390c7e{
-	background-color: #13967e;
+.x54390c7e {
+    background-color: #13967e;
 }
 
-.x54390c7e-subject{
-	background-color: #13967e;
+.x54390c7e-subject {
+    background-color: #13967e;
 }
 
 ::selection, option:checked, select:focus::-ms-value, option:checked:hover, select:focus option:checked:hover {
@@ -392,26 +392,26 @@ a:hover {
 }
 
 #childrenLv .win-container, #downloadsLv .win-container, #resultsLv .win-container, #newsLv .win-container{
-	margin-right:16px;
+    margin-right:16px;
 }
 
 .videoItem {
-	width: 220px;
-	height: 165px;	
-	background-color:#000;
-	display:-ms-grid;
-	-ms-grid-columns:1fr;
-	-ms-grid-rows:1fr;
-	background-size:cover;
+    width: 220px;
+    height: 165px;
+    background-color:#000;
+    display:-ms-grid;
+    -ms-grid-columns:1fr;
+    -ms-grid-rows:1fr;
+    background-size:cover;
     border:solid 1px #ccc;
 }
 
-.videoItem .titleDiv {	
-	background-image: linear-gradient(#252d39 0%, #000);
-	color: #E7E7E7;
-	-ms-grid-row-align: end;
-	padding: 8px;
-	min-height:38px;
+.videoItem .titleDiv {
+    background-image: linear-gradient(#252d39 0%, #000);
+    color: #E7E7E7;
+    -ms-grid-row-align: end;
+    padding: 8px;
+    min-height:38px;
 }
 
 @media screen and (-ms-view-state: snapped) {
@@ -435,22 +435,22 @@ a:hover {
         margin-left: 0;
         margin-top: 44px;
     }
-	
-	#userPane {
-		top: 12px;
-		right: 12px;
-		color:#777;
-	}
-	
-	#childrenLv .win-container, #downloadsLv .win-container, #resultsLv .win-container, #newsLv .win-container{
-		margin-right:20px;
-		margin-left:20px;
-	}
-	
-	.videoItem {
-		width: 280px;
-		height: 210px;	
-	}
+
+    #userPane {
+        top: 12px;
+        right: 12px;
+        color:#777;
+    }
+
+    #childrenLv .win-container, #downloadsLv .win-container, #resultsLv .win-container, #newsLv .win-container {
+        margin-right:20px;
+        margin-left:20px;
+    }
+
+    .videoItem {
+        width: 280px;
+        height: 210px;
+    }
 }
 
 @media screen and (-ms-view-state: fullscreen-portrait) {
@@ -462,7 +462,7 @@ a:hover {
         margin-left: 29px;
     }
 
-    #userMenu, #userPane {	
-	    right: 40px;
+    #userMenu, #userPane {
+        right: 40px;
     }
 }
