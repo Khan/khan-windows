@@ -1,28 +1,28 @@
 ﻿#searchResultsPanel section[role=main] {
-	overflow-x: auto;
-	overflow-y: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 #searchResultsPanel #resultsCount {
-	color: #666;
+    color: #666;
     font-weight:normal;
-	font-size:20pt;
+    font-size:20pt;
 }
 
 #searchResultsPanel #resultsGrid {
-	display: -ms-grid;
-	height: 100%;
-	-ms-grid-columns: 1fr;
-	-ms-grid-rows: 60px 1fr;
+    display: -ms-grid;
+    height: 100%;
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: 60px 1fr;
 }
 
 #searchResultsPanel #filterList {
-	margin-left:120px;
+    margin-left:120px;
 }
 
 #searchResultsPanel #resultsLv {
-	height:100%;
-	-ms-grid-row: 2;
+    height:100%;
+    -ms-grid-row: 2;
 }
 
 #searchResultsPanel #resultsLv .win-container:not(.win-footprint) {
@@ -30,8 +30,8 @@
 }
 
 #searchResultsPanel #resultsLv .win-surface {
-	margin-left:115px;
-	margin-bottom:100px;
+    margin-left:115px;
+    margin-bottom:100px;
 }
 
 #searchResultsPanel #noResults {
@@ -41,38 +41,38 @@
 }
 
 @media screen and (-ms-view-state: snapped) {
-	#searchResultsPanel header {
-		margin-left:0;
-		padding-left:12px;
-	}
-	
-	#searchResultsPanel  header[role=banner] .titlearea {
-		margin-top: 40px;
-		overflow:auto;
-		text-overflow:clip;
-		white-space:normal;
-	}
-	
-	#searchResultsPanel h1{
-		margin-top:40px;
-	}	
-	
-	#searchResultsPanel #resultsCount {
-		font-size:16pt;
-		display: block;
-	}
-	
-	#searchResultsPanel #resultsGrid {
-		-ms-grid-rows: 44px 1fr;
-	}
-	
-	#searchResultsPanel #filterList {
-		margin-left:20px;
-	}	
-	#searchResultsPanel #resultsLv .win-surface {
-		margin-left:0;
-		margin-bottom:0;
-	}
+    #searchResultsPanel header {
+        margin-left:0;
+        padding-left:12px;
+    }
+
+    #searchResultsPanel  header[role=banner] .titlearea {
+        margin-top: 40px;
+        overflow:auto;
+        text-overflow:clip;
+        white-space:normal;
+    }
+
+    #searchResultsPanel h1 {
+        margin-top:40px;
+    }
+
+    #searchResultsPanel #resultsCount {
+        font-size:16pt;
+        display: block;
+    }
+
+    #searchResultsPanel #resultsGrid {
+        -ms-grid-rows: 44px 1fr;
+    }
+
+    #searchResultsPanel #filterList {
+        margin-left:20px;
+    }
+    #searchResultsPanel #resultsLv .win-surface {
+        margin-left:0;
+        margin-bottom:0;
+    }
 
     #searchResultsPanel #noResults {
         margin-left:20px;
@@ -81,17 +81,17 @@
 
 @media all and (-ms-view-state: fullscreen-portrait) {
     #searchResultsPanel header h1 {
-		margin-top:60px;
-		padding-right:30px;
-		font-size:24pt;
-	}
+        margin-top:60px;
+        padding-right:30px;
+        font-size:24pt;
+    }
     #searchResultsPanel #resultsCount {
-	    font-size:14pt;
+        font-size:14pt;
     }
 
     #searchResultsPanel #filterList {
-		margin-left:100px;
-	}
+        margin-left:100px;
+    }
 
     #searchResultsPanel #resultsLv .win-surface {
         margin-left:100px;

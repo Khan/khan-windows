@@ -1,37 +1,37 @@
 ﻿#videoPagePanel section[role=main] {
-	overflow-x: auto;
-	overflow-y: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
-#videoPagePanel .mainGrid{
-	display:-ms-grid;
-	-ms-grid-rows:416px 1fr 40px;
-	-ms-grid-columns:120px 740px 70px 1fr;
-	height:100%;
+#videoPagePanel .mainGrid {
+    display:-ms-grid;
+    -ms-grid-rows:416px 1fr 40px;
+    -ms-grid-columns:120px 740px 70px 1fr;
+    height:100%;
 }
 
 #videoPagePanel #titleGrid {
     -ms-grid-column: 2;
-	display:-ms-grid;
-	-ms-grid-rows:32px auto auto;
-	-ms-grid-columns:130px 12px 1fr;
-	height:100%;	
+    display:-ms-grid;
+    -ms-grid-rows:32px auto auto;
+    -ms-grid-columns:130px 12px 1fr;
+    height:100%;
 }
 
-#videoPagePanel #pageTitle{
-	font-size:26pt;
-	-ms-grid-row: 2;
-	-ms-grid-column-span: 3;
+#videoPagePanel #pageTitle {
+    font-size:26pt;
+    -ms-grid-row: 2;
+    -ms-grid-column-span: 3;
 }
 
 #videoPagePanel #pageDescDivider {
     font-size:10pt;
-	color:#666;    
-    -ms-grid-row: 3;    
-	-ms-grid-column: 2;
+    color:#666;
+    -ms-grid-row: 3;
+    -ms-grid-column: 2;
 }
 
-#videoPagePanel #pageDesc{
+#videoPagePanel #pageDesc {
     font-size:10pt;
     color:#666;
     -ms-grid-row: 3;
@@ -43,16 +43,16 @@
 }
 
 #videoPagePanel #videoDownload, #videoPagePanel #videoDelete {
-	color:#666;    
+    color:#666;
     -ms-grid-column: 1;
-	-ms-grid-row: 3;
-	font-size:10pt;
-	background-image: url('/images/download.png');
-	background-repeat: no-repeat;
-	background-position-y: 2px;
-	padding-left: 23px;
-	height: 40px;
-	cursor:pointer;
+    -ms-grid-row: 3;
+    font-size:10pt;
+    background-image: url('/images/download.png');
+    background-repeat: no-repeat;
+    background-position-y: 2px;
+    padding-left: 23px;
+    height: 40px;
+    cursor:pointer;
 }
 
 #videoPagePanel #videoDelete {
@@ -61,292 +61,292 @@
 }
 
 #videoPagePanel #videoDownload:hover, #videoPagePanel #videoDelete:hover {
-	color:#333;    
-	background-position-y: 3px;
+    color:#333;
+    background-position-y: 3px;
 }
 
-#videoPagePanel #downloadProgress{
-	width:95px;
-	display:none;
+#videoPagePanel #downloadProgress {
+    width:95px;
+    display:none;
     margin-top:3px;
     color:#242c37;
 }
 
 #videoPagePanel #offlineDiv {
-	color:#666;
-	font-size: 10pt;
-	-ms-grid-row: 2;
-	-ms-grid-column: 2;
+    color:#666;
+    font-size: 10pt;
+    -ms-grid-row: 2;
+    -ms-grid-column: 2;
 }
 
 #videoPagePanel #vidPlayer {
     -ms-grid-column: 2;
 }
 
-#tutDiv{
-	-ms-grid-column: 4;
-	-ms-grid-row-span: 2;	
-	font-size:10pt;
-	height:100%;
+#tutDiv {
+    -ms-grid-column: 4;
+    -ms-grid-row-span: 2;
+    font-size:10pt;
+    height:100%;
 }
 
 #tutGrid {
-	width:360px;	
-	height:100%;
-	display:-ms-grid;
-	-ms-grid-rows:auto 1fr;
-	-ms-grid-columns:1fr;
+    width:360px;
+    height:100%;
+    display:-ms-grid;
+    -ms-grid-rows:auto 1fr;
+    -ms-grid-columns:1fr;
 }
 
-#tutTitleBgd {	
-	border:solid 1px #ccc;
-	border-bottom-width:0;
+#tutTitleBgd {
+    border:solid 1px #ccc;
+    border-bottom-width:0;
 }
 
-#tutTitle {	
-	color:white;
-	padding:8px 8px 8px 12px;		
-	margin:1px 40px 0px 1px;
+#tutTitle {
+    color:white;
+    padding:8px 8px 8px 12px;
+    margin:1px 40px 0px 1px;
 }
 
-#tutDownload {	
-	height:39px;
-	width:40px;
+#tutDownload {
+    height:39px;
+    width:40px;
     margin-top:1px;
-	-ms-grid-column-align: end;
-	background-image: url('/images/download_list.png');
-	background-repeat: no-repeat;
-	background-position: 10px 12px;	
-	cursor:pointer;
+    -ms-grid-column-align: end;
+    background-image: url('/images/download_list.png');
+    background-repeat: no-repeat;
+    background-position: 10px 12px;
+    cursor:pointer;
 }
 
 #tutDownload:hover {
-	background-position: 10px 13px;	
-    background-color: rgba(0,0,0,0.2);	
+    background-position: 10px 13px;
+    background-color: rgba(0,0,0,0.2);
 }
 
-#tutList {		
-	-ms-grid-row: 2;	
-	display: -ms-flexbox;
-	-ms-flex-wrap: wrap;	
-	overflow-y:auto;
-	-ms-flex-line-pack: start;
+#tutList {
+    -ms-grid-row: 2;
+    display: -ms-flexbox;
+    -ms-flex-wrap: wrap;
+    overflow-y:auto;
+    -ms-flex-line-pack: start;
 }
 
 #tutList .tutItem {
-	padding:10px 10px 10px 39px;
-	background-color: white;
-	border:solid 1px #ccc;
-	border-bottom-width:0;
-	color:#297395;
-	background-image: url('/images/playlistItem-mid.png');
-	background-repeat: no-repeat;
-	background-position-x: -10px;
-	width:309px;
+    padding:10px 10px 10px 39px;
+    background-color: white;
+    border:solid 1px #ccc;
+    border-bottom-width:0;
+    color:#297395;
+    background-image: url('/images/playlistItem-mid.png');
+    background-repeat: no-repeat;
+    background-position-x: -10px;
+    width:309px;
 }
 
 #tutList .tutItem:hover {
-    background-color:#e3f5fd;	
+    background-color:#e3f5fd;
 }
 
 #tutList .selected {
     color:#0d445d;
-    background-color:#e3f5fd;	
+    background-color:#e3f5fd;
 }
 
-#tutList .tutItem:first-child {    
-	background-image: url('/images/playlistItem-top.png');
-	background-position: -11px 4px;
+#tutList .tutItem:first-child {
+    background-image: url('/images/playlistItem-top.png');
+    background-position: -11px 4px;
 }
 
-#tutList .tutItem:last-child {    
-	background-image: url('/images/playlistItem-bot.png');
+#tutList .tutItem:last-child {
+    background-image: url('/images/playlistItem-bot.png');
     background-position: -11px -2px;
-	border-bottom-width:1px;
+    border-bottom-width:1px;
 }
 
-#noTranscriptDiv{
-	-ms-grid-column: 2;
-	-ms-grid-row: 2;	
-	margin-top:16px;
-    font-size:8pt;	
+#noTranscriptDiv {
+    -ms-grid-column: 2;
+    -ms-grid-row: 2;
+    margin-top:16px;
+    font-size:8pt;
     color:#666;
     display:none;
 }
 
-#transcriptDiv{
-	-ms-grid-column: 2;
-	-ms-grid-row: 2;	
-	overflow-y:auto;
-	margin-top:16px;
-    font-size:10pt;	
+#transcriptDiv {
+    -ms-grid-column: 2;
+    -ms-grid-row: 2;
+    overflow-y:auto;
+    margin-top:16px;
+    font-size:10pt;
 }
 
-#transcriptList{	
-	background-color:#fff;
+#transcriptList {
+    background-color:#fff;
 }
 
-#transcriptList .selected{
-	background-color:#eee;
-	border-color:#ccc;
+#transcriptList .selected {
+    background-color:#eee;
+    border-color:#ccc;
 }
 
 .transcriptItem {
-	display:-ms-grid;
-	-ms-grid-columns: 40px 1fr;
-	-ms-grid-rows: 1fr;
-	padding:6px 6px;	
-	border:solid 1px #fff;
+    display:-ms-grid;
+    -ms-grid-columns: 40px 1fr;
+    -ms-grid-rows: 1fr;
+    padding:6px 6px;
+    border:solid 1px #fff;
 }
 
 .transcriptItem .time {
-	color:#666;
+    color:#666;
 }
 
 .transcriptItem .text {
-	-ms-grid-column:2;
+    -ms-grid-column:2;
 }
 
 @media screen and (-ms-view-state: snapped) {
-	
-	.fragment {
-		-ms-grid-rows: auto 1fr;
-	}	
-	
-	#videoPagePanel #pageTitle{
-		font-size:20pt;
-	}
 
-	#videoPagePanel  header[role=banner] .titlearea {
-		margin-top: 44px;
-		overflow:auto;
-		text-overflow:clip;
-		white-space:normal;
-	}
-	
-	#videoPagePanel  header[role=banner] p {
-		line-height:1.3em;
-		width: calc(100% - 20px);
-	}
-	
-	#videoPagePanel .mainGrid{
-		margin-top:20px;
-		-ms-grid-rows:158px auto 1fr;
-		-ms-grid-columns:20px 280px 20px;
-	}
-	
-	#transcriptDiv{
-		height:200px;
-		margin-bottom:20px
-	}
-	
-	#videoPagePanel #offlineDiv {
-		-ms-grid-row: 2;
-		-ms-grid-column: 2;
-		margin-top: 0;
-		font-size:8pt;
-	}
-	
-	#videoPagePanel #titleGrid {
-		-ms-grid-column: 2;
-		display:-ms-grid;
-		-ms-grid-rows:36px auto auto auto;
-		-ms-grid-columns:1fr;
-		height:100%;
-	}
-
-	#videoPagePanel #pageTitle{
-		font-size:14pt;
-		-ms-grid-row: 2;
-		-ms-grid-column-span: 1;
-	}
-
-	#videoPagePanel #pageDescDivider {
-		display:none;
-	}
-
-	#videoPagePanel #pageDesc{
-		-ms-grid-row: 3;    
-		-ms-grid-column: 1;
-		padding-bottom:10px;
-	}
-	
-	#videoPagePanel #videoDownload, #videoPagePanel #videoDelete {
-		-ms-grid-column: 1;
-		-ms-grid-row: 4;
-	}
-	
-	#tutDiv{
-		-ms-grid-column: 2;
-		-ms-grid-row:3;
-		-ms-grid-row-span: 1;	
-		height:100%;
-	}
-	
-	#tutGrid {
-		width:280px;	
-	}
-
-    #noTranscriptDiv{
-	    margin-top:6px;
-        margin-bottom:6px;
+    .fragment {
+        -ms-grid-rows: auto 1fr;
     }
-	
-	#tutList .tutItem {
-		padding:10px 10px 10px 39px;		
-		width:229px;
-	}		
-}
 
-@media all and (-ms-view-state: fullscreen-portrait) { 
-	.fragment {
-		-ms-grid-rows: auto 1fr;
-	}	
+    #videoPagePanel #pageTitle {
+        font-size:20pt;
+    }
+
+    #videoPagePanel  header[role=banner] .titlearea {
+        margin-top: 44px;
+        overflow:auto;
+        text-overflow:clip;
+        white-space:normal;
+    }
+
+    #videoPagePanel  header[role=banner] p {
+        line-height:1.3em;
+        width: calc(100% - 20px);
+    }
+
+    #videoPagePanel .mainGrid {
+        margin-top:20px;
+        -ms-grid-rows:158px auto 1fr;
+        -ms-grid-columns:20px 280px 20px;
+    }
+
+    #transcriptDiv {
+        height:200px;
+        margin-bottom:20px
+    }
+
+    #videoPagePanel #offlineDiv {
+        -ms-grid-row: 2;
+        -ms-grid-column: 2;
+        margin-top: 0;
+        font-size:8pt;
+    }
+
+    #videoPagePanel #titleGrid {
+        -ms-grid-column: 2;
+        display:-ms-grid;
+        -ms-grid-rows:36px auto auto auto;
+        -ms-grid-columns:1fr;
+        height:100%;
+    }
+
+    #videoPagePanel #pageTitle {
+        font-size:14pt;
+        -ms-grid-row: 2;
+        -ms-grid-column-span: 1;
+    }
+
+    #videoPagePanel #pageDescDivider {
+        display:none;
+    }
+
+    #videoPagePanel #pageDesc {
+        -ms-grid-row: 3;
+        -ms-grid-column: 1;
+        padding-bottom:10px;
+    }
 
     #videoPagePanel #videoDownload, #videoPagePanel #videoDelete {
-	    height: 60px;
+        -ms-grid-column: 1;
+        -ms-grid-row: 4;
     }
-	
-	#videoPagePanel #pageTitle{
-		font-size:14pt;
-		width:calc(100% - 200px);
-	}
-	
-	#videoPagePanel .mainGrid{
-		-ms-grid-rows:353px auto 1fr;
-		-ms-grid-columns:100px 1fr 40px;
-	}
 
-    #transcriptDiv{
-		height:200px;
-		margin-bottom:20px
-	}
+    #tutDiv {
+        -ms-grid-column: 2;
+        -ms-grid-row:3;
+        -ms-grid-row-span: 1;
+        height:100%;
+    }
 
-	#noTranscriptDiv{
-	    margin-top:6px;
+    #tutGrid {
+        width:280px;
+    }
+
+    #noTranscriptDiv {
+        margin-top:6px;
         margin-bottom:6px;
     }
-	
-	#tutDiv{
-		-ms-grid-column: 2;
-		-ms-grid-row:3;
-		-ms-grid-row-span: 1;	
-		height:100%;
-	}
-	
-	#tutGrid {
-		width:100%;	
-	}
-	
-	#tutList .tutItem {
-		padding:10px 10px 10px 39px;		
-		width:100%;
-	}
+
+    #tutList .tutItem {
+        padding:10px 10px 10px 39px;
+        width:229px;
+    }
 }
 
-@media screen and (min-width: 1920px){
-	#videoPagePanel .mainGrid{
-		-ms-grid-rows:720px 1fr 80px;
-		-ms-grid-columns:120px 1280px 70px 1fr;
-	}
+@media all and (-ms-view-state: fullscreen-portrait) {
+    .fragment {
+        -ms-grid-rows: auto 1fr;
+    }
+
+    #videoPagePanel #videoDownload, #videoPagePanel #videoDelete {
+        height: 60px;
+    }
+
+    #videoPagePanel #pageTitle {
+        font-size:14pt;
+        width:calc(100% - 200px);
+    }
+
+    #videoPagePanel .mainGrid {
+        -ms-grid-rows:353px auto 1fr;
+        -ms-grid-columns:100px 1fr 40px;
+    }
+
+    #transcriptDiv {
+        height:200px;
+        margin-bottom:20px
+    }
+
+    #noTranscriptDiv {
+        margin-top:6px;
+        margin-bottom:6px;
+    }
+
+    #tutDiv {
+        -ms-grid-column: 2;
+        -ms-grid-row:3;
+        -ms-grid-row-span: 1;
+        height:100%;
+    }
+
+    #tutGrid {
+        width:100%;
+    }
+
+    #tutList .tutItem {
+        padding:10px 10px 10px 39px;
+        width:100%;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    #videoPagePanel .mainGrid {
+        -ms-grid-rows:720px 1fr 80px;
+        -ms-grid-columns:120px 1280px 70px 1fr;
+    }
 }
