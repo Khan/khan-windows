@@ -69,8 +69,9 @@ module VideoPage {
             isPlaying = true;
         });
 
-        vidPlayer.addEventListener('MSPointerDown', function(e) {
-          togglePlayPause();
+        vidPlayer.addEventListener('MSPointerDown', function posterPlay(e) {
+            vidPlayer.play();
+            vidPlayer.removeEventListener('MSPointerDown', posterPlay);
         });
 
         vidPlayer.addEventListener('pause', function (e) {
