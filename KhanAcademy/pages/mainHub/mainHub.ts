@@ -421,22 +421,21 @@ module MainHub {
         WinJS.Application.removeEventListener("newDataCheckCompleted", handleNewDataCheckCompleted);
     }
 
-    function updateLayout(element, viewState, lastViewState) {
-        if (lastViewState !== viewState) {
-            if (lastViewState === appViewState.snapped || viewState === appViewState.snapped) {
-                repositionDomainMenus();
-                var handler = function (e) {
-                    downloadsLv.removeEventListener("contentanimating", handler, false);
-                    e.preventDefault();
-                }
-                downloadsLv.addEventListener("contentanimating", handler, false);
-                initListLayout(viewState);
-                if (viewState === appViewState.snapped) {
-                    KA.id('userPane').style.visibility = 'hidden';
-                } else {
-                    KA.id('userPane').style.visibility = 'visible';
-                }
-            }
+    function updateLayout(element, info) {
+        if (!info.dimensionsChanged)
+            return;
+
+        repositionDomainMenus();
+        var handler = function (e) {
+            downloadsLv.removeEventListener("contentanimating", handler, false);
+            e.preventDefault();
+        }
+        downloadsLv.addEventListener("contentanimating", handler, false);
+        initListLayout(info.viewState);
+        if (info.viewState === appViewState.snapped) {
+            KA.id('userPane').style.visibility = 'hidden';
+        } else {
+            KA.id('userPane').style.visibility = 'visible';
         }
     }
 

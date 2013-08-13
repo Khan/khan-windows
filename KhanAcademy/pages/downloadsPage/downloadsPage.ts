@@ -160,17 +160,15 @@ module DownloadsPage {
         dataTransferManager.removeEventListener("datarequested", KA.generalSharingDataRequested);
     }
 
-    function updateLayout(element, viewState, lastViewState) {
-        if (lastViewState !== viewState) {
-            if (lastViewState === appViewState.snapped || viewState === appViewState.snapped) {
-                var handler = function (e) {
-                    downloadsLv.removeEventListener("contentanimating", handler, false);
-                    e.preventDefault();
-                }
-                downloadsLv.addEventListener("contentanimating", handler, false);
-                initListLayout(viewState);
-            }
+    function updateLayout(element, info) {
+        if (!info.dimensionsChanged)
+            return;
+        var handler = function (e) {
+            downloadsLv.removeEventListener("contentanimating", handler, false);
+            e.preventDefault();
         }
+        downloadsLv.addEventListener("contentanimating", handler, false);
+        initListLayout(info.viewState);
     }
 
     KA.definePage("/pages/downloadsPage/downloadsPage.html", ready, unload, updateLayout);

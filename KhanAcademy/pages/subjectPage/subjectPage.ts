@@ -202,17 +202,15 @@ module SubjectPage {
         dataTransferManager.removeEventListener("datarequested", dataRequested);
     }
 
-    function updateLayout(element, viewState, lastViewState) {
-        if (lastViewState !== viewState) {
-            if (lastViewState === appViewState.snapped || viewState === appViewState.snapped) {
-                var handler = function (e) {
-                    childrenLv.removeEventListener("contentanimating", handler, false);
-                    e.preventDefault();
-                }
-                childrenLv.addEventListener("contentanimating", handler, false);
-                initListLayout(viewState);
-            }
+    function updateLayout(element, info) {
+        if (!info.dimensionsChanged)
+            return;
+        var handler = function (e) {
+            childrenLv.removeEventListener("contentanimating", handler, false);
+            e.preventDefault();
         }
+        childrenLv.addEventListener("contentanimating", handler, false);
+        initListLayout(info.viewState);
     }
 
     KA.definePage("/pages/subjectPage/subjectPage.html", ready, unload, updateLayout);
