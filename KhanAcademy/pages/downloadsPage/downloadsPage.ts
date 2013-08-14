@@ -38,8 +38,7 @@ module DownloadsPage {
                     });
                 });
                 downloadsLv.addEventListener("selectionchanged", listSelectionChanged);
-
-                initListLayout(appView.value);
+                KA.initListLayout(downloadsLv);
             } else {
                 KA.show(KA.id('noDownloads'));
                 KA.hide(downloadsLv);
@@ -82,16 +81,6 @@ module DownloadsPage {
 
         appBar.disabled = true;
         appBar.hideCommands(appBar.element.querySelectorAll('.multiSelect'));
-    }
-
-    function initListLayout(viewState) {
-        if (downloadsLv) {
-            if (viewState === appViewState.snapped) {
-                downloadsLv.winControl.layout = new ui.ListLayout();
-            } else {
-                downloadsLv.winControl.layout = new ui.GridLayout();
-            }
-        }
     }
 
     function listSelectionChanged() {
@@ -160,15 +149,8 @@ module DownloadsPage {
         dataTransferManager.removeEventListener("datarequested", KA.generalSharingDataRequested);
     }
 
-    function updateLayout(element, info) {
-        if (!info.dimensionsChanged)
-            return;
-        var handler = function (e) {
-            downloadsLv.removeEventListener("contentanimating", handler, false);
-            e.preventDefault();
-        }
-        downloadsLv.addEventListener("contentanimating", handler, false);
-        initListLayout(info.viewState);
+    function updateLayout(element: HTMLElement, dimensionsChanged: boolean) {
+        KA.updateLayout(downloadsLv, dimensionsChanged);
     }
 
     KA.definePage("/pages/downloadsPage/downloadsPage.html", ready, unload, updateLayout);

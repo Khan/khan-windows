@@ -12,7 +12,6 @@ module KA {
         home: string = "";
         _element: HTMLElement = null;
         _lastNavigationPromise: WinJS.Promise<any> = WinJS.Promise.as();
-        _lastViewState: number = 0;
         _lastWidth: number = 0;
         _lastHeight: number = 0;
 
@@ -23,7 +22,6 @@ module KA {
             this._element.appendChild(this._createPageElement());
 
             this.home = options.home;
-            this._lastViewState = appView.value;
             this._lastWidth = this._element.clientWidth;
             this._lastHeight = this._element.clientHeight;
 
@@ -123,17 +121,12 @@ module KA {
         // Responds to resize events and call the updateLayout function
         // on the currently loaded page.
         _resized(args) {
+
             if (this.pageControl && this.pageControl.updateLayout) {
                 var dimensionsChanged = this._lastWidth != this.pageElement.clientWidth ||
                                         this._lastHeight != this.pageElement.clientHeight;
-                var info = { viewState: appView.value,
-                             lastViewState: this._lastViewState,
-                             lastWidth: this._lastWidth,
-                             lastHeight: this._lastHeight,
-                             dimensionsChanged: dimensionsChanged };
-                this.pageControl.updateLayout.call(this.pageControl, this.pageElement, info);
+                this.pageControl.updateLayout.call(this.pageControl, this.pageElement, dimensionsChanged);
             }
-            this._lastViewState = appView.value;
             this._lastWidth = this.pageElement.clientWidth;
             this._lastHeight = this.pageElement.clientHeight;
         }
