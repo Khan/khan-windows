@@ -99,4 +99,35 @@ module KA {
             });
         }
     }
+
+    // itemLv purposely untyped since sometimes it has itemLv.winControl
+    // and sometimes it does not.
+    export function initListLayout(itemLv) {
+        if (!itemLv)
+            return;
+
+        var ctrl = itemLv.winControl || itemLv;
+        var viewState = Windows.UI.ViewManagement.ApplicationView.value;
+        if (viewState === Windows.UI.ViewManagement.ApplicationViewState.snapped) {
+            ctrl.layout = new WinJS.UI.ListLayout();
+        } else {
+            ctrl.layout = new WinJS.UI.GridLayout();
+        }
+    }
+
+    // Common updateLayout functionality that most pages want
+    export function updateLayout(itemLv: HTMLElement, dimensionsChanged: boolean, initListLayout?: Function) {
+        if (!dimensionsChanged)
+            return;
+        var handler = function (e) {
+            itemLv.removeEventListener("contentanimating", handler, false);
+            e.preventDefault();
+        }
+        itemLv.addEventListener("contentanimating", handler, false);
+        if (initListLayout) {
+            initListLayout(itemLv);
+        } else {
+            KA.initListLayout(itemLv);
+        }
+    }
 }

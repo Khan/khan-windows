@@ -56,19 +56,9 @@ module SubjectPage {
                 } else {
                     console.log('subjectPage: subject does not contain recognizable children');
                 }
-                initListLayout(appView.value);
+                KA.initListLayout(childrenLv);
             } else {
                 console.log('subjectPage: subject does not contain any children');
-            }
-        }
-    }
-
-    function initListLayout(viewState) {
-        if (childrenLv) {
-            if (viewState === appViewState.snapped) {
-                childrenLv.layout = new ui.ListLayout();
-            } else {
-                childrenLv.layout = new ui.GridLayout();
             }
         }
     }
@@ -202,17 +192,8 @@ module SubjectPage {
         dataTransferManager.removeEventListener("datarequested", dataRequested);
     }
 
-    function updateLayout(element, viewState, lastViewState) {
-        if (lastViewState !== viewState) {
-            if (lastViewState === appViewState.snapped || viewState === appViewState.snapped) {
-                var handler = function (e) {
-                    childrenLv.removeEventListener("contentanimating", handler, false);
-                    e.preventDefault();
-                }
-                childrenLv.addEventListener("contentanimating", handler, false);
-                initListLayout(viewState);
-            }
-        }
+    function updateLayout(element: HTMLElement, dimensionsChanged: boolean) {
+        KA.updateLayout(childrenLv, dimensionsChanged);
     }
 
     KA.definePage("/pages/subjectPage/subjectPage.html", ready, unload, updateLayout);

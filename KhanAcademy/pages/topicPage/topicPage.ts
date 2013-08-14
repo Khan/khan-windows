@@ -56,23 +56,19 @@ module TopicPage {
                 } else {
                     console.log('topicPage: topic does not contain recognizable children');
                 }
-                initListLayout(appView.value);
+                KA.initListLayout(childrenLv);
+                updateMaxVideos();
             } else {
                 console.log('topicPage: topic does not contain tutorials');
             }
         }
     }
 
-    function initListLayout(viewState) {
-        if (childrenLv) {
-            if (viewState === appViewState.snapped) {
-                maxVideoLinks = 2;
-                childrenLv.layout = new ui.ListLayout();
-            } else {
-                maxVideoLinks = 5;
-                childrenLv.layout = new ui.GridLayout();
-            }
-        }
+    function updateMaxVideos() {
+        if (appView.value === appViewState.snapped)
+            maxVideoLinks = 2;
+        else
+            maxVideoLinks = 5;
     }
 
     function renderTutorial(itemPromise) {
@@ -214,17 +210,9 @@ module TopicPage {
         dataTransferManager.removeEventListener("datarequested", dataRequested);
     }
 
-    function updateLayout(element, viewState, lastViewState) {
-        if (lastViewState !== viewState) {
-            if (lastViewState === appViewState.snapped || viewState === appViewState.snapped) {
-                var handler = function (e) {
-                    childrenLv.removeEventListener("contentanimating", handler, false);
-                    e.preventDefault();
-                }
-                childrenLv.addEventListener("contentanimating", handler, false);
-                initListLayout(viewState);
-            }
-        }
+    function updateLayout(element: HTMLElement, dimensionsChanged: boolean) {
+        KA.updateLayout(childrenLv, dimensionsChanged);
+        updateMaxVideos();
     }
 
     KA.definePage("/pages/topicPage/topicPage.html", ready, unload, updateLayout);

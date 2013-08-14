@@ -135,7 +135,7 @@ module MainHub {
                         nav.navigate("/pages/videoPage/videoPage.html", { video: vid });
                     });
                 });
-                initListLayout(appView.value);
+                initListLayout(downloadsLv);
             } else {
                 KA.show(KA.id('noDownloads'));
                 KA.hide(downloadsLv);
@@ -308,15 +308,15 @@ module MainHub {
         newsTitle.addEventListener('MSPointerOut', KA.handleMSPointerOut);
     }
 
-    function initListLayout(viewState) {
-        if (downloadsLv) {
-            if (viewState === appViewState.snapped) {
-                downloadsLv.winControl.layout = new ui.ListLayout();
-            } else if (viewState === appViewState.fullScreenPortrait) {
-                downloadsLv.winControl.layout = new ui.GridLayout();
-            } else {
-                downloadsLv.winControl.layout = new ui.GridLayout({ maxRows: 3 });
-            }
+    function initListLayout(itemLv: HTMLElement) {
+        if (!itemLv)
+            return;
+        if (appView.value === appViewState.snapped) {
+            itemLv.winControl.layout = new ui.ListLayout();
+        } else if (appView.value === appViewState.fullScreenPortrait) {
+            itemLv.winControl.layout = new ui.GridLayout();
+        } else {
+            itemLv.winControl.layout = new ui.GridLayout({ maxRows: 3 });
         }
     }
 
@@ -421,22 +421,15 @@ module MainHub {
         WinJS.Application.removeEventListener("newDataCheckCompleted", handleNewDataCheckCompleted);
     }
 
-    function updateLayout(element, viewState, lastViewState) {
-        if (lastViewState !== viewState) {
-            if (lastViewState === appViewState.snapped || viewState === appViewState.snapped) {
-                repositionDomainMenus();
-                var handler = function (e) {
-                    downloadsLv.removeEventListener("contentanimating", handler, false);
-                    e.preventDefault();
-                }
-                downloadsLv.addEventListener("contentanimating", handler, false);
-                initListLayout(viewState);
-                if (viewState === appViewState.snapped) {
-                    KA.id('userPane').style.visibility = 'hidden';
-                } else {
-                    KA.id('userPane').style.visibility = 'visible';
-                }
-            }
+    function updateLayout(element: HTMLElement, dimensionsChanged: boolean) {
+        KA.updateLayout(downloadsLv, dimensionsChanged, initListLayout);
+        if (!dimensionsChanged)
+            return;
+        repositionDomainMenus();
+        if (appView.value === appViewState.snapped) {
+            KA.id('userPane').style.visibility = 'hidden';
+        } else {
+            KA.id('userPane').style.visibility = 'visible';
         }
     }
 
