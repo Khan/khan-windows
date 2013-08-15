@@ -17,9 +17,18 @@ module KA {
 
     export class Data {
         static newAndNoteworthyId = 'x29232c6b';
-        static coachResId = 'x6a4a5e33';
-        static partnerContentId = 'x54390c7e';
 
+        // When processing topic tree, we selectively include domains to show in the app. This is to avoid issues caused by new domains being added on ka.org.
+        private allowedDomains = [
+            Data.newAndNoteworthyId,
+            'x7a488390', // Math
+            'xb92336a2', // Science & Economics
+            'x905db83d', // Humanities
+            'x7626d097', // Test Prep
+            'xd1039e22', // Talks and Interviews
+            'xae887ec6', // Projects & Discovery Lab
+        ];
+        
         private domains: Domain[] = null;
         private videos: Video[] = null;
         lastSyncETag = null;
@@ -219,7 +228,7 @@ module KA {
             app.queueEvent({ type: "networkStatusChanged", statusChange: statusChange });
         }
 
-        static init() {
+        static init(isFirstRun : boolean) {
             service = new KA.Data();
 
             //register for network change
@@ -228,7 +237,8 @@ module KA {
             return new WinJS.Promise(function (c, e) {
                 //check if data exists
                 app.local.exists(savedDateFileName).done(function (fileExists) {
-                    if (fileExists) {
+                    // we want to start fresh if this is first run, even if the data file exists
+                    if (fileExists && !isFirstRun) {
                         app.local.readText(savedDateFileName).done(function (text) {
                             //rehydrate data
                             var savedData = JSON.parse(text);
@@ -242,7 +252,7 @@ module KA {
                             var checkDate = new Date();
                             checkDate.setDate(checkDate.getDate() - KA.Settings.newDataCheckDelay);
                             if (service.lastSyncDate < checkDate) {
-                                service.loadDataFromUrl();
+                                service.loadDataFromUrl(isFirstRun);
                             } else {
                                 console.log('date check, skipped since not enough time has passed');
                             }
@@ -274,7 +284,7 @@ module KA {
                         });
 
                         //queue up data refresh
-                        service.loadDataFromUrl().done();
+                        service.loadDataFromUrl(isFirstRun).done();
                     }
                 });
             });
@@ -328,17 +338,17 @@ module KA {
             return service.domains;
         }
 
-        loadDataFromUrl() {
-            return new WinJS.Promise(function (c, e) {
+        loadDataFromUrl(isFirstRun: boolean) {
+            return new WinJS.Promise((c, e) => {
                 if (!KA.Settings.isInDesigner) {
                     WinJS.Application.queueEvent({ type: "newDataCheckRequested" });
 
-                    WinJS.xhr({ url: topicUrl }).done(function (result) {
+                    WinJS.xhr({ url: topicUrl }).done(result => {
                         if (result.status === 200) {
                             var eTag = result.getResponseHeader('ETag');
 
                             //have we synced before and is the eTag different?
-                            if (!service.lastSyncETag || (eTag != service.lastSyncETag)) {
+                            if (isFirstRun || !service.lastSyncETag || (eTag != service.lastSyncETag)) {
                                 service.lastSyncETag = eTag;
                                 service.lastSyncDate = new Date();
                                 var newData = JSON.parse(result.responseText);
@@ -372,7 +382,7 @@ module KA {
         }
 
         parseTopicTree(parsedObject) {
-            return new WinJS.Promise(function (c, e) {
+            return new WinJS.Promise((c, e) => {
                 var obj, obj2, obj3, obj4;
                 var domain: Domain, subject: Subject, topic: Topic, tutorial: Tutorial;
 
@@ -380,8 +390,8 @@ module KA {
                 for (var i = 0; i < parsedObject.children.length; i++) {
                     obj = parsedObject.children[i];
 
-                    //skip coach resources and partner content
-                    if (obj.id != Data.coachResId && obj.id != Data.partnerContentId) {
+                    //skip domains which are not in the list of domains shown in the app
+                    if (this.allowedDomains.indexOf(obj.id) > -1) {
                         domain = {
                             type: KA.ObjectType.domain,
                             id: obj.id,

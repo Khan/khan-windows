@@ -87,9 +87,13 @@
     <Content Include="images\xd1039e22.png" />
     <Content Include="images\x7626d097.png" />
     <Content Include="images\widelogo.png" />
-    <TypeScriptCompile Include="js\base.ts" />
-    <Content Include="js\base.js">
-      <DependentUpon>base.ts</DependentUpon>
+    <TypeScriptCompile Include="js\global.ts" />
+    <Content Include="js\global.js">
+      <DependentUpon>global.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="js\constants.ts" />
+    <Content Include="js\constants.js">
+      <DependentUpon>constants.ts</DependentUpon>
     </Content>
     <TypeScriptCompile Include="js\data\data.ts" />
     <Content Include="js\data\data.js">
