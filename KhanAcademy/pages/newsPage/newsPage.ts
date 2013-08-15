@@ -1,4 +1,4 @@
-﻿/// <reference path="../../js/base.ts" />
+﻿/// <reference path="../../js/global.ts" />
 
 module NewsPage {
 
@@ -24,7 +24,11 @@ module NewsPage {
                 //check for videos
                 if (domain.children && domain.children.length > 0) {
                     for (var j = 0; j < domain.children.length; j++) {
-                        newsItems.push(KA.Data.getVideo(domain.children[j].id));
+                        var video = KA.Data.getVideo(domain.children[j].id);
+
+                        if (video) {
+                            newsItems.push(KA.Data.getVideo(domain.children[j].id));
+                        }
                     }
                 }
                 break;
