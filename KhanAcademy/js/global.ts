@@ -14,6 +14,26 @@ module KA {
     var userNameDiv, loginOptionsDiv, loginDiv, registerDiv;
 
     export class Global {
+        // property to track if the app is running for the first time for current version. 
+        // this is used for cleaning/upgrading data from old versions and showing user what's new in the new version
+        public IsFirstRun: boolean;
+        
+        constructor() {
+            var localSettings = Windows.Storage.ApplicationData.current.localSettings,
+                version = Windows.ApplicationModel.Package.current.id.version;
+
+            var appVersion = version.major + "." + version.minor + "." + version.build + "." + version.revision;
+
+            var lastAppVersion = localSettings.values[Constants.SettingNames.AppVersion];
+
+            this.IsFirstRun = !lastAppVersion || lastAppVersion != appVersion;
+
+            // set the version if it's first run. this value will be persisted and for next run, app would know it's not first run
+            if (this.IsFirstRun) {
+                localSettings.values[Constants.SettingNames.AppVersion] = appVersion;
+            }
+        }
+
         handleLogOutBtnClick(e) {
             KA.User.logOut();
             loggedIn = false;
@@ -88,7 +108,7 @@ module KA {
                 service.initUserMenu();
 
                 //init data
-                KA.Data.init()
+                KA.Data.init(service.IsFirstRun)
                     .then(function () { return KA.User.init() })
                     .then(function () { return KA.Downloads.init() })
                     .done(function () {

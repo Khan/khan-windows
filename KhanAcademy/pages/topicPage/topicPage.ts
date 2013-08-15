@@ -1,4 +1,4 @@
-﻿/// <reference path="../../js/base.ts" />
+﻿/// <reference path="../../js/global.ts" />
 
 module TopicPage {
     "use strict";

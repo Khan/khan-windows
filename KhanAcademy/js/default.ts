@@ -1,6 +1,6 @@
 ﻿/// <reference path="navigator.ts" />
 /// <reference path="data/user.ts" />
-/// <reference path="base.ts" />
+/// <reference path="global.ts" />
 /// <reference path="../scripts/typings/winrt.d.ts" />
 /// <reference path="../scripts/typings/winjs.d.ts" />
 
