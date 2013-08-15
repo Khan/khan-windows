@@ -42,17 +42,7 @@ module NewsPage {
                     nav.navigate("/pages/videoPage/videoPage.html", { video: vid });
                 });
             });
-            initListLayout(appView.value);
-        }
-    }
-
-    function initListLayout(viewState) {
-        if (newsLv) {
-            if (viewState === appViewState.snapped) {
-                newsLv.layout = new ui.ListLayout();
-            } else {
-                newsLv.layout = new ui.GridLayout();
-            }
+            KA.initListLayout(newsLv);
         }
     }
 
@@ -99,17 +89,8 @@ module NewsPage {
         dataTransferManager.removeEventListener("datarequested", KA.generalSharingDataRequested);
     }
 
-    function updateLayout(element, viewState, lastViewState) {
-        if (lastViewState !== viewState) {
-            if (lastViewState === appViewState.snapped || viewState === appViewState.snapped) {
-                var handler = function (e) {
-                    newsLv.removeEventListener("contentanimating", handler, false);
-                    e.preventDefault();
-                }
-                newsLv.addEventListener("contentanimating", handler, false);
-                initListLayout(viewState);
-            }
-        }
+    function updateLayout(element: HTMLElement, dimensionsChanged: boolean) {
+        KA.updateLayout(newsLv, dimensionsChanged);
     }
 
     KA.definePage("/pages/newsPage/newsPage.html", ready, unload, updateLayout);

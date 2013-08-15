@@ -69,8 +69,9 @@ module VideoPage {
             isPlaying = true;
         });
 
-        vidPlayer.addEventListener('MSPointerDown', function(e) {
-          togglePlayPause();
+        vidPlayer.addEventListener('MSPointerDown', function posterPlay(e) {
+            vidPlayer.play();
+            vidPlayer.removeEventListener('MSPointerDown', posterPlay);
         });
 
         vidPlayer.addEventListener('pause', function (e) {
@@ -107,10 +108,10 @@ module VideoPage {
                     //decrement selected index
                     selectedScriptIndex--;
 
-                    if (newTime < script[selectedScriptIndex].start_time) {
+                    if (!script[selectedScriptIndex] || newTime < script[selectedScriptIndex].start_time) {
                         //playhead moved back more than a full segment
                         for (var i = selectedScriptIndex - 1; i > -1; i--) {
-                            if (newTime < script[i].end_time) {
+                            if (!script[i] || newTime < script[i].end_time) {
                                 selectedScriptIndex = i;
                             }
                         }

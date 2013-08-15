@@ -12,7 +12,8 @@ module KA {
         home: string = "";
         _element: HTMLElement = null;
         _lastNavigationPromise: WinJS.Promise<any> = WinJS.Promise.as();
-        _lastViewstate: number = 0;
+        _lastWidth: number = 0;
+        _lastHeight: number = 0;
 
         // Define the constructor function for the PageControlNavigator.
         constructor(element, options) {
@@ -21,10 +22,11 @@ module KA {
             this._element.appendChild(this._createPageElement());
 
             this.home = options.home;
-            this._lastViewstate = appView.value;
+            this._lastWidth = this._element.clientWidth;
+            this._lastHeight = this._element.clientHeight;
 
             nav.onnavigated = this._navigated.bind(this);
-            window.onresize = this._resized.bind(this);
+            element.onresize = this._resized.bind(this);
 
             document.body.onkeyup = this._keyupHandler.bind(this);
             document.body.onkeypress = this._keypressHandler.bind(this);
@@ -119,10 +121,14 @@ module KA {
         // Responds to resize events and call the updateLayout function
         // on the currently loaded page.
         _resized(args) {
+
             if (this.pageControl && this.pageControl.updateLayout) {
-                this.pageControl.updateLayout.call(this.pageControl, this.pageElement, appView.value, this._lastViewstate);
+                var dimensionsChanged = this._lastWidth != this.pageElement.clientWidth ||
+                                        this._lastHeight != this.pageElement.clientHeight;
+                this.pageControl.updateLayout.call(this.pageControl, this.pageElement, dimensionsChanged);
             }
-            this._lastViewstate = appView.value;
+            this._lastWidth = this.pageElement.clientWidth;
+            this._lastHeight = this.pageElement.clientHeight;
         }
 
         // Updates the back button state. Called after navigation has

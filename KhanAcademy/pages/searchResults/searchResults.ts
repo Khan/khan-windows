@@ -70,21 +70,11 @@ module SearchResults {
                     nav.navigate("/pages/videoPage/videoPage.html", { video: vid });
                 });
             });
-            initListLayout(appView.value);
+            KA.initListLayout(resultsLv);
         } else {
             updateResultCount();
             KA.show(KA.id('noResults'));
             KA.hide(resultsLv);
-        }
-    }
-
-    function initListLayout(viewState) {
-        if (resultsLv) {
-            if (viewState === appViewState.snapped) {
-                resultsLv.winControl.layout = new ui.ListLayout();
-            } else {
-                resultsLv.winControl.layout = new ui.GridLayout();
-            }
         }
     }
 
@@ -150,17 +140,8 @@ module SearchResults {
         dataTransferManager.removeEventListener("datarequested", KA.generalSharingDataRequested);
     }
 
-    function updateLayout(element, viewState, lastViewState) {
-        if (lastViewState !== viewState) {
-            if (lastViewState === appViewState.snapped || viewState === appViewState.snapped) {
-                var handler = function (e) {
-                    resultsLv.removeEventListener("contentanimating", handler, false);
-                    e.preventDefault();
-                }
-                resultsLv.addEventListener("contentanimating", handler, false);
-                initListLayout(viewState);
-            }
-        }
+    function updateLayout(element: HTMLElement, dimensionsChanged: boolean) {
+        KA.updateLayout(resultsLv, dimensionsChanged);
     }
 
     KA.definePage("/pages/searchResults/searchResults.html", ready, unload, updateLayout);
