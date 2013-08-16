@@ -27,7 +27,7 @@ module NewsPage {
                         var video = KA.Data.getVideo(domain.children[j].id);
 
                         if (video) {
-                            newsItems.push(KA.Data.getVideo(domain.children[j].id));
+                            newsItems.push(video);
                         }
                     }
                 }
