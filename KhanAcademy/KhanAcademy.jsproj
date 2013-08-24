@@ -87,6 +87,7 @@
     <Content Include="images\xd1039e22.png" />
     <Content Include="images\x7626d097.png" />
     <Content Include="images\widelogo.png" />
+    <Content Include="secrets.json" />
     <TypeScriptCompile Include="js\global.ts" />
     <Content Include="js\global.js">
       <DependentUpon>global.ts</DependentUpon>
@@ -127,6 +128,14 @@
     <TypeScriptCompile Include="js\settings.ts" />
     <Content Include="js\settings.js">
       <DependentUpon>settings.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="js\OAuth.ts" />
+    <Content Include="js\OAuth.js">
+      <DependentUpon>OAuth.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="js\KAAPI.ts" />
+    <Content Include="js\KAAPI.js">
+      <DependentUpon>KAAPI.ts</DependentUpon>
     </Content>
     <TypeScriptCompile Include="js\utilities.ts" />
     <Content Include="js\utilities.js">

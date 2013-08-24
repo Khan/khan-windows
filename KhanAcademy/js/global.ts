@@ -109,6 +109,7 @@ module KA {
 
                 //init data
                 KA.Data.init(service.IsFirstRun)
+                    .then(function () { return KA.KAAPI.init() })
                     .then(function () { return KA.User.init() })
                     .then(function () { return KA.Downloads.init() })
                     .done(function () {
