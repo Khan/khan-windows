@@ -82,7 +82,7 @@ declare module WinJS {
         static onerror: any;
         static join: any;
         static timeout: any;
-        static as(): Promise;
+        static as(): Promise<any>;
     }
     module Navigation {
         var history: any;
