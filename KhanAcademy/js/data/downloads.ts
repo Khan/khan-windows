@@ -1,10 +1,4 @@
-﻿/// <reference path="data.ts" />
-/// <reference path="../settings.ts" />
-/// <reference path="../utilities.ts" />
-/// <reference path="../../scripts/typings/winrt.d.ts" />
-/// <reference path="../../scripts/typings/winjs.d.ts" />
-
-module KA {
+﻿module KA {
     'use strict';
     var app = WinJS.Application;
 
@@ -16,7 +10,7 @@ module KA {
 
     export class Downloads {
         deleteVideo(videoId) {
-            return new WinJS.Promise(function (c, e) {
+            return new WinJS.Promise(function (complete, error) {
                 var fileName = videoId + '.mp4';
                 var photoFileName = videoId + '.jpg';
                 var scriptFileName = videoId + '.json';
@@ -52,10 +46,10 @@ module KA {
                                         KA.logError(err);
                                     })
                                 });
-                                c();
-                            }, e);
+                                complete();
+                            }, error);
                         } else {
-                            c();
+                            complete();
                         }
                     });
                 });
@@ -108,12 +102,12 @@ module KA {
         }
 
         getTranscript(video, isVideoDownloaded) {
-            return new WinJS.Promise(function (c, e) {
+            return new WinJS.Promise(function (complete, error) {
                 if (KA.Settings.isInDesigner) {
                     var url = new Windows.Foundation.Uri("ms-appx:///transcript.json");
                     Windows.Storage.StorageFile.getFileFromApplicationUriAsync(url).then(function (file) {
                         Windows.Storage.FileIO.readTextAsync(file).then(function (text) {
-                            c(JSON.parse(text));
+                            complete(JSON.parse(text));
                         }, function (err) {
                             KA.logError(err);
                         });
@@ -129,25 +123,25 @@ module KA {
                             folder.getFileAsync(scriptFileName).done(function (file) {
                                 Windows.Storage.FileIO.readTextAsync(file).then(function (text) {
                                     if (text != undefined && text != '') {
-                                        c(JSON.parse(text));
+                                        complete(JSON.parse(text));
                                     } else {
-                                        c();
+                                        complete();
                                     }
                                 });
                             }, function (err) {
                                 //as a backup, grab it from the web
-                                service.getTranscriptFromWeb(video).done(c, e);
+                                service.getTranscriptFromWeb(video).done(complete, error);
                             });
                         });
                     } else {
-                        service.getTranscriptFromWeb(video).done(c, e);
+                        service.getTranscriptFromWeb(video).done(complete, error);
                     }
                 }
             });
         }
 
         getTranscriptFromWeb(video) {
-            return new WinJS.Promise(function (c, e) {
+            return new WinJS.Promise(function (complete, error) {
                 //check to see if transcript has been cached in temporary
                 var scriptFileName = video.id + '.script';
 
@@ -156,9 +150,9 @@ module KA {
                         //file exists in cache
                         Windows.Storage.FileIO.readTextAsync(file).then(function (text) {
                             if (text != '') {
-                                c(JSON.parse(text));
+                                complete(JSON.parse(text));
                             } else {
-                                c();
+                                complete();
                             }
                         });
                     }, function (err) {
@@ -171,15 +165,15 @@ module KA {
 
                                 //send back results
                                 if (result.responseText != '') {
-                                    c(JSON.parse(result.responseText));
+                                    complete(JSON.parse(result.responseText));
                                 } else {
-                                    c();
+                                    complete();
                                 }
                             }
                         }, function (err2) {
                             KA.logError(err2);
-                            if (e) {
-                                e();
+                            if (error) {
+                                error();
                             }
                         });
                     });
@@ -188,7 +182,7 @@ module KA {
 
         static init() {
             service = new Downloads();
-            return new WinJS.Promise(function (c, e) {
+            return new WinJS.Promise(function (complete, error) {
                 //load tracked video downloads
                 app.local.exists(savedDateFileName).done(function (fileExists) {
                     if (fileExists) {
@@ -196,10 +190,10 @@ module KA {
                             //rehydrate data
                             var savedData = JSON.parse(text);
                             trackedDownloads = savedData.trackedDownloads;
-                            service.loadDownloadedVideos().done(c, e);
+                            service.loadDownloadedVideos().done(complete, error);
                         });
                     } else {
-                        service.loadDownloadedVideos().done(c, e);
+                        service.loadDownloadedVideos().done(complete, error);
                     }
                 });
             });
@@ -276,7 +270,7 @@ module KA {
         }
 
         loadDownloadedVideos() {
-            return new WinJS.Promise(function (c, e) {
+            return new WinJS.Promise(function (complete, error) {
                 //verify photos and scripts folder exists
                 app.local.folder.createFolderAsync('photos', Windows.Storage.CreationCollisionOption.openIfExists);
                 app.local.folder.createFolderAsync('scripts', Windows.Storage.CreationCollisionOption.openIfExists);
@@ -322,11 +316,11 @@ module KA {
                             console.log("current downloads check done");
                         });
 
-                        c();
+                        complete();
                     });
                 }, function (err) {
                     console.log('downloads.init: error creating videos folder');
-                    c();
+                    complete();
                 });
             });
         }

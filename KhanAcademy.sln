@@ -4,15 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "KhanAcademy", "KhanAcademy\KhanAcademy.jsproj", "{154AF414-344A-4BC9-B43B-80943099E7D1}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://adkinn.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = KhanAcademy\\KhanAcademy.jsproj
-		SccProjectName1 = KhanAcademy
-		SccLocalPath1 = KhanAcademy
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM

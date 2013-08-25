@@ -1,9 +1,5 @@
-﻿/// <reference path="../utilities.ts" />
-/// <reference path="../extensions.ts" />
-/// <reference path="models.ts" />
-/// <reference path="../../scripts/typings/winjs.d.ts" />
+﻿/// <reference path="../../scripts/typings/winjs.d.ts" />
 /// <reference path="../../scripts/typings/winrt.d.ts" />
-/// <reference path="../settings.ts" />
 
 module KA {
     'use strict';
@@ -11,7 +7,6 @@ module KA {
     var networkInfo: any = Windows.Networking.Connectivity.NetworkInformation;
 
     var service: Data;
-    var topicUrl = 'http://www.khanacademy.org/api/v1/topictree';
     var savedDateFileName = 'data.json';
     var isConnected = null;
 
@@ -28,7 +23,7 @@ module KA {
             'xd1039e22', // Talks and Interviews
             'xae887ec6', // Projects & Discovery Lab
         ];
-        
+
         private domains: Domain[] = null;
         private videos: Video[] = null;
         lastSyncETag = null;
@@ -65,7 +60,7 @@ module KA {
         }
 
         getSubjectByTitle(subjectTitle) {
-            var result:Subject;
+            var result: Subject;
 
             for (var i = 0; i < this.domains.length; i++) {
                 //does the domain have children that are subjects
@@ -207,7 +202,7 @@ module KA {
         }
 
         getVideoList(videoId) {
-            var videos:Video[] = [];
+            var videos: Video[] = [];
 
             for (var i = 0; i < this.videos.length; i++) {
                 if (this.videos[i].id == videoId) {
@@ -228,13 +223,13 @@ module KA {
             app.queueEvent({ type: "networkStatusChanged", statusChange: statusChange });
         }
 
-        static init(isFirstRun : boolean) {
+        static init(isFirstRun: boolean) {
             service = new KA.Data();
 
             //register for network change
             networkInfo.addEventListener("networkstatuschanged", service.handleNetworkStatusChange);
 
-            return new WinJS.Promise(function (c, e) {
+            return new WinJS.Promise(function (complete, error) {
                 //check if data exists
                 app.local.exists(savedDateFileName).done(function (fileExists) {
                     // we want to start fresh if this is first run, even if the data file exists
@@ -248,17 +243,23 @@ module KA {
                             service.domains = savedData.domains;
                             service.videos = savedData.videos;
 
+                            if (isFirstRun) {
+                                //clear saved tag last and sync date as we want to refresh from server given this is the first run for this version
+                                service.lastSyncETag = "";
+                                service.lastSyncDate = new Date(2000, 1, 1);
+                            }
+
                             //check for new data if longer than newDataCheckDelay
                             var checkDate = new Date();
                             checkDate.setDate(checkDate.getDate() - KA.Settings.newDataCheckDelay);
                             if (service.lastSyncDate < checkDate) {
-                                service.loadDataFromUrl(isFirstRun);
+                                service.loadDataFromServer();
                             } else {
                                 console.log('date check, skipped since not enough time has passed');
                             }
 
                             //return control back to page rendering
-                            c()
+                            complete()
                         });
                     } else {
                         //no file so use packaged data
@@ -273,18 +274,18 @@ module KA {
                                 service.domains = savedData.domains;
                                 service.videos = savedData.videos;
 
-                                c();
+                                complete();
 
                             }, function (err) {
-                                KA.logError(err);
-                                if (e) {
-                                    e();
-                                }
-                            });
+                                    KA.logError(err);
+                                    if (error) {
+                                        error();
+                                    }
+                                });
                         });
 
                         //queue up data refresh
-                        service.loadDataFromUrl(isFirstRun).done();
+                        service.loadDataFromServer().done();
                     }
                 });
             });
@@ -338,51 +339,42 @@ module KA {
             return service.domains;
         }
 
-        loadDataFromUrl(isFirstRun: boolean) {
-            return new WinJS.Promise((c, e) => {
+        loadDataFromServer() {
+            return new WinJS.Promise((complete, error) => {
                 if (!KA.Settings.isInDesigner) {
                     WinJS.Application.queueEvent({ type: "newDataCheckRequested" });
 
-                    WinJS.xhr({ url: topicUrl }).done(result => {
-                        if (result.status === 200) {
-                            var eTag = result.getResponseHeader('ETag');
-
-                            //have we synced before and is the eTag different?
-                            if (isFirstRun || !service.lastSyncETag || (eTag != service.lastSyncETag)) {
-                                service.lastSyncETag = eTag;
-                                service.lastSyncDate = new Date();
-                                var newData = JSON.parse(result.responseText);
-                                service.domains = [];
-                                service.videos = [];
-                                service.parseTopicTree(newData).done(function () {
-                                    //raise event when completed
-                                    WinJS.Application.queueEvent({ type: "newDataCheckCompleted", newDataAvailable: true });
-                                });
-                            } else {
-                                //no new data
-                                WinJS.Application.queueEvent({ type: "newDataCheckCompleted", newDataAvailable: false });
-                            }
+                    ApiClient.getTopicTreeAsync(service.lastSyncETag).done(function(data) {
+                        if (data && data.topicTree && data.eTag) {
+                            service.lastSyncETag = data.eTag;
+                            service.lastSyncDate = new Date();
+                            service.domains = [];
+                            service.videos = [];
+                            service.parseTopicTree(data.topicTree).done(function () {
+                                //raise event when completed
+                                WinJS.Application.queueEvent({ type: "newDataCheckCompleted", newDataAvailable: true });
+                            });
                         } else {
-                            //download did not complete
+                            //no new data
                             WinJS.Application.queueEvent({ type: "newDataCheckCompleted", newDataAvailable: false });
                         }
                     }, function (err) {
-                        KA.logError(err);
-                        if (e) {
-                            e();
-                        }
-                    });
+                            KA.logError(err);
+                            if (error) {
+                                error();
+                            }
+                        });
 
                     //run complete function so UI can continue while waiting
-                    if (c) {
-                        c();
+                    if (complete) {
+                        complete();
                     }
                 }
             });
         }
 
         parseTopicTree(parsedObject) {
-            return new WinJS.Promise((c, e) => {
+            return new WinJS.Promise((complete, error) => {
                 var obj, obj2, obj3, obj4;
                 var domain: Domain, subject: Subject, topic: Topic, tutorial: Tutorial;
 
@@ -495,7 +487,7 @@ module KA {
                     }
                 }
 
-                c();
+                complete();
             });
         }
 
@@ -550,13 +542,13 @@ module KA {
         }
 
         save() {
-            return new WinJS.Promise(function (c, e) {
+            return new WinJS.Promise(function (complete, error) {
                 //save data
                 if (service.domains && service.domains.length > 0) {
                     var content = JSON.stringify({ lastSyncETag: service.lastSyncETag, lastSyncDate: service.lastSyncDate, domains: service.domains, videos: service.videos });
-                    WinJS.Application.local.writeText(savedDateFileName, content).done(c, e);
+                    WinJS.Application.local.writeText(savedDateFileName, content).done(complete, error);
                 } else {
-                    c();
+                    complete();
                 }
             });
         }
