@@ -1,9 +1,5 @@
-﻿/// <reference path="../utilities.ts" />
-/// <reference path="../extensions.ts" />
-/// <reference path="models.ts" />
-/// <reference path="../../scripts/typings/winjs.d.ts" />
+﻿/// <reference path="../../scripts/typings/winjs.d.ts" />
 /// <reference path="../../scripts/typings/winrt.d.ts" />
-/// <reference path="../settings.ts" />
 
 module KA {
     'use strict';
@@ -11,7 +7,6 @@ module KA {
     var networkInfo: any = Windows.Networking.Connectivity.NetworkInformation;
 
     var service: Data;
-    var topicUrl = 'http://www.khanacademy.org/api/v1/topictree';
     var savedDateFileName = 'data.json';
     var isConnected = null;
 
@@ -343,15 +338,15 @@ module KA {
                 if (!KA.Settings.isInDesigner) {
                     WinJS.Application.queueEvent({ type: "newDataCheckRequested" });
 
-                    WinJS.xhr({ url: topicUrl }).done(result => {
-                        if (result.status === 200) {
-                            var eTag = result.getResponseHeader('ETag');
+                    ApiClient.sendTopicTreeRequestAsync().done(request => {
+                        if (request.status === 200) {
+                            var eTag = request.getResponseHeader('ETag');
 
                             //have we synced before and is the eTag different?
                             if (isFirstRun || !service.lastSyncETag || (eTag != service.lastSyncETag)) {
                                 service.lastSyncETag = eTag;
                                 service.lastSyncDate = new Date();
-                                var newData = JSON.parse(result.responseText);
+                                var newData = JSON.parse(request.responseText);
                                 service.domains = [];
                                 service.videos = [];
                                 service.parseTopicTree(newData).done(function () {

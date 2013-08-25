@@ -1,7 +1,4 @@
-﻿/// <reference path="../scripts/typings/winrt.d.ts" />
-/// <reference path="../scripts/typings/winjs.d.ts" />
-
-module KA {
+﻿module KA {
     export function generalSharingDataRequested(e) {
         e.request.data.properties.title = 'Khan Academy';
         e.request.data.properties.description = 'Learn almost anything for free.';
@@ -129,5 +126,17 @@ module KA {
         } else {
             KA.initListLayout(itemLv);
         }
+    }
+
+    // Returns value of query string parameter
+    export function getParameterByName(queryString, name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(queryString);
+        if (results == null)
+            return "";
+        else
+            return decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 }

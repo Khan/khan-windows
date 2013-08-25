@@ -1,10 +1,4 @@
-﻿/// <reference path="data.ts" />
-/// <reference path="../settings.ts" />
-/// <reference path="../utilities.ts" />
-/// <reference path="../../scripts/typings/winrt.d.ts" />
-/// <reference path="../../scripts/typings/winjs.d.ts" />
-
-module KA {
+﻿module KA {
     'use strict';
     var app = WinJS.Application;
 

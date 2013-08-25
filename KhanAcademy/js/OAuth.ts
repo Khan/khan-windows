@@ -1,6 +1,4 @@
-﻿/// <reference path="../scripts/typings/winrt.d.ts" />
-
-// Parts of the implementation of the functions below were taken and modified from:
+﻿// Parts of the implementation of the functions below were taken and modified from:
 // Source: http://code.msdn.microsoft.com/windowsapps/WinJS-OAuth-for-Twitter-6fb22e37
 
 module KA {

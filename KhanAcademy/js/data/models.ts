@@ -7,15 +7,23 @@
         video = 4
     };
 
-    export interface AuthToken {
-        key?: string;
-        secret?: string;
+    export class AuthToken {
+        constructor(public key: string, public secret: string) { }
     }
 
     export interface ResumeInfo {
         userId: string;
         videoId: string;
         currentTime: number;
+    }
+
+    export interface UserInfo {
+        id: string;
+        nickName: string;
+        points: string;
+        avatarUrl: string;
+        profileRoot: string;
+        joined: Date;
     }
 
     export interface Item {
