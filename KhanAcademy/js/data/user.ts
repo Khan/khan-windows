@@ -30,7 +30,7 @@
         static init() {
             service = new User();
             service.playbackList = [];
-            return new WinJS.Promise(function (c, e) {
+            return new WinJS.Promise(function (complete, error) {
                 //check if data exists
                 var app: any = WinJS.Application;
                 app.roaming.exists(savedDateFileName).done(function (fileExists) {
@@ -46,10 +46,10 @@
                                 
                                 service.fetchUserInfo();
                             }
-                            c()
+                            complete()
                         });
                     } else {
-                        c();
+                        complete();
                     }
                 });
             });

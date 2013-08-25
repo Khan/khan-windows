@@ -15,18 +15,35 @@
 
             return new WinJS.Promise(function (complete, error) {
                 var url = new Windows.Foundation.Uri("ms-appx:///secrets.json");
-                Windows.Storage.StorageFile.getFileFromApplicationUriAsync(url).then(function (file) {
-                    Windows.Storage.FileIO.readTextAsync(file).then(function (text) {
+
+                Windows.Storage.StorageFile.getFileFromApplicationUriAsync(url).done(function (file) {
+                    Windows.Storage.FileIO.readTextAsync(file).done(function (text) {
                         service.oauthKeys = <KA.AuthToken>JSON.parse(text);
                         complete();
-                    });
-                });
+                    }, function (err) { service.handleError(err, error) });
+                }, function (err) { service.handleError(err, error) });
             });
         }
 
         // Submits request for topic tree and returns a Promise
-        static sendTopicTreeRequestAsync(): WinJS.Promise<XMLHttpRequest> {
-            return service.sendRequest(Constants.URL_TOPIC_TREE);
+        static getTopicTreeAsync(lastSyncETag: string) {
+            return new WinJS.Promise(function (complete, error) {
+                service.sendRequest(Constants.URL_TOPIC_TREE, Constants.HTTP_METHOD_HEAD)
+                    .then(function (request) {
+                        if (request.status === 200 && request.getResponseHeader('ETag') !== lastSyncETag) {
+                            return service.sendRequest(Constants.URL_TOPIC_TREE);
+                        }
+                    }).done(function (request) {
+                        if (request && request.status === 200) {
+                            var topicTree = JSON.parse(request.responseText);
+                            //send new data to completion for processing
+                            complete({ topicTree: topicTree, eTag: request.getResponseHeader('ETag') });
+                        } else {
+                            //nothing to update, call completion with null value
+                            complete();
+                        }
+                    }, function (err) { service.handleError(err, error) });
+            });
         }
 
         // Fetches access token for given oauth request token and verifier and returns a Promise
@@ -43,7 +60,7 @@
                     var url = service.getUrlWithAuthParams(Constants.URL_ACCESS_TOKEN, Constants.HTTP_METHOD_GET, token, paramOverrides);
 
                     if (url) {
-                        service.sendRequest(url).then(function (request: XMLHttpRequest) {
+                        service.sendRequest(url).done(function (request: XMLHttpRequest) {
 
                             if (request.status === 200) {
                                 var response = "?" + request.responseText;
@@ -63,7 +80,7 @@
                 var url = service.getUrlWithAuthParams(Constants.URL_USER, Constants.HTTP_METHOD_GET, User.AuthToken);
 
                 if (url) {
-                    service.sendRequest(url).then(function (request: XMLHttpRequest) {
+                    service.sendRequest(url).done(function (request: XMLHttpRequest) {
                         if (request.status === 200) {
                             var ur = JSON.parse(request.responseText);
                             var userInfo = {
@@ -106,7 +123,7 @@
             }
 
             if (!token || !token.key || !token.secret) {
-                KA.logError("No wuth token is passed to prepare authorization parameters for the use API call, call will fail.");
+                KA.logError("No auth token is passed to prepare authorization parameters for the user API call, call will fail.");
                 return null;
             }
 

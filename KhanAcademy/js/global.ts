@@ -106,11 +106,11 @@
 
                 //init services
                 KA.ApiClient.init().then(function () { 
-                    return KA.Data.init(service.IsFirstRun)
-                }).then(function () { 
-                    return KA.User.init()
-                }).then(function () { 
-                    return KA.Downloads.init()
+                    //run init on services in parallel to speed up startup
+                    return WinJS.Promise.join([
+                        KA.Data.init(service.IsFirstRun),
+                        KA.User.init(),
+                        KA.Downloads.init()]);
                 }).done(function () {
                     //init settings flyout
                     WinJS.Application.onsettings = function (e) {

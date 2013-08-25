@@ -14,7 +14,5 @@
     export var HTTP_METHOD_GET = "GET";
     export var HTTP_METHOD_POST = "POST";
     export var HTTP_METHOD_PUT = "PUT";
-
-    export var RESPONSE_TYPE_TEXT = "text";
-    export var RESPONSE_TYPE_JSON = "json";
+    export var HTTP_METHOD_HEAD = "HEAD";
 }
