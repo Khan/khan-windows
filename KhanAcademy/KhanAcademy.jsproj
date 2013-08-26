@@ -129,13 +129,13 @@
     <Content Include="js\settings.js">
       <DependentUpon>settings.ts</DependentUpon>
     </Content>
-    <TypeScriptCompile Include="js\OAuth.ts" />
-    <Content Include="js\OAuth.js">
-      <DependentUpon>OAuth.ts</DependentUpon>
+    <TypeScriptCompile Include="js\oauth.ts" />
+    <Content Include="js\oauth.js">
+      <DependentUpon>oauth.ts</DependentUpon>
     </Content>
-    <TypeScriptCompile Include="js\KAAPI.ts" />
-    <Content Include="js\KAAPI.js">
-      <DependentUpon>KAAPI.ts</DependentUpon>
+    <TypeScriptCompile Include="js\apiClient.ts" />
+    <Content Include="js\apiClient.js">
+      <DependentUpon>apiClient.ts</DependentUpon>
     </Content>
     <TypeScriptCompile Include="js\utilities.ts" />
     <Content Include="js\utilities.js">
@@ -198,13 +198,15 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptTarget>ES5</TypeScriptTarget>
-    <TypeScriptIncludeComments>true</TypeScriptIncludeComments>
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptEnableCompileOnSave>true</TypeScriptEnableCompileOnSave>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptTarget>ES5</TypeScriptTarget>
-    <TypeScriptIncludeComments>false</TypeScriptIncludeComments>
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
+    <TypeScriptEnableCompileOnSave>true</TypeScriptEnableCompileOnSave>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" />
   <!-- To modify your build process, add your task inside one of the targets below then uncomment

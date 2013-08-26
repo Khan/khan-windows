@@ -1,12 +1,4 @@
-﻿/// <reference path="utilities.ts" />
-/// <reference path="data/downloads.ts" />
-/// <reference path="data/data.ts" />
-/// <reference path="settings.ts" />
-/// <reference path="data/user.ts" />
-/// <reference path="../scripts/typings/winrt.d.ts" />
-/// <reference path="../scripts/typings/winjs.d.ts" />
-
-module KA {
+﻿module KA {
     'use strict';
 
     var service: Global, loggedIn;
@@ -17,20 +9,20 @@ module KA {
         // property to track if the app is running for the first time for current version. 
         // this is used for cleaning/upgrading data from old versions and showing user what's new in the new version
         public IsFirstRun: boolean;
-        
+
         constructor() {
             var localSettings = Windows.Storage.ApplicationData.current.localSettings,
                 version = Windows.ApplicationModel.Package.current.id.version;
 
             var appVersion = version.major + "." + version.minor + "." + version.build + "." + version.revision;
 
-            var lastAppVersion = localSettings.values[Constants.SettingNames.AppVersion];
+            var lastAppVersion = localSettings.values[Constants.SETTINGS_APP_VERSION];
 
             this.IsFirstRun = !lastAppVersion || lastAppVersion != appVersion;
 
             // set the version if it's first run. this value will be persisted and for next run, app would know it's not first run
             if (this.IsFirstRun) {
-                localSettings.values[Constants.SettingNames.AppVersion] = appVersion;
+                localSettings.values[Constants.SETTINGS_APP_VERSION] = appVersion;
             }
         }
 
@@ -45,6 +37,11 @@ module KA {
         handleNetworkStatusChanged(e) {
             if (e.statusChange) {
                 service.showNetworkStatus();
+
+                // If user is signed in and connectivity just got restored, refresh user data
+                if (KA.Data.getIsConnected() && User.AuthToken && User.AuthToken.key && !User.UserInfo) {
+                    User.Refresh();
+                }
             }
         }
 
@@ -107,31 +104,33 @@ module KA {
 
                 service.initUserMenu();
 
-                //init data
-                KA.Data.init(service.IsFirstRun)
-                    .then(function () { return KA.KAAPI.init() })
-                    .then(function () { return KA.User.init() })
-                    .then(function () { return KA.Downloads.init() })
-                    .done(function () {
-                        //init settings flyout
-                        WinJS.Application.onsettings = function (e) {
-                            e.detail.applicationcommands = {
-                                "terms": { title: "Terms of Service", href: "/pages/flyouts/terms.html" },
-                                "privacy": { title: "Privacy Policy", href: "/pages/flyouts/privacy.html" },
-                                "about": { title: "About", href: "/pages/flyouts/about.html" },
-                                "feedback": { title: "Feedback", href: "/pages/flyouts/feedback.html" }
-                            };
-                            WinJS.UI.SettingsFlyout.populateSettings(e);
+                //init services
+                KA.ApiClient.init().then(function () { 
+                    //run init on services in parallel to speed up startup
+                    return WinJS.Promise.join([
+                        KA.Data.init(service.IsFirstRun),
+                        KA.User.init(),
+                        KA.Downloads.init()]);
+                }).done(function () {
+                    //init settings flyout
+                    WinJS.Application.onsettings = function (e) {
+                        e.detail.applicationcommands = {
+                            "terms": { title: "Terms of Service", href: "/pages/flyouts/terms.html" },
+                            "privacy": { title: "Privacy Policy", href: "/pages/flyouts/privacy.html" },
+                            "about": { title: "About", href: "/pages/flyouts/about.html" },
+                            "feedback": { title: "Feedback", href: "/pages/flyouts/feedback.html" }
                         };
+                        WinJS.UI.SettingsFlyout.populateSettings(e);
+                    };
 
-                        //init logging
-                        WinJS.Promise.onerror = KA.handleError;
-                        WinJS.Application.onerror = KA.handleError;
-                        window.onerror = function (err) {
-                            KA.handleError(err);
-                        };
-                        c();
-                    });
+                    //init logging
+                    WinJS.Promise.onerror = KA.handleError;
+                    WinJS.Application.onerror = KA.handleError;
+                    window.onerror = function (err) {
+                        KA.handleError(err);
+                    };
+                    c();
+                });
             });
         }
 
@@ -177,7 +176,7 @@ module KA {
 
             registerDiv.addEventListener('MSPointerDown', function (e) {
                 if (e.pointerType == e.MSPOINTER_TYPE_MOUSE) {
-                    var uri = new Windows.Foundation.Uri(KA.Settings.registrationLink);
+                    var uri = new Windows.Foundation.Uri(Constants.URL_REGISTRATION);
                     Windows.System.Launcher.launchUriAsync(uri);
                 } else if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
                     WinJS.Utilities.addClass(e.currentTarget, "touchShade");
@@ -187,7 +186,7 @@ module KA {
             registerDiv.addEventListener('MSPointerUp', function (e) {
                 if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
                     WinJS.Utilities.removeClass(e.currentTarget, "touchShade");
-                    var uri = new Windows.Foundation.Uri(KA.Settings.registrationLink);
+                    var uri = new Windows.Foundation.Uri(Constants.URL_REGISTRATION);
                     Windows.System.Launcher.launchUriAsync(uri);
                 }
             });

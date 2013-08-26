@@ -1,7 +1,4 @@
-﻿/// <reference path="utilities.ts" />
-/// <reference path="../scripts/typings/winjs.d.ts" />
-/// <reference path="../scripts/typings/winrt.d.ts" />
-module KA {
+﻿module KA {
     "use strict";
 
     var appView = Windows.UI.ViewManagement.ApplicationView;
