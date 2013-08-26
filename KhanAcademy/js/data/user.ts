@@ -43,8 +43,9 @@
                                 if (savedData.playbackList) {
                                     service.playbackList = savedData.playbackList;
                                 }
-                                
-                                service.fetchUserInfo();
+                                if (service.authToken) {
+                                    service.refreshUserInfo();
+                                }
                             }
                             complete()
                         });

@@ -11,40 +11,49 @@
     background-color: transparent;
     border-color: rgb(255, 255, 255);
 }
+
 button:hover .win-commandring {
     background-color: rgba(255, 255, 255, 0.43);
     border-color: rgb(255, 255, 255);
 }
+
 button:hover:active .win-commandring {
     background-color: rgb(255, 255, 255);
     border-color: rgb(255, 255, 255);
 }
+
 button:-ms-keyboard-active .win-commandring {
     background-color: rgb(255, 255, 255);
     border-color: rgb(255, 255, 255);
 }
+
 button:disabled .win-commandring,
 button:disabled:active .win-commandring {
     background-color: transparent;
     border-color: rgba(255, 255, 255, 0.4);
 }
+
 button[aria-checked=true] .win-commandring,
 button[aria-checked=true]:active .win-commandring {
     background-color: rgb(255, 255, 255);
     border-color: rgb(255, 255, 255);
 }
+
 button[aria-checked=true]:hover .win-commandring {
     background-color: rgb(222, 222, 222);
     border-color: rgb(222, 222, 222);
 }
+
 button[aria-checked=true]:hover:active .win-commandring {
     background-color: transparent;
     border-color: rgb(255, 255, 255);
 }
+
 button[aria-checked=true]:-ms-keyboard-active .win-commandring {
     background-color: transparent;
     border-color: rgb(255, 255, 255);
 }
+
 button[aria-checked=true]:disabled .win-commandring,
 button[aria-checked=true]:disabled:active .win-commandring {
     background-color: rgba(255, 255, 255, 0.4);
@@ -58,13 +67,13 @@ button[aria-checked=true]:disabled:active .win-commandring {
 }
 
 button:disabled .win-commandimage, button:disabled:active .win-commandimage {
-   background-position-x: -120px;
-   background-position-y: 0px;
-   color: rgba(255, 255, 255, 0.4);
+    background-position-x: -120px;
+    background-position-y: 0px;
+    color: rgba(255, 255, 255, 0.4);
 }
 
 button:disabled.win-command .win-label, button:disabled.win-command:active .win-label {
-   color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .win-commandimage {
@@ -78,138 +87,152 @@ input[type=reset], input[type=file]::-ms-browse {
     color: rgb(255,255,255);
 }
 
-button.win-command:focus {
-    border-color: rgb(255,255,255);
-}
+    button.win-command:focus {
+        border-color: rgb(255,255,255);
+    }
 
 .win-settingsflyout .win-content {
-   padding-top: 0;
-   padding-right: 0;
-   padding-left: 24px;
-   overflow-y:hidden;
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 24px;
+    overflow-y: hidden;
 }
 
-.win-settingsflyout .win-content .win-settings-section {
-   height: 100%;
-   overflow-y:hidden;
-}
+    .win-settingsflyout .win-content .win-settings-section {
+        height: 100%;
+        overflow-y: hidden;
+    }
 
-.win-settingsflyout .win-content iframe {
-   height: 100%;
-   width: 100%;
-}
+    .win-settingsflyout .win-content iframe {
+        height: 100%;
+        width: 100%;
+    }
 
-#userPane {
+#logInBox {
     position: absolute;
-    top: 32px;
-    right: 76px;
-    display:-ms-grid;
-    -ms-grid-columns:auto auto auto;
+    top: 58px;
+    right: 81px;
+    display: -ms-grid;
+    -ms-grid-columns: auto auto;
     -ms-grid-rows: 1fr;
-    font-size:10pt;
 }
+
+#loginButton {
+    background-color: transparent;
+    border: hidden;
+    color: black;
+    -ms-grid-column: 2;
+    font-size: 20pt;
+    font-weight: lighter;
+	padding: 0;
+}
+
+    #loginButton:hover {
+        background-color: #cccccc;
+    }
+
+    #loginButton:active {
+        background-color: #828688;
+    }
 
 #userProgress {
-    margin-top:4px;
-    color:#7fac05;
-    display:none;
+    margin: 5px;
+    color: #7fac05;
+    -ms-grid-row-align: center;
+    display: none;
 }
 
-#userNameDiv {
-    -ms-grid-column:2;
-    padding:6px;
-    font-weight:bold;
-    display:none;
+#loginButtonContent {
+    display: -ms-grid;
+    -ms-grid-columns: auto auto;
+    -ms-grid-rows: 1fr;
 }
 
-#loginOptionsDiv {
-    -ms-grid-column:2;
+#displayText {
+    -ms-grid-row-align: center;
+    -ms-grid-column-align: end;
+    margin-left: 10px;
 }
 
-#loginOptionsContainer {
-    display: -ms-flexbox;
+#userAvatarContainer {
+    background-color: #26303D;
+    -ms-grid-column: 2;
+    margin: 5px 5px 5px 10px;
+    height: 60px;
+    width: 60px;
 }
 
-#loginOrDiv {
-    padding:6px 2px;
-}
-
-#loginDiv, #registerDiv {
-    padding:6px;
-    font-weight:bold;
-}
-
-#userIconDiv {
-    -ms-grid-column:3;
-    padding:6px 6px 6px 0px;
-    font-weight:bold;
-    font-family:'segoe ui symbol'
-}
-
-#userMenuClickEater {
-    visibility: collapse;
-    width:100%;
-    height:100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-}
+#avatarImage{
+	background-size: contain;
+	width: 100%;
+	height: 100%;
+	
+	}
 
 #userMenu {
-    position: absolute;
-    top: 64px;
-    right: 70px;
-    background-color:#fff;
-    border:solid 1px #999;
-    font-size:10pt;
-    visibility: collapse;
-    z-index: 102;
+    border: solid 1px #999;
 }
 
-#userMenuGrid {
-    display:-ms-grid;
-    -ms-grid-columns: 1fr;
-    -ms-grid-rows: 1fr 40px;
-    width:140px;
-    height:90px;
-    text-align:right;
+#userDetails {
+    display: -ms-grid;
+    -ms-grid-columns: auto auto;
+    -ms-grid-rows: auto auto auto;
+    font-weight: normal;
 }
 
-#userPtsDiv {
-    font-size:12pt;
-    padding:10px;
+#userImage {
+    height:100px;
+    width:100px;
+    -ms-grid-row-span: 3;
+    background-size: cover;
 }
 
-#userPtsDiv span {
-    font-size:8pt;
-    color:#666;
+#userName {
+    font-size: 20pt;
+    padding: 10px 0px 10px 10px;
+    -ms-grid-column:2;
 }
-
-#logOutBtn {
-    padding:10px;
-    background-color:#ddd;
+#userPoints {
+    font-size: 12pt;
+        color: #666;
+    padding: 5px 0px 5px 10px;
+    -ms-grid-column:2;
     -ms-grid-row: 2;
+    text-align: right;
+}
+
+    #userPtsDiv span {
+        font-size: 8pt;
+    }
+
+#joined {
+        color: #666;
+    padding: 5px 0px 5px 10px;
+    -ms-grid-column:2;
+    -ms-grid-row:3;
+    float: right;
+    text-align: right;
 }
 
 #noConnectionPane {
     position: absolute;
     top: 0px;
     left: 50%;
-    display:none;
+    display: none;
 }
 
-#noConnectionPane div {
-    width:84px;
-    padding:4px;
-    margin-left:-44px;
-    background-color:lightgrey;
-    color: #898989;
-    font-size: 10pt;
-    text-align:center;
-}
+    #noConnectionPane div {
+        width: 84px;
+        padding: 4px;
+        margin-left: -44px;
+        background-color: lightgrey;
+        color: #898989;
+        font-size: 10pt;
+        text-align: center;
+    }
 
 #noDataPane {
-    height:100%;
+    height: 100%;
     background-image: url('/images/splashscreen.png');
     background-repeat: no-repeat;
     background-position: center center;
@@ -219,22 +242,22 @@ button.win-command:focus {
 
 #noDataGrid {
     display: -ms-grid;
-    height:100%;
+    height: 100%;
     -ms-grid-columns: 1fr;
     -ms-grid-rows: 1fr;
 }
 
-#noDataGrid div {
-    -ms-grid-column-align: center;
-    -ms-grid-row-align: center;
-    margin-top: 345px;
-    color:#ccc;
-    text-align:center;
-}
+    #noDataGrid div {
+        -ms-grid-column-align: center;
+        -ms-grid-row-align: center;
+        margin-top: 345px;
+        color: #ccc;
+        text-align: center;
+    }
 
-#noDataGrid progress {
-    color:#9eb63a;
-}
+    #noDataGrid progress {
+        color: #9eb63a;
+    }
 
 #contenthost {
     height: 100%;
@@ -250,54 +273,54 @@ button.win-command:focus {
     width: 100%;
 }
 
-.fragment header[role=banner] {
-    -ms-grid-columns: 120px 1fr;
-    -ms-grid-rows: 1fr;
-    display: -ms-grid;
-}
+    .fragment header[role=banner] {
+        -ms-grid-columns: 120px 1fr;
+        -ms-grid-rows: 1fr;
+        display: -ms-grid;
+    }
 
-.fragment header[role=banner] .win-backbutton {
-    margin-left: 39px;
-    margin-top: 59px;
-}
+        .fragment header[role=banner] .win-backbutton {
+            margin-left: 39px;
+            margin-top: 59px;
+        }
 
-.fragment header[role=banner] .titlearea {
-    -ms-grid-column: 2;
-    margin-top: 37px;
-}
+        .fragment header[role=banner] .titlearea {
+            -ms-grid-column: 2;
+            margin-top: 37px;
+        }
 
-.fragment header[role=banner] .titlearea .pagetitle, .fragment header[role=banner] .titlearea .chevron {
-    width: calc(100% - 20px);
-}
+            .fragment header[role=banner] .titlearea .pagetitle, .fragment header[role=banner] .titlearea .chevron {
+                width: calc(100% - 20px);
+            }
 
-.fragment section[role=main] {
-    -ms-grid-row: 2;
-    height: 100%;
-    width: 100%;
-}
+    .fragment section[role=main] {
+        -ms-grid-row: 2;
+        height: 100%;
+        width: 100%;
+    }
 
 .win-listview .win-container:not(.win-footprint) {
     background-color: rgb(15, 110, 180);
 }
 
 .win-listview .win-container:hover {
-    outline-style:none;
+    outline-style: none;
 }
 
 a {
-    color:white;
+    color: white;
 }
 
-a:hover {
-    color:#e1e57f;
-}
+    a:hover {
+        color: #e1e57f;
+    }
 
 .touchShade {
-    background-color:rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.1);
 }
 
 .touchScale {
-    transform:scale(0.96, 0.96);
+    transform: scale(0.96, 0.96);
 }
 
 /* Default colors for unknown domains */
@@ -370,49 +393,49 @@ a:hover {
 }
 
 ::selection, option:checked, select:focus::-ms-value, option:checked:hover, select:focus option:checked:hover {
-    background-color:#7fac05;
+    background-color: #7fac05;
 }
 
 .win-listview:not(.win-selectionstylefilled) .win-container.win-selected .win-selectionborder {
-    border-color:#7fac05;
+    border-color: #7fac05;
 }
 
 .win-listview:not(.win-selectionstylefilled) .win-container.win-selected:hover .win-selectionborder {
-    border-color:#6b9104;
+    border-color: #6b9104;
 }
 
 .win-listview:not(.win-selectionstylefilled) .win-selectioncheckmarkbackground {
-    border-top-color:#7fac05;
-    border-right-color:#7fac05;
+    border-top-color: #7fac05;
+    border-right-color: #7fac05;
 }
 
 .win-listview:not(.win-selectionstylefilled) .win-container.win-selected:hover .win-selectioncheckmarkbackground {
-    border-top-color:#6b9104;
-    border-right-color:#6b9104;
+    border-top-color: #6b9104;
+    border-right-color: #6b9104;
 }
 
-#childrenLv .win-container, #downloadsLv .win-container, #resultsLv .win-container, #newsLv .win-container{
-    margin-right:16px;
+#childrenLv .win-container, #downloadsLv .win-container, #resultsLv .win-container, #newsLv .win-container {
+    margin-right: 16px;
 }
 
 .videoItem {
     width: 220px;
     height: 165px;
-    background-color:#000;
-    display:-ms-grid;
-    -ms-grid-columns:1fr;
-    -ms-grid-rows:1fr;
-    background-size:cover;
-    border:solid 1px #ccc;
+    background-color: #000;
+    display: -ms-grid;
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: 1fr;
+    background-size: cover;
+    border: solid 1px #ccc;
 }
 
-.videoItem .titleDiv {
-    background-image: linear-gradient(#252d39 0%, #000);
-    color: #E7E7E7;
-    -ms-grid-row-align: end;
-    padding: 8px;
-    min-height:38px;
-}
+    .videoItem .titleDiv {
+        background-image: linear-gradient(#252d39 0%, #000);
+        color: #E7E7E7;
+        -ms-grid-row-align: end;
+        padding: 8px;
+        min-height: 38px;
+    }
 
 @media screen and (-ms-view-state: snapped) {
     .fragment header[role=banner] {
@@ -420,31 +443,31 @@ a:hover {
         margin-left: 20px;
     }
 
-    .fragment header[role=banner] .win-backbutton {
-        margin: 0;
-        margin-right: 10px;
-        margin-top: 46px;
-    }
+        .fragment header[role=banner] .win-backbutton {
+            margin: 0;
+            margin-right: 10px;
+            margin-top: 46px;
+        }
 
-    .fragment header[role=banner] .win-backbutton:disabled {
-        display: none;
-    }
+            .fragment header[role=banner] .win-backbutton:disabled {
+                display: none;
+            }
 
-    .fragment header[role=banner] .titlearea {
-        -ms-grid-column: 2;
-        margin-left: 0;
-        margin-top: 44px;
-    }
+        .fragment header[role=banner] .titlearea {
+            -ms-grid-column: 2;
+            margin-left: 0;
+            margin-top: 44px;
+        }
 
-    #userPane {
+    #logInBox {
         top: 12px;
         right: 12px;
-        color:#777;
+        color: #777;
     }
 
     #childrenLv .win-container, #downloadsLv .win-container, #resultsLv .win-container, #newsLv .win-container {
-        margin-right:20px;
-        margin-left:20px;
+        margin-right: 20px;
+        margin-left: 20px;
     }
 
     .videoItem {
@@ -458,11 +481,11 @@ a:hover {
         -ms-grid-columns: 100px 1fr;
     }
 
-    .fragment header[role=banner] .win-backbutton {
-        margin-left: 29px;
-    }
+        .fragment header[role=banner] .win-backbutton {
+            margin-left: 29px;
+        }
 
-    #userMenu, #userPane {
+    #logInBox {
         right: 40px;
     }
 }

@@ -11,16 +11,17 @@
 #mainHubPanel .mainGrid {
     display:-ms-grid;
     -ms-grid-columns:120px auto 58px 472px 59px 740px;
-    -ms-grid-rows:100px 1fr;
+    -ms-grid-rows:140px 1fr;
     height:100%;
 }
 
 #mainHubPanel .mainGrid #banner {
     background-image: url('/images/header-logo.png');
     background-repeat: no-repeat;
+    background-position-y: bottom;
     -ms-grid-column-span: 3;
-    margin-top: 26px;
-    margin-left: 74px;
+    margin-left: 40px;
+    margin-bottom: 30px;
 
 }
 

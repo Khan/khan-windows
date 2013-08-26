@@ -27,26 +27,41 @@
 </head>
 <body>
     <div id="contenthost" data-win-control="KA.PageControlNavigator" data-win-options="{home: '/pages/mainHub/mainHub.html'}"></div>
-    <div id="noDataPane"><div id="noDataGrid"><div>Downloading data<br /><progress></progress></div></div></div>
-    <div id="noConnectionPane"><div>Offline Mode</div></div>
-    <div id="userPane">
-        <progress id="userProgress" class="win-ring"></progress>
-        <div id="loginOptionsDiv">
-            <div id="loginOptionsContainer">
-                <div id="loginDiv">Log In</div>
-                <div id="loginOrDiv">or</div>
-                <div id="registerDiv">Register</div>
+    <div id="noDataPane">
+        <div id="noDataGrid">
+            <div>
+                Downloading data<br />
+                <progress></progress>
             </div>
         </div>
-        <div id="userNameDiv"></div>
-        <div id="userIconDiv"></div>
     </div>
-    <div id="userMenuClickEater"></div>
-    <div id="userMenu">
-        <div id="userMenuGrid">
-            <div id="userPtsDiv">0 <span>points</span></div>
-            <div id="logOutBtn">Log Out</div>
-        </div>
+    <div id="noConnectionPane">
+        <div>Offline Mode</div>
+    </div>
+    <div id="logInBox">
+        <progress id="userProgress" class="win-ring win-medium"></progress>
+        <button id="loginButton" type="button">
+            <div id="loginButtonContent">
+                <div id="displayText">Log In</div>
+                <div id="userAvatarContainer">
+                    <div id="avatarImage"></div>
+                </div>
+            </div>
+        </button>
+    </div>
+    <div id="userMenu" data-win-control="WinJS.UI.Menu" data-win-options="{placement:'bottom',alignment:'right'}">
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:'userInfo'}">
+            <div id="userDetails">
+                <div id="userImage"></div>
+                <div id="userName"></div>
+                <div id="userPoints">0 <span>points</span></div>
+                <div id="joined"></div>
+            </div>
+        </button>
+        <hr data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:'separator',type:'separator'}" />
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:'logoutMenuItem',label:'Log out'}" style="text-align: right;">
+        </button>
+
     </div>
 </body>
 </html>

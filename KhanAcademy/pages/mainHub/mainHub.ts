@@ -255,7 +255,7 @@ module MainHub {
 
     function initControls() {
         if (appView.value === appViewState.snapped) {
-            KA.id('userPane').style.visibility = 'hidden';
+            KA.id('logInBox').style.visibility = 'hidden';
         }
 
         isConnected = KA.Data.getIsConnected();
@@ -413,7 +413,7 @@ module MainHub {
     }
 
     function unload() {
-        KA.id('userPane').style.visibility = 'visible';
+        KA.id('logInBox').style.visibility = 'visible';
 
         var dataTransferManager: any = Windows.ApplicationModel.DataTransfer.DataTransferManager.getForCurrentView();
         dataTransferManager.removeEventListener("datarequested", KA.generalSharingDataRequested);
@@ -427,9 +427,9 @@ module MainHub {
             return;
         repositionDomainMenus();
         if (appView.value === appViewState.snapped) {
-            KA.id('userPane').style.visibility = 'hidden';
+            KA.id('logInBox').style.visibility = 'hidden';
         } else {
-            KA.id('userPane').style.visibility = 'visible';
+            KA.id('logInBox').style.visibility = 'visible';
         }
     }
 
