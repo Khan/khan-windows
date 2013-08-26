@@ -10,14 +10,21 @@
 
     app.onactivated = function (args:any) {
         if (args.detail.kind === Windows.ApplicationModel.Activation.ActivationKind.launch) {
+
             args.setPromise(WinJS.UI.processAll().then(function () {
                 KA.Global.init().done(function () {
+
                     //initial offline check
                     KA.Global.showNetworkStatus();
 
-                    if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
-                        if (nav.location) {
+                    if (args.detail.previousExecutionState == activation.ApplicationExecutionState.terminated) {
+                        if (app.sessionState.history) {
+                            // Restore the existing history saved on checkpoint
+                            nav.history = app.sessionState.history;
+
+                            // Don't add the page we're about to navigate to into history
                             nav.history.current.initialPlaceholder = true;
+
                             return nav.navigate(nav.location, nav.state);
                         } else {
                             return nav.navigate(KA.navigator.home);
@@ -52,14 +59,10 @@
     app.oncheckpoint = function (args: any) {
         var shutdownPromises = [];
 
-        //var pageControl = KA.id('contenthost').winControl.pageControl;
-        //save page if needed
-        //if (WinJS.Navigation.history.current.location == "/pages/.../.html") {
-        //    if (pageControl.save) {
-        //        shutdownPromises.push(pageControl.save());
-        //    }
-        //}
+        // Session data
+        shutdownPromises.push(KA.navigator.save());
 
+        // Persistent data
         shutdownPromises.push(KA.User.save());
         shutdownPromises.push(KA.Data.save());
         shutdownPromises.push(KA.Downloads.save());
