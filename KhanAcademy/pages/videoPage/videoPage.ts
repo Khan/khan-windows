@@ -44,6 +44,20 @@ module VideoPage {
         }
     }
 
+    function handleVisibilityChange(e) {
+        // Pause the video as soon as visibility changes, otherwise
+        // the audio would stop, but the video would continue until suspension.
+        if (document.visibilityState === 'hidden') {
+            if (isPlaying) {
+                vidPlayer.pause();
+                vidPlayer.wasPlayingBeforeHide = true;
+            }
+        } else if (vidPlayer.wasPlayingBeforeHide) {
+            delete vidPlayer.wasPlayingBeforeHide;
+            vidPlayer.play();
+        }
+    }
+
     function initControls() {
         // function called on page load, video playlist clicks
         // just call the renderControls function to refresh the data
@@ -122,6 +136,8 @@ module VideoPage {
                 }
             }
         });
+
+        document.addEventListener("visibilitychange", handleVisibilityChange, true);
 
         //app bar controls
         appBar = KA.id('appBar');
@@ -543,6 +559,8 @@ module VideoPage {
 
         var dataTransferManager: any = Windows.ApplicationModel.DataTransfer.DataTransferManager.getForCurrentView();
         dataTransferManager.removeEventListener("datarequested", dataRequested);
+
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
     }
 
     KA.definePage("/pages/videoPage/videoPage.html", ready, unload);
