@@ -13,18 +13,16 @@
     <script src="subjectPage.js"></script>
 </head>
 <body>
-    <div id="subjectPagePanel" class="fragment">
+    <div id="subjectPagePanel" class="fragment listpage">
         <header id="subjectHeader" aria-label="Header content" role="banner">
             <button class="win-backbutton" aria-label="Back" disabled type="button"></button>
-            <h1 class="titlearea">
+            <h1 class="titlearea ">
                 <span id="pageTitle" class="pagetitle"></span>
                 <p id="pageDesc"></p>
             </h1>
         </header>
         <section aria-label="Main content" role="main">
-            <div class="mainGrid">
-                <div id="childrenLv" data-win-control="WinJS.UI.ListView" data-win-options="{ selectionMode: 'none' }" ></div>
-            </div>
+            <div id="childrenLv" data-win-control="WinJS.UI.ListView" data-win-options="{ selectionMode: 'none' }"></div>
         </section>
     </div>
 </body>
