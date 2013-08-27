@@ -31,7 +31,8 @@
 
 #searchResultsPanel #resultsLv .win-surface {
     margin-left:115px;
-    margin-bottom:100px;
+    margin-right:60px;
+    margin-bottom:50px;
 }
 
 #searchResultsPanel #noResults {
