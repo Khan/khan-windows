@@ -1,42 +1,41 @@
 ﻿#mainHubPanel {
-    -ms-grid-rows:1fr;
+    -ms-grid-rows: 1fr;
 }
 
-#mainHubPanel section[role=main] {
-    -ms-grid-row:1;
-    overflow-x: auto;
-    overflow-y: hidden;
-}
+    #mainHubPanel section[role=main] {
+        -ms-grid-row: 1;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
 
-#mainHubPanel .mainGrid {
-    display:-ms-grid;
-    -ms-grid-columns:120px auto 58px 472px 59px 740px;
-    -ms-grid-rows:140px 1fr;
-    height:100%;
-}
+    #mainHubPanel .mainGrid {
+        display: -ms-grid;
+        -ms-grid-columns: 120px auto 58px 472px 59px 790px;
+        -ms-grid-rows: 140px 1fr;
+        height: 100%;
+    }
 
-#mainHubPanel .mainGrid #banner {
-    background-image: url('/images/header-logo.png');
-    background-repeat: no-repeat;
-    background-position-y: bottom;
-    -ms-grid-column-span: 3;
-    margin-left: 40px;
-    margin-bottom: 30px;
+        #mainHubPanel .mainGrid #banner {
+            background-image: url('/images/header-logo.png');
+            background-repeat: no-repeat;
+            background-position-y: bottom;
+            -ms-grid-column-span: 3;
+            margin-left: 40px;
+            margin-bottom: 40px;
+        }
 
-}
-
-#mainHubPanel .mainGrid h2 {
-    font-size: 12pt;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 17px;
-}
+        #mainHubPanel .mainGrid h2 {
+            font-size: 12pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 17px;
+        }
 
 #downloadCount {
-    font-weight:normal;
-    text-transform:lowercase;
+    font-weight: normal;
+    text-transform: lowercase;
     font-size: 10pt;
-    color:#777;
+    color: #777;
 }
 
 #mainHubPanel #downloadsLv .win-container:not(.win-footprint) {
@@ -61,21 +60,21 @@
     margin-bottom: 12px;
     z-index: 100;
     position: relative;
-    background-repeat:no-repeat;
-    background-position:50% 40%;
+    background-repeat: no-repeat;
+    background-position: 50% 40%;
 }
 
-.domainItem div {
-    color:#fff;
-    margin-left: 8px;
-    position:absolute;
-    bottom:9px;
-}
+    .domainItem div {
+        color: #fff;
+        margin-left: 8px;
+        position: absolute;
+        bottom: 9px;
+    }
 
 #domainMenuClickEater {
     visibility: collapse;
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -87,28 +86,28 @@
     z-index: 101;
 }
 
-.domainMenu div {
-    width:244px;
-    height:24px;
-    padding:8px;
-    background-color:#fff;
-    margin-left:3px;
-    margin-right:3px;
-    border-bottom:solid 1px #ddd;
-}
+    .domainMenu div {
+        width: 244px;
+        height: 24px;
+        padding: 8px;
+        background-color: #fff;
+        margin-left: 3px;
+        margin-right: 3px;
+        border-bottom: solid 1px #ddd;
+    }
 
-.domainMenu div:hover {
-    background-color:#c4e5f4;
-}
+        .domainMenu div:hover {
+            background-color: #c4e5f4;
+        }
 
 
-.domainMenu div:first-child {
-    margin-top:3px;
-}
+        .domainMenu div:first-child {
+            margin-top: 3px;
+        }
 
-.domainMenu div:last-child {
-    margin-bottom:3px;
-}
+        .domainMenu div:last-child {
+            margin-bottom: 3px;
+        }
 
 #newsPane {
     -ms-grid-column: 4;
@@ -125,24 +124,24 @@
     width: 456px;
     height: 342px;
     margin-bottom: 12px;
-    background-color:#000;
-    display:-ms-grid;
-    -ms-grid-columns:1fr;
-    -ms-grid-rows:1fr;
-    background-size:cover;
-    border:solid 1px #ccc;
+    background-color: #000;
+    display: -ms-grid;
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: 1fr;
+    background-size: cover;
+    border: solid 1px #ccc;
 }
 
 .newsItem {
     width: 220px;
     height: 165px;
-    margin-right:14px;
-    background-color:#000;
-    display:-ms-grid;
-    -ms-grid-columns:1fr;
-    -ms-grid-rows:1fr;
-    background-size:cover;
-    border:solid 1px #ccc;
+    margin-right: 14px;
+    background-color: #000;
+    display: -ms-grid;
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: 1fr;
+    background-size: cover;
+    border: solid 1px #ccc;
 }
 
 #newsList .titleDiv {
@@ -150,29 +149,33 @@
     color: #E7E7E7;
     -ms-grid-row-align: end;
     padding: 8px;
-    min-height:38px;
+    min-height: 38px;
 }
 
 #downloadsPane {
     -ms-grid-column: 6;
     -ms-grid-row: 2;
-    display:-ms-grid;
-    -ms-grid-columns:1fr;
-    -ms-grid-rows:30px 1fr 80px;
+    display: -ms-grid;
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: 30px 1fr 60px;
 }
 
 #downloadsTitle {
-    padding-left:5px;
+    padding-left: 5px;
 }
 
 #mainHubPanel #downloadsLv {
     -ms-grid-row: 2;
-    height:100%;
+    height: 100%;
 }
 
+	#mainHubPanel #downloadsLv .win-surface {
+		margin-right: 60px;
+	}
+
 #mainHubPanel #noDownloads {
-    display:none;
-    padding-left:5px;
+    display: none;
+    padding-left: 5px;
     -ms-grid-row: 2;
     margin-top: 5px;
 }
@@ -184,18 +187,18 @@
     }
 
     #mainHubPanel .mainGrid {
-        -ms-grid-columns:20px auto 20px;
-        -ms-grid-rows:100px 500px auto auto;
+        -ms-grid-columns: 20px auto 20px;
+        -ms-grid-rows: 100px 500px auto auto;
     }
 
-    #mainHubPanel .mainGrid #banner {
-        -ms-grid-column-span: 1;
-        background-size:cover;
-        margin-top: 51px;
-        margin-left: 20px;
-        width: 280px;
-        height: 27px;
-    }
+        #mainHubPanel .mainGrid #banner {
+            -ms-grid-column-span: 1;
+            background-size: cover;
+            margin-top: 51px;
+            margin-left: 20px;
+            width: 280px;
+            height: 27px;
+        }
 
     #domainList {
         width: 280px;
@@ -205,26 +208,26 @@
     .domainItem {
         width: 134px;
         height: 134px;
-        display:-ms-grid;
-        -ms-grid-rows:1fr;
-        -ms-grid-columns:1fr;
-        margin-right:0;
-        background-position:50% 30%;
-        background-size:50% 50%;
+        display: -ms-grid;
+        -ms-grid-rows: 1fr;
+        -ms-grid-columns: 1fr;
+        margin-right: 0;
+        background-position: 50% 30%;
+        background-size: 50% 50%;
     }
 
-    .domainItem div {
-        color:#fff;
-        margin-left: 8px;
-        margin-top: 0;
-        -ms-grid-row-align: end;
-        margin-bottom:8px;
-    }
+        .domainItem div {
+            color: #fff;
+            margin-left: 8px;
+            margin-top: 0;
+            -ms-grid-row-align: end;
+            margin-bottom: 8px;
+        }
 
     #newsPane {
         -ms-grid-column: 2;
         -ms-grid-row: 3;
-        margin-bottom:12px;
+        margin-bottom: 12px;
     }
 
     #newsList {
@@ -236,47 +239,48 @@
     .bigNewsItem {
         width: 280px;
         height: 210px;
-        margin-bottom:8px;
+        margin-bottom: 8px;
     }
 
     .newsItem {
         width: 280px;
         height: auto;
-        margin-right:0;
-        background-size:0 0;
-        background-color:transparent;
-        border:0;
+        margin-right: 0;
+        background-size: 0 0;
+        background-color: transparent;
+        border: 0;
     }
 
     #newsList .newsItem .titleDiv {
-        background-image:none;
+        background-image: none;
         color: #000;
         -ms-grid-row-align: end;
         padding: 8px;
-        min-height:20px;
+        min-height: 20px;
     }
 
-    #newsList .newsItem .titleDiv:hover {
-        color:#7fac05;
-    }
+        #newsList .newsItem .titleDiv:hover {
+            color: #7fac05;
+        }
 
     #downloadsTitle {
-        margin-left:18px;
+        margin-left: 18px;
     }
 
     #downloadsPane {
         -ms-grid-column: 1;
-        -ms-grid-column-span:3;
+        -ms-grid-column-span: 3;
         -ms-grid-row: 4;
-        display:-ms-grid;
-        -ms-grid-columns:1fr;
-        -ms-grid-rows:30px 1fr 80px;
+        display: -ms-grid;
+        -ms-grid-columns: 1fr;
+        -ms-grid-rows: 30px 1fr 70px;
     }
 
     #mainHubPanel #noDownloads {
-        padding-left:25px;
+        padding-left: 25px;
     }
 }
+
 @media all and (-ms-view-state: fullscreen-portrait) {
     #mainHubPanel section[role=main] {
         overflow-x: hidden;
@@ -284,13 +288,13 @@
     }
 
     #mainHubPanel .mainGrid {
-        -ms-grid-columns:50px 1fr 40px;
-        -ms-grid-rows:100px 440px auto 600px;
+        -ms-grid-columns: 50px 1fr 40px;
+        -ms-grid-rows: 100px 440px auto 600px;
     }
 
-    #mainHubPanel .mainGrid #banner {
-        margin-left: 44px;
-    }
+        #mainHubPanel .mainGrid #banner {
+            margin-left: 44px;
+        }
 
     #newsList {
         width: 100%;
@@ -314,15 +318,15 @@
     #newsPane {
         -ms-grid-column: 2;
         -ms-grid-row: 3;
-        margin-bottom:36px;
+        margin-bottom: 36px;
     }
 
     #downloadsPane {
         -ms-grid-column: 2;
-        -ms-grid-column-span:1;
+        -ms-grid-column-span: 1;
         -ms-grid-row: 4;
-        -ms-grid-columns:1fr;
-        -ms-grid-rows:30px 1fr 80px;
+        -ms-grid-columns: 1fr;
+        -ms-grid-rows: 30px 1fr 70px;
     }
 
     .videoItem {

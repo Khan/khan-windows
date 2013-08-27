@@ -110,8 +110,8 @@ input[type=reset], input[type=file]::-ms-browse {
 
 #logInBox {
     position: absolute;
-    top: 58px;
-    right: 81px;
+    top: 55px;
+    right: 71px;
     display: -ms-grid;
     -ms-grid-columns: auto auto;
     -ms-grid-rows: 1fr;
@@ -124,7 +124,7 @@ input[type=reset], input[type=file]::-ms-browse {
     -ms-grid-column: 2;
     font-size: 20pt;
     font-weight: lighter;
-	padding: 0;
+    padding: 0;
 }
 
     #loginButton:hover {
@@ -158,16 +158,15 @@ input[type=reset], input[type=file]::-ms-browse {
     background-color: #26303D;
     -ms-grid-column: 2;
     margin: 5px 5px 5px 10px;
-    height: 60px;
-    width: 60px;
+    height: 40px;
+    width: 40px;
 }
 
-#avatarImage{
-	background-size: contain;
-	width: 100%;
-	height: 100%;
-	
-	}
+#avatarImage {
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+}
 
 #userMenu {
     border: solid 1px #999;
@@ -181,8 +180,8 @@ input[type=reset], input[type=file]::-ms-browse {
 }
 
 #userImage {
-    height:100px;
-    width:100px;
+    height: 100px;
+    width: 100px;
     -ms-grid-row-span: 3;
     background-size: cover;
 }
@@ -190,26 +189,27 @@ input[type=reset], input[type=file]::-ms-browse {
 #userName {
     font-size: 20pt;
     padding: 10px 0px 10px 10px;
-    -ms-grid-column:2;
+    -ms-grid-column: 2;
 }
+
 #userPoints {
     font-size: 12pt;
-        color: #666;
+    color: #666;
     padding: 5px 0px 5px 10px;
-    -ms-grid-column:2;
+    -ms-grid-column: 2;
     -ms-grid-row: 2;
     text-align: right;
 }
 
-    #userPtsDiv span {
-        font-size: 8pt;
-    }
+#userPtsDiv span {
+    font-size: 8pt;
+}
 
 #joined {
-        color: #666;
+    color: #666;
     padding: 5px 0px 5px 10px;
-    -ms-grid-column:2;
-    -ms-grid-row:3;
+    -ms-grid-column: 2;
+    -ms-grid-row: 3;
     float: right;
     text-align: right;
 }
@@ -274,18 +274,18 @@ input[type=reset], input[type=file]::-ms-browse {
 }
 
     .fragment header[role=banner] {
-        -ms-grid-columns: 120px 1fr;
+        -ms-grid-columns: 39px 81px 1fr;
         -ms-grid-rows: 1fr;
         display: -ms-grid;
     }
 
         .fragment header[role=banner] .win-backbutton {
-            margin-left: 39px;
+            -ms-grid-column: 2;
             margin-top: 59px;
         }
 
         .fragment header[role=banner] .titlearea {
-            -ms-grid-column: 2;
+            -ms-grid-column: 3;
             margin-top: 37px;
         }
 
@@ -298,6 +298,50 @@ input[type=reset], input[type=file]::-ms-browse {
         height: 100%;
         width: 100%;
     }
+
+.listpage {
+    -ms-grid-columns: 530px 1fr;
+}
+
+    .listpage header[role=banner] {
+        color: white;
+        -ms-grid-row-span: 2;
+    }
+
+        .listpage header[role=banner] .titlearea {
+            margin-top: 45px;
+        }
+
+    .listpage .win-backbutton {
+        background-color: transparent;
+        border-color: rgb(255, 255, 255);
+        color: rgb(255, 255, 255);
+    }
+
+    .listpage header p {
+        font-size: 20pt;
+        overflow: hidden;
+        padding: 0px 20px 20px 0px;
+    }
+
+    .listpage section[role=main] {
+        -ms-grid-column: 2;
+    }
+
+    .listpage #childrenLv {
+        height: 100%;
+        width: 100%;
+    }
+
+
+        .listpage #childrenLv .win-surface {
+            margin-left: 40px;
+            margin-right: 60px;
+        }
+
+        .listpage #childrenLv .win-container:not(.win-footprint) {
+            background-color: transparent;
+        }
 
 .win-listview .win-container:not(.win-footprint) {
     background-color: rgb(15, 110, 180);
