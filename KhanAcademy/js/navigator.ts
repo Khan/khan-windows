@@ -32,6 +32,13 @@
             KA.navigator = this;
         }
 
+        save() {
+            return new WinJS.Promise(function (c, e) {
+                WinJS.Application.sessionState.history = nav.history;
+                c();
+            });
+        }
+
         // This is the currently loaded Page object.
         private get pageControl() {
             return this.pageElement && this.pageElement.winControl;
