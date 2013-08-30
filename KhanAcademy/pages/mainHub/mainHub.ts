@@ -158,8 +158,10 @@ module MainHub {
                 domain = KA.Data.domains[i];
                 //check for videos
                 if (domain.children && domain.children.length > 0) {
-                    for (var j = 0; j < newsItemCount; j++) {
+                    for (var j = 0; j < domain.children.length && newsVideos.length < newsItemCount; j++) {
                         video = KA.Data.getVideo(domain.children[j].id);
+                        if (!video)
+                          continue;
                         newsVideos.push(video);
                         newsItem = document.createElement('div');
                         newsItem.attributes['data-index'] = j;
