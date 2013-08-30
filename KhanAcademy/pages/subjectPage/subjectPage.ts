@@ -15,7 +15,7 @@ module SubjectPage {
         var request = e.request;
         if (subject) {
             request.data.properties.title = subject.title;
-            request.data.properties.description = subject.description;
+            request.data.properties.description = subject.description || "";
             request.data.setUri(new Windows.Foundation.Uri(subject.kaUrl));
         } else {
             request.failWithDisplayText('Subject not loaded properly, please reload ');
@@ -27,7 +27,7 @@ module SubjectPage {
             isConnected = KA.Data.getIsConnected();
 
             KA.id('pageTitle').innerText = subject.title;
-            KA.id('pageDesc').innerHTML = subject.description;
+            KA.id('pageDesc').innerHTML = subject.description || "";
             KA.id('subjectHeader').className = 'domainItemSubject ' + subject.domainId + '-subject';
 
             //does the subject have children?

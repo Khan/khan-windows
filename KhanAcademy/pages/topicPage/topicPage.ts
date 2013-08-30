@@ -16,7 +16,7 @@ module TopicPage {
         var request = e.request;
         if (topic) {
             request.data.properties.title = topic.title;
-            request.data.properties.description = topic.description;
+            request.data.properties.description = topic.description || "";
             request.data.setUri(new Windows.Foundation.Uri(topic.kaUrl));
         } else {
             request.failWithDisplayText('Topic not loaded properly, please reload ');
@@ -28,7 +28,7 @@ module TopicPage {
             isConnected = KA.Data.getIsConnected();
 
             KA.id('pageTitle').innerText = topic.title;
-            KA.id('pageDesc').innerHTML = topic.description;
+            KA.id('pageDesc').innerHTML = topic.description || "";
             KA.id('topicHeader').className = 'domainItemSubject ' + topic.domainId + '-subject';
 
             //does tutorial have children?
