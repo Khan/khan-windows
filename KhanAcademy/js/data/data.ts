@@ -1,5 +1,6 @@
 ﻿/// <reference path="../../scripts/typings/winjs.d.ts" />
 /// <reference path="../../scripts/typings/winrt.d.ts" />
+/// <reference path="../../scripts/typings/moment/moment.d.ts" />
 
 module KA {
     'use strict';

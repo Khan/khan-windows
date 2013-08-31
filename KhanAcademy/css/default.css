@@ -122,7 +122,7 @@ input[type=reset], input[type=file]::-ms-browse {
     border: hidden;
     color: black;
     -ms-grid-column: 2;
-    font-size: 20pt;
+    font-size: 16pt;
     font-weight: lighter;
     padding: 0;
 }
@@ -163,6 +163,7 @@ input[type=reset], input[type=file]::-ms-browse {
 }
 
 #avatarImage {
+    background-image: url('/images/leaf-green.png');
     background-size: contain;
     width: 100%;
     height: 100%;
@@ -188,7 +189,9 @@ input[type=reset], input[type=file]::-ms-browse {
 
 #userName {
     font-size: 20pt;
+    font-weight: lighter;
     padding: 10px 0px 10px 10px;
+    text-align: right;
     -ms-grid-column: 2;
 }
 
