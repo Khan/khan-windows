@@ -52,7 +52,7 @@
 
                 userName.innerHTML = displayText.innerHTML = e.userInfo.nickName;
                 avatarImage.style.backgroundImage = userImage.style.backgroundImage = "url('" + e.userInfo.avatarUrl + "')";
-                joined = e.userInfo.joined;
+                joined.innerHTML = "Joined " + moment(e.userInfo.joined).fromNow();
 
                 if (e.userInfo.points > 0) {
                     var decimalFormat = new Windows.Globalization.NumberFormatting.DecimalFormatter();
@@ -68,7 +68,7 @@
                 loggedIn = false;
 
                 userName.innerHTML = displayText.innerHTML = "Log In";
-                avatarImage.style.backgroundImage = userImage.style.backgroundImage = "";
+                avatarImage.style.backgroundImage = userImage.style.backgroundImage = "url('/images/leaf-green.png')";
                 joined.innerHTML = "";
                 userPoints.innerHTML = '0 <span>points</span>';
             }
