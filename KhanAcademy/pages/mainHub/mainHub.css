@@ -16,7 +16,7 @@
     }
 
         #mainHubPanel .mainGrid #banner {
-            background-image: url('/images/header-logo.png');
+            background-image: url('/images/header-logo.svg');
             background-repeat: no-repeat;
             background-position-y: bottom;
             -ms-grid-column-span: 3;

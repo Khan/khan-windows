@@ -92,6 +92,8 @@
                                 joined: new Date(ur.joined),
                             }
                             complete(userInfo);
+                        } else {
+                            complete(null);
                         }
                     }, function (err) { service.handleError(err, error) });
                 }
