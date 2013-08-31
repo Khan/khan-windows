@@ -17,9 +17,9 @@ module KA {
         private allowedDomains = [
             Data.newAndNoteworthyId,
             'x7a488390', // Math
-            'xb92336a2', // Science & Economics
+            'xb92336a2', // Science
+            'x5ca94af1', // Economics and Finance
             'x905db83d', // Humanities
-            'x7626d097', // Test Prep
             'xd1039e22', // Talks and Interviews
             'xae887ec6', // Projects & Discovery Lab
         ];

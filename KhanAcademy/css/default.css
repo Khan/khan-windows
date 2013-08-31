@@ -382,13 +382,23 @@ a {
     background-color: #30a7de;
 }
 
-/* science and economics */
+/* science */
 .xb92336a2 {
     background-color: #ba3d66;
 }
 
 .xb92336a2-subject {
     background-color: #ba3d66;
+}
+
+/* economics and finance */
+
+.x5ca94af1 {
+    background-color: #8e4c9b;
+}
+
+.x5ca94af1-subject {
+    background-color: #8e4c9b;
 }
 
 /* humanities */
@@ -400,15 +410,6 @@ a {
     background-color: #4e55a1;
 }
 
-/* test prep */
-.x7626d097 {
-    background-color: #8e4c9b;
-}
-
-.x7626d097-subject {
-    background-color: #8e4c9b;
-}
-
 /* talks and interviews */
 .xd1039e22 {
     background-color: #13967e;
@@ -416,15 +417,6 @@ a {
 
 .xd1039e22-subject {
     background-color: #13967e;
-}
-
-/* Projects & Discovery Lab */
-.xae887ec6 {
-    background-color: #d44c28;
-}
-
-.xae887ec6-subject {
-    background-color: #d44c28;
 }
 
 /* partner content */
