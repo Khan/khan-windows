@@ -24,6 +24,9 @@
     }
 
     export function handleError(event) {
+        if (!event)
+            return;
+
         var ex: string;
         if (event.detail) {
             if (event.detail.error) {
