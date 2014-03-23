@@ -217,6 +217,12 @@ input[type=reset], input[type=file]::-ms-browse {
     text-align: right;
 }
 
+#logoutButton {
+    text-align: right;
+    margin-left: auto;
+    display: block;
+}
+
 #noConnectionPane {
     position: absolute;
     top: 0px;
