@@ -256,10 +256,6 @@ module MainHub {
     }
 
     function initControls() {
-        if (appView.value === appViewState.snapped) {
-            KA.id('logInBox').style.visibility = 'hidden';
-        }
-
         isConnected = KA.Data.getIsConnected();
         isDomainMenuOpen = false;
         isMenuInitialized = false;
