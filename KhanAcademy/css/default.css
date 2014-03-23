@@ -483,6 +483,10 @@ a {
     }
 
 @media screen and (-ms-view-state: snapped) {
+    #logInBox {
+        visibility: hidden;
+    }
+
     .fragment header[role=banner] {
         -ms-grid-columns: auto 1fr;
         margin-left: 20px;

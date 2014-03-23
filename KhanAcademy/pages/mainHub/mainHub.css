@@ -22,6 +22,7 @@
             -ms-grid-column-span: 3;
             margin-left: 40px;
             margin-bottom: 40px;
+            background-size: contain;
         }
 
         #mainHubPanel .mainGrid h2 {
@@ -193,11 +194,11 @@
 
         #mainHubPanel .mainGrid #banner {
             -ms-grid-column-span: 1;
-            background-size: cover;
-            margin-top: 51px;
+            background-size: contain;
+            margin-top: 12px;
             margin-left: 20px;
             width: 280px;
-            height: 27px;
+            height: 65px;
         }
 
     #domainList {
