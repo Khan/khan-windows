@@ -137,7 +137,10 @@
                 }
             });
 
-            KA.id("logoutMenuItem").addEventListener("click", KA.User.logOut);
+            KA.id("logoutButton").addEventListener("click", function () {
+                document.getElementById("userMenu").winControl.hide();
+                KA.User.logOut();
+            });
 
             WinJS.Application.addEventListener("userInfoUpdated", service.handleUserInfoUpdated);
             WinJS.Application.addEventListener("userInfoRequested", service.handleUserInfoRequested);

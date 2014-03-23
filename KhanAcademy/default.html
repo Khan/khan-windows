@@ -50,19 +50,15 @@
             </div>
         </button>
     </div>
-    <div id="userMenu" data-win-control="WinJS.UI.Menu" data-win-options="{placement:'bottom',alignment:'right'}">
-        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:'userInfo'}">
+    <div id="userMenu" data-win-control="WinJS.UI.Flyout" data-win-options="{placement:'bottom',alignment:'right'}">
             <div id="userDetails">
                 <div id="userImage"></div>
                 <div id="userName"></div>
                 <div id="userPoints">0 <span>points</span></div>
                 <div id="joined"></div>
             </div>
-        </button>
-        <hr data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:'separator',type:'separator'}" />
-        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:'logoutMenuItem',label:'Log out'}" style="text-align: right;">
-        </button>
-
+        <hr />
+        <button id="logoutButton" style="text-align: right;">Log out</button>
     </div>
 </body>
 </html>
