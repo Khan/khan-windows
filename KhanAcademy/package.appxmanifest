@@ -1,27 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="154af414-344a-4bc9-b43b-80943099e7d1" Version="1.3.2.0" Publisher="CN=Khan Academy" />
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
+  <Identity Name="154af414-344a-4bc9-b43b-80943099e7d1" Version="1.4.2.0" Publisher="CN=Khan Academy" />
   <Properties>
     <DisplayName>Khan Academy</DisplayName>
     <PublisherDisplayName>Khan Academy</PublisherDisplayName>
     <Logo>images\storelogo.png</Logo>
   </Properties>
   <Prerequisites>
-    <OSMinVersion>6.2.1</OSMinVersion>
-    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
+    <OSMinVersion>6.3.0</OSMinVersion>
+    <OSMaxVersionTested>6.3.0</OSMaxVersionTested>
   </Prerequisites>
   <Resources>
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
     <Application Id="App" StartPage="default.html">
-      <VisualElements DisplayName="Khan Academy" Logo="images\logo.png" SmallLogo="images\smalllogo.png" Description="Khan Academy is a fluid, feature rich and well-designed app which enables you to learn on the go. It has thousands of videos from Khan Academy for topics including math, science, history, finance, civics and many more." ForegroundText="light" BackgroundColor="#242c37">
-        <DefaultTile ShowName="noLogos" WideLogo="images\widelogo.png" ShortName="Khan Academy" />
-        <SplashScreen Image="images\splashscreen.png" BackgroundColor="#242c37" />
-      </VisualElements>
       <Extensions>
         <Extension Category="windows.search" />
       </Extensions>
+      <m2:VisualElements DisplayName="Khan Academy" Description="Khan Academy is a fluid, feature rich and well-designed app which enables you to learn on the go. It has thousands of videos from Khan Academy for topics including math, science, history, finance, civics and many more." BackgroundColor="#242c37" ForegroundText="light" Square150x150Logo="images\logo.png" Square30x30Logo="images\smalllogo.png">
+        <m2:DefaultTile ShortName="Khan Academy" Wide310x150Logo="images\widelogo.png">
+        </m2:DefaultTile>
+        <m2:SplashScreen BackgroundColor="#242c37" Image="images\splashscreen.png" />
+      </m2:VisualElements>
     </Application>
   </Applications>
   <Capabilities>
