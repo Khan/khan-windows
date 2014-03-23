@@ -123,8 +123,8 @@ module TopicPage {
 
                         if (i > 0) {
                             pItem.attributes['data-id'] = video.id;
-                            pItem.addEventListener('MSPointerDown', function (e) {
-                                if (e.pointerType == e.MSPOINTER_TYPE_MOUSE) {
+                            pItem.addEventListener('pointerdown', function (e) {
+                                if (e.pointerType == "mouse") {
                                     e.cancelBubble = true;
                                     var tutId = e.currentTarget.parentElement.parentElement.attributes['data-id'];
                                     var vid = KA.Data.getVideoInTutorial(tutId, e.currentTarget.attributes['data-id']);
@@ -132,8 +132,8 @@ module TopicPage {
                                 }
                             });
 
-                            pItem.addEventListener('MSPointerUp', function (e) {
-                                if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+                            pItem.addEventListener('pointerdown', function (e) {
+                                if (e.pointerType == "touch") {
                                     e.cancelBubble = true;
                                     var tutId = e.currentTarget.parentElement.parentElement.attributes['data-id'];
                                     var vid = KA.Data.getVideoInTutorial(tutId, e.currentTarget.attributes['data-id']);

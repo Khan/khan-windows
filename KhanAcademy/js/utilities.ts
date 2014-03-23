@@ -75,8 +75,8 @@
         }
     }
 
-    export function handleMSPointerOut(e) {
-        if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+    export function handlePointerOut(e) {
+        if (e.pointerType == "touch") {
             WinJS.Utilities.removeClass(e.currentTarget, "touchScale");
             WinJS.Utilities.removeClass(e.currentTarget, "touchShade");
         }

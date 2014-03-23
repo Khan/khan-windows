@@ -72,7 +72,7 @@ module VideoPage {
         transcriptDiv = KA.id('transcriptDiv');
         transcriptList = KA.id('transcriptList');
 
-        transcriptDiv.addEventListener('MSPointerDown', function (e) {
+        transcriptDiv.addEventListener('pointerdown', function (e) {
             //pause auto advancing of scroll because user is dragging scroll bar
             isAutoAdvanced = false;
         });
@@ -83,9 +83,9 @@ module VideoPage {
             isPlaying = true;
         });
 
-        vidPlayer.addEventListener('MSPointerDown', function posterPlay(e) {
+        vidPlayer.addEventListener('pointerdown', function posterPlay(e) {
             vidPlayer.play();
-            vidPlayer.removeEventListener('MSPointerDown', posterPlay);
+            vidPlayer.removeEventListener('pointerdown', posterPlay);
         });
 
         vidPlayer.addEventListener('pause', function (e) {
@@ -141,12 +141,12 @@ module VideoPage {
 
         //app bar controls
         appBar = KA.id('appBar');
-        KA.id('cmdDownload').addEventListener('MSPointerDown', function (e) {
+        KA.id('cmdDownload').addEventListener('pointerdown', function (e) {
             if (video != null) {
                 KA.Downloads.downloadVideo(video.id, video.vidUrl);
             }
         });
-        KA.id('cmdDelete').addEventListener('MSPointerDown', function (e) {
+        KA.id('cmdDelete').addEventListener('pointerdown', function (e) {
             if (video != null) {
                 KA.Downloads.deleteVideo(video.id).done(function () {
                     toggleDownloadCmd(true);
@@ -157,42 +157,42 @@ module VideoPage {
         });
 
         var videoDownload = KA.id('videoDownload');
-        videoDownload.addEventListener('MSPointerDown', function (e: MSPointerEvent) {
+        videoDownload.addEventListener('pointerdown', function (e: MSPointerEvent) {
             if (video != null) {
-                if (e.pointerType == e.MSPOINTER_TYPE_MOUSE) {
+                if (e.pointerType == "mouse") {
                     KA.Downloads.downloadVideo(video.id, video.vidUrl);
-                } else if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+                } else if (e.pointerType == "touch") {
                     WinJS.Utilities.addClass(e.currentTarget, "touchShade");
                 }
             }
         });
-        videoDownload.addEventListener('MSPointerUp', function (e: MSPointerEvent) {
+        videoDownload.addEventListener('pointerdown', function (e: MSPointerEvent) {
             if (video != null) {
-                if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+                if (e.pointerType == "touch") {
                     WinJS.Utilities.removeClass(e.currentTarget, "touchShade");
                     KA.Downloads.downloadVideo(video.id, video.vidUrl);
                 }
             }
         });
-        videoDownload.addEventListener('MSPointerOut', KA.handleMSPointerOut);
+        videoDownload.addEventListener('pointerout', KA.handlePointerOut);
 
         var videoDelete = KA.id('videoDelete');
-        videoDelete.addEventListener('MSPointerDown', function (e: MSPointerEvent) {
+        videoDelete.addEventListener('pointerdown', function (e: MSPointerEvent) {
             if (video != null) {
-                if (e.pointerType == e.MSPOINTER_TYPE_MOUSE) {
+                if (e.pointerType == "mouse") {
                     KA.Downloads.deleteVideo(video.id).done(function () {
                         toggleDownloadCmd(true);
                     }, function (err) {
                         console.log(err);
                     });
-                } else if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+                } else if (e.pointerType == "touch") {
                     WinJS.Utilities.addClass(e.currentTarget, "touchShade");
                 }
             }
         });
-        videoDelete.addEventListener('MSPointerUp', function (e: MSPointerEvent) {
+        videoDelete.addEventListener('pointerdown', function (e: MSPointerEvent) {
             if (video != null) {
-                if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+                if (e.pointerType == "touch") {
                     WinJS.Utilities.removeClass(e.currentTarget, "touchShade");
                     KA.Downloads.deleteVideo(video.id).done(function () {
                         toggleDownloadCmd(true);
@@ -202,9 +202,9 @@ module VideoPage {
                 }
             }
         });
-        videoDelete.addEventListener('MSPointerOut', KA.handleMSPointerOut);
+        videoDelete.addEventListener('pointerout', KA.handlePointerOut);
 
-        KA.id('tutDownload').addEventListener('MSPointerDown', function (e) {
+        KA.id('tutDownload').addEventListener('pointerdown', function (e) {
             if (parent != null && parent.children != null && parent.children.length > 0) {
                 var vid;
                 for (var i = 0; i < parent.children.length; i++) {
@@ -333,7 +333,7 @@ module VideoPage {
                     item.className = 'transcriptItem';
                 }
                 item.setAttribute('data-index', i);
-                item.addEventListener('MSPointerUp', function (e) {
+                item.addEventListener('pointerdown', function (e) {
                     var itemIndex = parseInt(e.currentTarget.getAttribute('data-index'), 10);
                     vidPlayer.currentTime = script[itemIndex].start_time / 1000;
                     isAutoAdvanced = true;
@@ -388,8 +388,8 @@ module VideoPage {
             }
             tutItem.innerHTML = parent.children[i].title;
 
-            tutItem.addEventListener('MSPointerDown', function (e) {
-                if (e.pointerType == e.MSPOINTER_TYPE_MOUSE) {
+            tutItem.addEventListener('pointerdown', function (e) {
+                if (e.pointerType == "mouse") {
                     if (curIndex != e.currentTarget.attributes['data-index']) {
                         var vidId = e.currentTarget.attributes['data-id'];
                         switch (parent.type) {
@@ -408,8 +408,8 @@ module VideoPage {
                 }
             });
 
-            tutItem.addEventListener('MSPointerUp', function (e) {
-                if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+            tutItem.addEventListener('pointerdown', function (e) {
+                if (e.pointerType == "touch") {
                     if (curIndex != e.currentTarget.attributes['data-index']) {
                         var vidId = e.currentTarget.attributes['data-id'];
                         switch (parent.type) {

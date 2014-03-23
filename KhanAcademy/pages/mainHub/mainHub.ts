@@ -51,8 +51,8 @@ module MainHub {
                             }
                             domainMenuItem.innerText = domain.children[j].title;
 
-                            domainMenuItem.addEventListener('MSPointerDown', function (e) {
-                                if (e.pointerType == e.MSPOINTER_TYPE_MOUSE) {
+                            domainMenuItem.addEventListener('pointerdown', function (e) {
+                                if (e.pointerType == "mouse") {
                                     if (e.currentTarget.attributes['data-id']) {
                                         nav.navigate("/pages/subjectPage/subjectPage.html", { subjectId: e.currentTarget.attributes['data-id'] });
                                     } else if (e.currentTarget.attributes['data-title']) {
@@ -61,8 +61,8 @@ module MainHub {
                                 }
                             });
 
-                            domainMenuItem.addEventListener('MSPointerUp', function (e) {
-                                if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+                            domainMenuItem.addEventListener('pointerdown', function (e) {
+                                if (e.pointerType == "touch") {
                                     if (e.currentTarget.attributes['data-id']) {
                                         nav.navigate("/pages/subjectPage/subjectPage.html", { subjectId: e.currentTarget.attributes['data-id'] });
                                     } else if (e.currentTarget.attributes['data-title']) {
@@ -75,22 +75,22 @@ module MainHub {
                         }
 
                         domainMenuList.appendChild(domainMenu);
-                        domainItem.addEventListener('MSPointerDown', function (e) {
-                            if (e.pointerType == e.MSPOINTER_TYPE_MOUSE) {
+                        domainItem.addEventListener('pointerdown', function (e) {
+                            if (e.pointerType == "mouse") {
                                 showDomainMenu(e.currentTarget.attributes['data-index']);
-                            } else if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+                            } else if (e.pointerType == "touch") {
                                 WinJS.Utilities.addClass(e.currentTarget, "touchScale");
                             }
                         });
 
-                        domainItem.addEventListener('MSPointerUp', function (e) {
-                            if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+                        domainItem.addEventListener('pointerdown', function (e) {
+                            if (e.pointerType == "touch") {
                                 WinJS.Utilities.removeClass(e.currentTarget, "touchScale");
                                 showDomainMenu(e.currentTarget.attributes['data-index']);
                             }
                         });
 
-                        domainItem.addEventListener('MSPointerOut', KA.handleMSPointerOut);
+                        domainItem.addEventListener('pointerout', KA.handlePointerOut);
                     }
                 }
 
@@ -190,23 +190,23 @@ module MainHub {
                         el.innerText = video.title;
                         el.className = 'titleDiv';
 
-                        newsItem.addEventListener('MSPointerDown', function (e) {
-                            if (e.pointerType == e.MSPOINTER_TYPE_MOUSE) {
+                        newsItem.addEventListener('pointerdown', function (e) {
+                            if (e.pointerType == "mouse") {
                                 var vid = newsVideos[e.currentTarget.attributes['data-index']];
                                 nav.navigate("/pages/videoPage/videoPage.html", { video: vid });
-                            } else if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+                            } else if (e.pointerType == "touch") {
                                 WinJS.Utilities.addClass(e.currentTarget, "touchScale");
                             }
                         });
 
-                        newsItem.addEventListener('MSPointerUp', function (e) {
-                            if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+                        newsItem.addEventListener('pointerdown', function (e) {
+                            if (e.pointerType == "touch") {
                                 WinJS.Utilities.removeClass(e.currentTarget, "touchScale");
                                 var vid = newsVideos[e.currentTarget.attributes['data-index']];
                                 nav.navigate("/pages/videoPage/videoPage.html", { video: vid });
                             }
                         });
-                        newsItem.addEventListener('MSPointerOut', KA.handleMSPointerOut);
+                        newsItem.addEventListener('pointerout', KA.handlePointerOut);
 
                         newsItem.appendChild(el);
                         newsList.appendChild(newsItem);
@@ -269,45 +269,45 @@ module MainHub {
         buildDownloads();
 
         domainMenuClickEater = KA.id('domainMenuClickEater');
-        domainMenuClickEater.addEventListener('MSPointerDown', function (e) {
+        domainMenuClickEater.addEventListener('pointerdown', function (e) {
             hideDomainMenu();
         });
 
         var downloadsTitle = KA.id('downloadsTitle');
-        downloadsTitle.addEventListener('MSPointerDown', function (e: MSPointerEvent) {
-            if (e.pointerType == e.MSPOINTER_TYPE_MOUSE) {
+        downloadsTitle.addEventListener('pointerdown', function (e: MSPointerEvent) {
+            if (e.pointerType == "mouse") {
                 nav.navigate("/pages/downloadsPage/downloadsPage.html");
-            } else if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+            } else if (e.pointerType == "touch") {
                 WinJS.Utilities.addClass(e.currentTarget, "touchShade");
             }
         });
 
-        downloadsTitle.addEventListener('MSPointerUp', function (e: MSPointerEvent) {
-            if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+        downloadsTitle.addEventListener('pointerdown', function (e: MSPointerEvent) {
+            if (e.pointerType == "touch") {
                 WinJS.Utilities.removeClass(e.currentTarget, "touchShade");
                 nav.navigate("/pages/downloadsPage/downloadsPage.html");
             }
         });
 
-        downloadsTitle.addEventListener('MSPointerOut', KA.handleMSPointerOut);
+        downloadsTitle.addEventListener('pointerout', KA.handlePointerOut);
 
         var newsTitle = KA.id('newsTitle');
-        newsTitle.addEventListener('MSPointerDown', function (e: MSPointerEvent) {
-            if (e.pointerType == e.MSPOINTER_TYPE_MOUSE) {
+        newsTitle.addEventListener('pointerdown', function (e: MSPointerEvent) {
+            if (e.pointerType == "mouse") {
                 nav.navigate("/pages/newsPage/newsPage.html");
-            } else if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+            } else if (e.pointerType == "touch") {
                 WinJS.Utilities.addClass(e.currentTarget, "touchShade");
             }
         });
 
-        newsTitle.addEventListener('MSPointerUp', function (e: MSPointerEvent) {
-            if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
+        newsTitle.addEventListener('pointerdown', function (e: MSPointerEvent) {
+            if (e.pointerType == "touch") {
                 WinJS.Utilities.removeClass(e.currentTarget, "touchShade");
                 nav.navigate("/pages/newsPage/newsPage.html");
             }
         });
 
-        newsTitle.addEventListener('MSPointerOut', KA.handleMSPointerOut);
+        newsTitle.addEventListener('pointerout', KA.handlePointerOut);
     }
 
     function initListLayout(itemLv: HTMLElement) {

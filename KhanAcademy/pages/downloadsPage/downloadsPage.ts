@@ -75,9 +75,9 @@ module DownloadsPage {
 
         //appBar
         appBar = KA.id('appBar').winControl;
-        KA.id('cmdDelete').addEventListener('MSPointerDown', deleteSelectedVideos, false);
-        KA.id('cmdSelectAll').addEventListener('MSPointerDown', selectAllVideos, false);
-        KA.id('cmdClearSelection').addEventListener('MSPointerDown', clearVideoSelection, false);
+        KA.id('cmdDelete').addEventListener('pointerdown', deleteSelectedVideos, false);
+        KA.id('cmdSelectAll').addEventListener('pointerdown', selectAllVideos, false);
+        KA.id('cmdClearSelection').addEventListener('pointerdown', clearVideoSelection, false);
 
         appBar.disabled = true;
         appBar.hideCommands(appBar.element.querySelectorAll('.multiSelect'));
