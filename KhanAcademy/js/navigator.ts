@@ -23,7 +23,7 @@
             this._lastHeight = this._element.clientHeight;
 
             nav.onnavigated = this._navigated.bind(this);
-            element.onresize = this._resized.bind(this);
+            window.onresize = this._resized.bind(this);
 
             document.body.onkeyup = this._keyupHandler.bind(this);
             document.body.onkeypress = this._keypressHandler.bind(this);
