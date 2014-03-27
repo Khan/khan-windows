@@ -292,7 +292,7 @@
 
     #mainHubPanel .mainGrid {
         -ms-grid-columns: 50px 1fr 40px;
-        -ms-grid-rows: 100px 440px auto 600px;
+        -ms-grid-rows: 100px auto auto 600px;
     }
 
         #mainHubPanel .mainGrid #banner {
