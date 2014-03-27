@@ -353,8 +353,8 @@ module MainHub {
                 dPos = WinJS.Utilities.getPosition(dItem);
                 var menuLeft = Math.min(dPos.left + (i % 2 == 0 ? offsetLeft : offsetOddLeft),
                                         window.innerWidth - domainMenus[i].clientWidth);
-                var menuTop = Math.min(dPos.top + offsetTop,
-                                       window.innerHeight - domainMenus[i].clientHeight);
+                var menuTop = Math.max(0, Math.min(dPos.top + offsetTop,
+                                       window.innerHeight - domainMenus[i].clientHeight));
                 domainMenus[i].style.top = menuTop + 'px';
                 domainMenus[i].style.left = menuLeft + 'px';
             }

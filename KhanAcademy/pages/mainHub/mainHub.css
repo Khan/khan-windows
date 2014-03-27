@@ -85,6 +85,8 @@
     position: absolute;
     visibility: collapse;
     z-index: 101;
+    overflow: auto;
+    max-height: 100%;
 }
 
     .domainMenu div {
