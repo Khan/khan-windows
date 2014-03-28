@@ -60,10 +60,21 @@
             margin-left: 0;
             padding-left: 12px;
             padding-bottom: 10px;
+            -ms-grid-row: 1;
+            -ms-grid-row-span: 1;
+            -ms-grid-columns: auto 1fr;
         }
 
             #subjectPagePanel header p {
                 display: none;
+            }
+
+            #subjectPagePanel header button {
+                -ms-grid-column: 1;
+            }
+
+            #subjectPagePanel header h1 {
+                -ms-grid-column: 2;
             }
 
         #subjectPagePanel section[role=main] {

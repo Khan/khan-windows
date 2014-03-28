@@ -256,10 +256,6 @@ module MainHub {
     }
 
     function initControls() {
-        if (appView.value === appViewState.snapped) {
-            KA.id('logInBox').style.visibility = 'hidden';
-        }
-
         isConnected = KA.Data.getIsConnected();
         isDomainMenuOpen = false;
         isMenuInitialized = false;
@@ -357,8 +353,8 @@ module MainHub {
                 dPos = WinJS.Utilities.getPosition(dItem);
                 var menuLeft = Math.min(dPos.left + (i % 2 == 0 ? offsetLeft : offsetOddLeft),
                                         window.innerWidth - domainMenus[i].clientWidth);
-                var menuTop = Math.min(dPos.top + offsetTop,
-                                       window.innerHeight - domainMenus[i].clientHeight);
+                var menuTop = Math.max(0, Math.min(dPos.top + offsetTop,
+                                       window.innerHeight - domainMenus[i].clientHeight));
                 domainMenus[i].style.top = menuTop + 'px';
                 domainMenus[i].style.left = menuLeft + 'px';
             }
@@ -415,8 +411,6 @@ module MainHub {
     }
 
     function unload() {
-        KA.id('logInBox').style.visibility = 'visible';
-
         var dataTransferManager: any = Windows.ApplicationModel.DataTransfer.DataTransferManager.getForCurrentView();
         dataTransferManager.removeEventListener("datarequested", KA.generalSharingDataRequested);
 
@@ -428,11 +422,6 @@ module MainHub {
         if (!dimensionsChanged)
             return;
         repositionDomainMenus();
-        if (appView.value === appViewState.snapped) {
-            KA.id('logInBox').style.visibility = 'hidden';
-        } else {
-            KA.id('logInBox').style.visibility = 'visible';
-        }
     }
 
     KA.definePage("/pages/mainHub/mainHub.html", ready, unload, updateLayout);
