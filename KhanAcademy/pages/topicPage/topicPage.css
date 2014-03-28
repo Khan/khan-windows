@@ -86,7 +86,22 @@
             margin-left: 0;
             padding-left: 12px;
             padding-bottom: 10px;
+            -ms-grid-row: 1;
+            -ms-grid-row-span: 1;
+            -ms-grid-columns: auto 1fr;
         }
+
+            #topicPagePanel header p {
+                display: none;
+            }
+
+            #topicPagePanel header button {
+                -ms-grid-column: 1;
+            }
+
+            #topicPagePanel header h1 {
+                -ms-grid-column: 2;
+            }
 
             #topicPagePanel header p {
                 display: none;
