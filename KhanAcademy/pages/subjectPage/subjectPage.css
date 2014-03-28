@@ -56,32 +56,43 @@
         -ms-grid-columns: 1fr;
     }
 
-        #subjectPagePanel header {
-            margin-left: 0;
-            padding-left: 12px;
-            padding-bottom: 10px;
-        }
+    #subjectPagePanel header {
+        margin-left: 0;
+        padding-left: 12px;
+        padding-bottom: 10px;
+        -ms-grid-row: 1;
+        -ms-grid-row-span: 1;
+        -ms-grid-columns: auto 1fr;
+    }
 
-            #subjectPagePanel header p {
-                display: none;
-            }
+    #subjectPagePanel header p {
+        display: none;
+    }
 
-        #subjectPagePanel section[role=main] {
-            -ms-grid-row: 2;
-            -ms-grid-column: 1;
-        }
+    #subjectPagePanel header button {
+        -ms-grid-column: 1;
+    }
 
-        #subjectPagePanel .mainGrid {
-            -ms-grid-rows: 1fr;
-        }
+    #subjectPagePanel header h1 {
+        -ms-grid-column: 2;
+    }
 
-        #subjectPagePanel #childrenLv {
-            -ms-grid-row: 1;
-        }
+    #subjectPagePanel section[role=main] {
+        -ms-grid-row: 2;
+        -ms-grid-column: 1;
+    }
 
-            #subjectPagePanel #childrenLv .win-surface {
-                margin-left: 0;
-            }
+    #subjectPagePanel .mainGrid {
+        -ms-grid-rows: 1fr;
+    }
+
+    #subjectPagePanel #childrenLv {
+        -ms-grid-row: 1;
+    }
+
+    #subjectPagePanel #childrenLv .win-surface {
+        margin-left: 0;
+    }
 
     .topicItem {
         width: 280px;

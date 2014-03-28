@@ -82,32 +82,47 @@
         -ms-grid-columns: 1fr;
     }
 
-        #topicPagePanel header {
-            margin-left: 0;
-            padding-left: 12px;
-            padding-bottom: 10px;
-        }
+    #topicPagePanel header {
+        margin-left: 0;
+        padding-left: 12px;
+        padding-bottom: 10px;
+        -ms-grid-row: 1;
+        -ms-grid-row-span: 1;
+        -ms-grid-columns: auto 1fr;
+    }
 
-            #topicPagePanel header p {
-                display: none;
-            }
+    #topicPagePanel header p {
+        display: none;
+    }
 
-        #topicPagePanel section[role=main] {
-            -ms-grid-row: 2;
-            -ms-grid-column: 1;
-        }
+    #topicPagePanel header button {
+        -ms-grid-column: 1;
+    }
 
-        #topicPagePanel .mainGrid {
-            -ms-grid-rows: 1fr;
-        }
+    #topicPagePanel header h1 {
+        -ms-grid-column: 2;
+    }
 
-        #topicPagePanel #childrenLv {
-            -ms-grid-row: 1;
-        }
+    #topicPagePanel header p {
+        display: none;
+    }
 
-            #topicPagePanel #childrenLv .win-surface {
-                margin-left: 0;
-            }
+    #topicPagePanel section[role=main] {
+        -ms-grid-row: 2;
+        -ms-grid-column: 1;
+    }
+
+    #topicPagePanel .mainGrid {
+        -ms-grid-rows: 1fr;
+    }
+
+    #topicPagePanel #childrenLv {
+        -ms-grid-row: 1;
+    }
+
+    #topicPagePanel #childrenLv .win-surface {
+        margin-left: 0;
+    }
 
     .tutorialItem {
         width: 280px;
@@ -118,24 +133,24 @@
         -ms-grid-columns: 1fr;
     }
 
-        .tutorialItem .content {
-            margin: 12px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+    .tutorialItem .content {
+        margin: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
-        .tutorialItem .title {
-            margin: 0px 0 8px;
-            font-size: 12pt;
-        }
+    .tutorialItem .title {
+        margin: 0px 0 8px;
+        font-size: 12pt;
+    }
 
-        .tutorialItem .playlist {
-            -ms-grid-row: 2;
-            -ms-grid-column: 1;
-            -ms-grid-row-span: 1;
-            border-left: 0;
-            border-top: solid 1px #ccc;
-        }
+    .tutorialItem .playlist {
+        -ms-grid-row: 2;
+        -ms-grid-column: 1;
+        -ms-grid-row-span: 1;
+        border-left: 0;
+        border-top: solid 1px #ccc;
+    }
 }
 
 @media all and (-ms-view-state: fullscreen-portrait) {
@@ -144,27 +159,27 @@
         -ms-grid-columns: 1fr;
     }
 
-        #topicPagePanel header h1 {
-            margin-top: 60px;
-            padding-right: 30px;
-            font-size: 24pt;
-        }
+    #topicPagePanel header h1 {
+        margin-top: 60px;
+        padding-right: 30px;
+        font-size: 24pt;
+    }
 
-        #topicPagePanel header p {
-            display: none;
-        }
+    #topicPagePanel header p {
+        display: none;
+    }
 
-        #topicPagePanel section[role=main] {
-            -ms-grid-row: 2;
-            -ms-grid-column: 1;
-        }
+    #topicPagePanel section[role=main] {
+        -ms-grid-row: 2;
+        -ms-grid-column: 1;
+    }
 
-        #topicPagePanel .mainGrid {
-            display: -ms-grid;
-            -ms-grid-rows: 20px 1fr;
-        }
+    #topicPagePanel .mainGrid {
+        display: -ms-grid;
+        -ms-grid-rows: 20px 1fr;
+    }
 
-        #topicPagePanel #childrenLv .win-surface {
-            margin-left: 100px;
-        }
+    #topicPagePanel #childrenLv .win-surface {
+        margin-left: 100px;
+    }
 }
