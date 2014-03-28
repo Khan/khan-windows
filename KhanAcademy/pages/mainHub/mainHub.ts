@@ -411,8 +411,6 @@ module MainHub {
     }
 
     function unload() {
-        KA.id('logInBox').style.visibility = 'visible';
-
         var dataTransferManager: any = Windows.ApplicationModel.DataTransfer.DataTransferManager.getForCurrentView();
         dataTransferManager.removeEventListener("datarequested", KA.generalSharingDataRequested);
 
@@ -424,11 +422,6 @@ module MainHub {
         if (!dimensionsChanged)
             return;
         repositionDomainMenus();
-        if (appView.value === appViewState.snapped) {
-            KA.id('logInBox').style.visibility = 'hidden';
-        } else {
-            KA.id('logInBox').style.visibility = 'visible';
-        }
     }
 
     KA.definePage("/pages/mainHub/mainHub.html", ready, unload, updateLayout);
