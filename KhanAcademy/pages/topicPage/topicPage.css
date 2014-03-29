@@ -159,15 +159,30 @@
         -ms-grid-columns: 1fr;
     }
 
-        #topicPagePanel header h1 {
-            margin-top: 60px;
-            padding-right: 30px;
-            font-size: 24pt;
+        #topicPagePanel header {
+            margin-left: 0;
+            padding-left: 12px;
+            padding-bottom: 10px;
+            -ms-grid-row: 1;
+            -ms-grid-row-span: 1;
+            -ms-grid-columns: auto 1fr;
         }
 
-        #topicPagePanel header p {
-            display: none;
-        }
+            #topicPagePanel header h1 {
+                margin-top: 60px;
+                padding-right: 30px;
+                font-size: 24pt;
+                -ms-grid-column: 2;
+            }
+
+            #topicPagePanel header button {
+                -ms-grid-column: 1;
+                margin-right: 20px;
+            }
+
+            #topicPagePanel header p {
+                display: none;
+            }
 
         #topicPagePanel section[role=main] {
             -ms-grid-row: 2;
