@@ -19,7 +19,7 @@
         <Extension Category="windows.search" />
       </Extensions>
       <m2:VisualElements DisplayName="Khan Academy" Description="Khan Academy is a fluid, feature rich and well-designed app which enables you to learn on the go. It has thousands of videos from Khan Academy for topics including math, science, history, finance, civics and many more." BackgroundColor="#242c37" ForegroundText="light" Square150x150Logo="images\logo.png" Square30x30Logo="images\smalllogo.png">
-        <m2:DefaultTile ShortName="Khan Academy" Wide310x150Logo="images\widelogo.png">
+        <m2:DefaultTile ShortName="Khan Academy" Wide310x150Logo="images\widelogo.png" Square310x310Logo="images\Square310x310Logo.png" DefaultSize="square150x150Logo">
         </m2:DefaultTile>
         <m2:SplashScreen BackgroundColor="#242c37" Image="images\splashscreen.png" />
         <m2:ApplicationView MinWidth="width320" />
