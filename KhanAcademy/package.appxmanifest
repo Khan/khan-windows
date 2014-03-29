@@ -24,6 +24,10 @@
         <m2:SplashScreen BackgroundColor="#242c37" Image="images\splashscreen.png" />
         <m2:ApplicationView MinWidth="width320" />
       </m2:VisualElements>
+      <ApplicationContentUriRules>
+        <Rule Match="https://www.khanacademy.org/about/tos?view=mobile" Type="include" />
+        <Rule Match="https://www.khanacademy.org/about/privacy-policy?view=mobile" Type="include" />
+      </ApplicationContentUriRules>
     </Application>
   </Applications>
   <Capabilities>
