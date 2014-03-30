@@ -43,12 +43,15 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
-            border-top: solid 1px #ccc;
             color: #297395;
             background-image: url('/images/playlistItem-mid.png');
             background-repeat: no-repeat;
             background-position-x: -10px;
         }
+
+            .tutorialItem .playlist div.watched {
+                background-image: url('/images/playlistItem-mid-watched.png');
+            }
 
         .tutorialItem .playlist .pItem:first-child {
             border-top: none;
@@ -56,21 +59,37 @@
             background-position: -11px 4px;
         }
 
+        .tutorialItem .playlist .pItem.watched:first-child {
+            background-image: url('/images/playlistItem-top-watched.png');
+        }
+
         .tutorialItem .playlist .pEndItem {
             background-image: url('/images/playlistItem-bot.png');
             background-position: -11px -2px;
         }
+
+            .tutorialItem .playlist .pEndItem.watched {
+                background-image: url('/images/playlistItem-bot-watched.png');
+            }
 
         .tutorialItem .playlist .pSoloItem {
             background-image: url('/images/playlistItem-solo.png');
             background-position: -11px -2px;
         }
 
+            .tutorialItem .playlist .pSoloItem.watched {
+                background-image: url('/images/playlistItem-solo-watched.png');
+            }
+
         .tutorialItem .playlist .mItem {
             color: #999;
             background-image: url('/images/playlistItem-more.png');
             background-position: -11px -6px;
         }
+
+            .tutorialItem .playlist .mItem.watched {
+                background-image: url('/images/playlistItem-more-watched.png');
+            }
 
         .tutorialItem .playlist .pItem:hover, .tutorialItem .playlist .pEndItem:hover, .tutorialItem .playlist .pSoloItem:hover {
             background-color: #e3f5fd;

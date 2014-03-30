@@ -1,6 +1,6 @@
 ﻿#videoPagePanel header[role=banner] .titlearea {
     margin-top: 30px;
-	width: calc(100% - 300px);
+    width: calc(100% - 300px);
 }
 
     #videoPagePanel header[role=banner] .titlearea .pagetitle {
@@ -50,7 +50,7 @@
     background-repeat: no-repeat;
     background-position-y: 2px;
     padding-left: 23px;
-	margin-right: 12px;
+    margin-right: 12px;
     height: 40px;
     cursor: pointer;
 }
@@ -136,7 +136,6 @@
     #tutList .tutItem {
         padding: 10px 10px 10px 39px;
         background-color: white;
-        border: solid 1px #ccc;
         border-bottom-width: 0;
         color: #297395;
         background-image: url('/images/playlistItem-mid.png');
@@ -144,6 +143,10 @@
         background-position-x: -10px;
         width: 309px;
     }
+
+        #tutList .tutItem.watched {
+            background-image: url('/images/playlistItem-mid-watched.png');
+        }
 
         #tutList .tutItem:hover {
             background-color: #e3f5fd;
@@ -159,10 +162,18 @@
         background-position: -11px 4px;
     }
 
+    #tutList .tutItem.watched:first-child {
+        background-image: url('/images/playlistItem-top-watched.png');
+    }
+
     #tutList .tutItem:last-child {
         background-image: url('/images/playlistItem-bot.png');
         background-position: -11px -2px;
         border-bottom-width: 1px;
+    }
+
+    #tutList .tutItem.watched:last-child {
+        background-image: url('/images/playlistItem-bot-watched.png');
     }
 
 #noTranscriptDiv {

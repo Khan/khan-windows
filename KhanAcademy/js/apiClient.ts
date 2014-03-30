@@ -46,6 +46,26 @@
             });
         }
 
+        // Submits request for user videos and returns a Promise
+        static getUserVideosAsync() {
+            return new WinJS.Promise(function (complete, error) {
+                var url = service.getUrlWithAuthParams(Constants.URL_USER_VIDEOS, Constants.HTTP_METHOD_GET, User.AuthToken);
+                service.sendRequest(url)
+                    .done(function (request) {
+                        if (request && request.status === 200) {
+                            var userVideos = JSON.parse(request.responseText);
+                            //send new data to completion for processing
+                            complete({ userVideos: userVideos });
+                        } else {
+                            //nothing to update, call completion with null value
+                            complete();
+                        }
+                    }, function (err) {
+                        service.handleError(err, error)
+                    });
+            });
+        }
+
         // Fetches access token for given oauth request token and verifier and returns a Promise
         static getAccessTokenAsync(token: KA.AuthToken, verifier: string) {
             return new WinJS.Promise(function (complete, error) {
