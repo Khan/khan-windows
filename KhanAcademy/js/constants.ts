@@ -10,6 +10,7 @@
     export var URL_TOPIC_TREE = URL_API_BASE + "v1/topictree";
     export var URL_USER = URL_API_BASE + "v1/user";
     export var URL_USER_VIDEOS = URL_API_BASE + "v1/user/videos";
+    export var URL_USER_VIDEO_LOG = URL_API_BASE + "v1/user/videos/<youtubeid>/log";
     export var URL_REGISTRATION = URL_BASE + "signup";
 
     export var HTTP_METHOD_GET = "GET";
