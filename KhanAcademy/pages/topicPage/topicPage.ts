@@ -121,6 +121,10 @@ module TopicPage {
                         }
                         pItem.innerText = video.title;
 
+                        if (KA.User.isVideoWatched(video.id)) {
+                            WinJS.Utilities.addClass(pItem, 'watched');
+                        }
+
                         if (i > 0) {
                             pItem.attributes['data-id'] = video.id;
                             pItem.addEventListener('MSPointerDown', function (e) {
@@ -149,6 +153,13 @@ module TopicPage {
                 if (maxVideoLinks < currentItem.data.children.length) {
                     pItem = document.createElement("div");
                     pItem.className = 'mItem';
+                    // If each of the remaining items are watched, add the watched class
+                    var allWatched = currentItem.data.children.reduce(function (prevValue, child) {
+                        return prevValue && KA.User.isVideoWatched(child.id);
+                    }, true);
+                    if (allWatched) {
+                        WinJS.Utilities.addClass(pItem, 'watched');
+                    }
                     pItem.innerText = currentItem.data.children.length + ' total videos';
                     playlistDiv.appendChild(pItem);
                 }

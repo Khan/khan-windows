@@ -17,6 +17,13 @@
         currentTime: number;
     }
 
+    // It would be better to separate out the per user info so we don't need to store the user ID.
+    // But for consistency with ResumeInfo I'm storing the userId inside for now.
+    export interface WatchedInfo {
+        userId: string;
+        videoId: string;
+    }
+
     export interface UserInfo {
         id: string;
         nickName: string;

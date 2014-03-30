@@ -9,6 +9,7 @@
         userInfo: KA.UserInfo;
         authToken: KA.AuthToken = null;
         playbackList: KA.ResumeInfo[] = null;
+        watchedList: KA.WatchedInfo[] = null;
 
         fetchUserInfo() {
             return new WinJS.Promise(function (complete, error) {
@@ -22,9 +23,30 @@
             });
         }
 
+        fetchUserVideos() {
+            return new WinJS.Promise(function (complete, error) {
+                ApiClient.getUserVideosAsync().done(function (result) {
+                    service.watchedList = [];
+                    if (result && result.userVideos) {
+                        result.userVideos.forEach(function (v) {
+                            if (v.completed && service.userInfo) {
+                                service.watchedList.push({ userId: service.userInfo.id, videoId: v.video.id });
+                            }
+                        });
+                    }
+                    service.save();
+                    WinJS.Application.queueEvent({ type: "userVideosFetched", watchedList: service.watchedList });
+                    complete();
+                }, function (err) {
+                    WinJS.Application.queueEvent({ type: "userVideosFetched", watchedList: service.watchedList});
+                    });
+            });
+        }
+
         refreshUserInfo() {
             WinJS.Application.queueEvent({ type: "userInfoRequested", userInfo: service.userInfo });
             this.fetchUserInfo();
+            this.fetchUserVideos();
         }
 
         static init() {
@@ -45,6 +67,9 @@
                                 }
                                 if (service.authToken) {
                                     service.refreshUserInfo();
+                                }
+                                if (savedData.watchedList) {
+                                    service.watchedList = savedData.watchedList;
                                 }
                             }
                             complete()
@@ -74,6 +99,10 @@
 
         static isVideoPlaybackTracked(videoId) {
             return service.isVideoPlaybackTracked(videoId);
+        }
+
+        static isVideoWatched(videoId) {
+            return service.isVideoWatched(videoId);
         }
 
         static Refresh() {
@@ -107,6 +136,17 @@
             }
         }
 
+        isVideoWatched(videoId) {
+            if (!this.userInfo || !this.userInfo.id || !this.watchedList)
+                return false;
+
+            var found = service.watchedList.reduce(function (prevFound, watchedVideo) {
+                return prevFound || watchedVideo.videoId == videoId &&
+                    watchedVideo.userId == service.userInfo.id;
+            }, false);
+            return found;
+        }
+
         logIn() {
             var requestparams = {
                 consumerKey: ApiClient.OAuthKeys.key,
@@ -136,6 +176,7 @@
                             service.authToken = token;
                             service.save();
                             service.fetchUserInfo();
+                            service.fetchUserVideos();
                         });
                     } else {
                         //login error or cancelled
@@ -157,7 +198,7 @@
         save() {
             return new WinJS.Promise(function (c, e) {
                 //save data
-                var content = JSON.stringify({ authToken: service.authToken, playbackList: service.playbackList });
+                var content = JSON.stringify({ authToken: service.authToken, playbackList: service.playbackList, watchedList: service.watchedList });
                 var roaming: any = WinJS.Application.roaming;
                 roaming.writeText(savedDateFileName, content).done(c, e);
             });

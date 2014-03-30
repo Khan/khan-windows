@@ -67,6 +67,11 @@
     <Content Include="images\header-logo.svg" />
     <Content Include="images\leaf-green.png" />
     <Content Include="images\nodownloads.png" />
+    <Content Include="images\playlistItem-bot-watched.png" />
+    <Content Include="images\playlistItem-mid-watched.png" />
+    <Content Include="images\playlistItem-more-watched.png" />
+    <Content Include="images\playlistItem-solo-watched.png" />
+    <Content Include="images\playlistItem-top-watched.png" />
     <Content Include="images\x54390c7e.png" />
     <Content Include="images\x905db83d.png" />
     <Content Include="images\ico_camera.png" />
