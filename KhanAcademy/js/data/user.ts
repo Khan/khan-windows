@@ -101,6 +101,10 @@
             return service.isVideoPlaybackTracked(videoId);
         }
 
+        static isLoggedIn(): boolean {
+            return service.isLoggedIn();
+        }
+
         static isVideoWatched(videoId) {
             return service.isVideoWatched(videoId);
         }
@@ -137,7 +141,7 @@
         }
 
         isVideoWatched(videoId) {
-            if (!this.userInfo || !this.userInfo.id || !this.watchedList)
+            if (!this.isLoggedIn() || !this.watchedList)
                 return false;
 
             var found = service.watchedList.reduce(function (prevFound, watchedVideo) {
@@ -145,6 +149,10 @@
                     watchedVideo.userId == service.userInfo.id;
             }, false);
             return found;
+        }
+
+        isLoggedIn() : boolean {
+            return !!this.userInfo && !!this.userInfo.id;
         }
 
         logIn() {

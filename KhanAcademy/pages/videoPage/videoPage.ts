@@ -8,6 +8,25 @@ module VideoPage {
 
     var video = null, parent = null;
 
+    // Keeps track of the second that was watched last for the user of the video
+    // i.e. the last position of the video time.
+    var lastSecondWatched: number;
+
+    // Keeps track of the number of seconds that were watched since the last update.
+    var secondsWatched: number;
+
+    // Keeps track of the last time we logged a watched video update to the KA server.
+    var lastReportedTime: Date;
+
+    // Used to make sure updates to the server don't happen too often spamming the server.
+    var MIN_SECONDS_BETWEEN_REPORTS = 15;
+
+    // Keeps track of the start time of a consecutive span of seconds the user has
+    // been watching the video.  This is reset to NOW when the video is played.
+    // The difference betwen NOW and lastWatchedTimeSinceLastUpdate is flushed into
+    // secondsWatched on reports to the server and when the video is paused.
+    var lastWatchedTimeSinceLastUpdate: Date;
+
     function dataRequested(e) {
         var request = e.request;
         if (video) {
@@ -58,12 +77,42 @@ module VideoPage {
         }
     }
 
+    // Updates the secondsWatched variable with the difference between the current
+    // time and the time stamp stored in lastWatchedTimeSinceLastUpdate.
+    function updateSecondsWatched() {
+        var currentTime = new Date();
+        secondsWatched += (currentTime.getTime() - lastWatchedTimeSinceLastUpdate.getTime()) / 1000;
+        lastWatchedTimeSinceLastUpdate = currentTime;
+    }
+
+    // Reports the seconds watched to the server if it hasn't been reported recently
+    // or if the lastSecondWatched is at the end of the video.
+    function reportSecondsWatched() {
+        if (!KA.User.isLoggedIn())
+            return;
+
+        // Report watched time to the server
+        lastSecondWatched = Math.round(vidPlayer.currentTime);
+        updateSecondsWatched();
+        var currentTime = new Date();
+        var secondsSinceLastReport = (currentTime.getTime() - lastReportedTime.getTime()) / 1000;
+        if (secondsSinceLastReport >= MIN_SECONDS_BETWEEN_REPORTS || lastSecondWatched >= (vidPlayer.duration | 0)) {
+            lastReportedTime = new Date();
+            KA.ApiClient.reportVideoProgressAsync(video.youTubeId, secondsWatched, lastSecondWatched);
+            secondsWatched = 0;
+        }
+    }
+
     function initControls() {
         // function called on page load, video playlist clicks
         // just call the renderControls function to refresh the data
 
         isConnected = KA.Data.getIsConnected();
         firstRun = true;
+        lastSecondWatched = 0;
+        secondsWatched = 0;
+        lastReportedTime = new Date();
+        lastWatchedTimeSinceLastUpdate = new Date();
 
         //init control variables
         shadeDiv = KA.id('shadeDiv');
@@ -80,6 +129,9 @@ module VideoPage {
         //video player
         vidPlayer = KA.id('vidPlayer');
         vidPlayer.addEventListener('play', function (e) {
+            // Update lastWatchedTimeSinceLastUpdate so that we
+            // don't count paused time towards secondsWatched
+            lastWatchedTimeSinceLastUpdate = new Date();
             isPlaying = true;
         });
 
@@ -89,6 +141,7 @@ module VideoPage {
         });
 
         vidPlayer.addEventListener('pause', function (e) {
+            updateSecondsWatched();
             KA.User.trackPlayback(video.id, vidPlayer.currentTime);
             isPlaying = false;
         });
@@ -99,9 +152,14 @@ module VideoPage {
             }
         });
         vidPlayer.addEventListener('timeupdate', function (e) {
+            // Sometimes a 'timeupdate' event will come before a 'play' event when
+            // resuming a paused video.  We need to get the play event before reporting
+            // seconds watched to properly update the secondsWatched though.
+            if (isPlaying) {
+                reportSecondsWatched();
+            }
             if (script) {
                 var newTime = vidPlayer.currentTime * 1000;
-
                 if (newTime > nextScriptEndTime) {
                     //advance selected index
                     selectedScriptIndex++;
@@ -135,6 +193,9 @@ module VideoPage {
                     }
                 }
             }
+        });
+        vidPlayer.addEventListener('ended', function (e) {
+            reportSecondsWatched();
         });
 
         document.addEventListener("visibilitychange", handleVisibilityChange, true);

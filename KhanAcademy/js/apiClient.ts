@@ -66,6 +66,43 @@
             });
         }
 
+        // Reports video progress for the specified youtube ID
+        // yotubeID: The ID of the youtube video
+        // secondsWatched: The incremental number of seconds that have passed where the user is watching the video
+        //   since the last report.
+        // lastSecondWatched: The last location in seconds of the video position
+        static reportVideoProgressAsync(youtubeID: string, secondsWatched: number, lastSecondWatched: number) {
+            return new WinJS.Promise(function (complete, error) {
+                var extraParams = {
+                    queryParams: {
+                        seconds_watched: secondsWatched.toString(),
+                        last_second_watched: lastSecondWatched.toString()
+                    }
+                };
+
+                var url = service.getUrlWithAuthParams(Constants.URL_USER_VIDEO_LOG.replace("<youtubeid>", youtubeID),
+                    Constants.HTTP_METHOD_POST, User.AuthToken, extraParams);
+                service.sendRequest(url, Constants.HTTP_METHOD_POST, service.getFormData(extraParams))
+                    .done(function (request) {
+                        if (request && request.status === 200) {
+                            var info = JSON.parse(request.responseText);
+                            //send new data to completion for processing
+                            complete({
+                                completed: info.is_video_completed,
+                                lastSecondWatched: info.last_second_watched,
+                                pointsEarned: info.points_earned,
+                                youtubeID: info.youtube_id
+                            });
+                        } else {
+                            //nothing to update, call completion with null value
+                            complete();
+                        }
+                    }, function (err) {
+                        service.handleError(err, error)
+                    });
+            });
+        }
+
         // Fetches access token for given oauth request token and verifier and returns a Promise
         static getAccessTokenAsync(token: KA.AuthToken, verifier: string) {
             return new WinJS.Promise(function (complete, error) {
@@ -135,6 +172,14 @@
                 url: url,
                 data: data
             });
+        }
+
+        getFormData(values) : FormData {
+            var formData = new FormData();
+            for (var prop in values) {
+                formData.append(prop, values[prop]);
+            }
+            return formData;
         }
 
         // Returns  API url with OAuth parameters appended in the query string

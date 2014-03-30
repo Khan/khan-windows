@@ -26,6 +26,10 @@ module KA {
                         sigParams[queryParamsKey] = requestParams.queryParams[queryParamsKey];
                     }
                 }
+                // Sig expects queryParams: [object Object] (doubly URI encoded)
+                // I think it's an API bug to both doubly encode it and to include queyrParams=[object Object] at all.
+                // But we must do what the server expects.
+                sigParams['queryParams'] = encodeURIComponent(requestParams.queryParams);
             }
 
             // Compute base signature string and sign it.
