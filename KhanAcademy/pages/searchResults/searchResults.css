@@ -5,8 +5,8 @@
 
 #searchResultsPanel #resultsCount {
     color: #666;
-    font-weight:normal;
-    font-size:20pt;
+    font-weight: normal;
+    font-size: 20pt;
 }
 
 #searchResultsPanel #resultsGrid {
@@ -17,49 +17,61 @@
 }
 
 #searchResultsPanel #filterList {
-    margin-left:120px;
+    margin-left: 120px;
 }
 
 #searchResultsPanel #resultsLv {
-    height:100%;
+    height: 100%;
     -ms-grid-row: 2;
 }
 
-#searchResultsPanel #resultsLv .win-container:not(.win-footprint) {
-    background-color: transparent;
-}
+    #searchResultsPanel #resultsLv .win-container:not(.win-footprint) {
+        background-color: transparent;
+    }
 
-#searchResultsPanel #resultsLv .win-surface {
-    margin-left:115px;
-    margin-right:60px;
-    margin-bottom:50px;
-}
+    #searchResultsPanel #resultsLv .win-surface {
+        margin-left: 115px;
+        margin-right: 60px;
+        margin-bottom: 50px;
+    }
 
 #searchResultsPanel #noResults {
-    display:none;
-    -ms-grid-row:2;
-    margin-left:120px;
+    display: none;
+    -ms-grid-row: 2;
+    margin-left: 120px;
 }
 
 @media screen and (-ms-view-state: snapped) {
     #searchResultsPanel header {
-        margin-left:0;
-        padding-left:12px;
+        margin-left: 0;
+        padding-left: 12px;
+        -ms-grid-row: 1;
+        -ms-grid-row-span: 1;
+        -ms-grid-columns: auto 1fr;
     }
 
-    #searchResultsPanel  header[role=banner] .titlearea {
+    #topicPagePanel header p {
+        display: none;
+    }
+
+    #searchResultsPanel header[role=banner] .titlearea {
         margin-top: 40px;
-        overflow:auto;
-        text-overflow:clip;
-        white-space:normal;
+        overflow: auto;
+        text-overflow: clip;
+        white-space: normal;
+    }
+
+    #searchResultsPanel header button {
+        -ms-grid-column: 1;
     }
 
     #searchResultsPanel h1 {
-        margin-top:40px;
+        margin-top: 40px;
+        -ms-grid-column: 2;
     }
 
     #searchResultsPanel #resultsCount {
-        font-size:16pt;
+        font-size: 16pt;
         display: block;
     }
 
@@ -68,37 +80,39 @@
     }
 
     #searchResultsPanel #filterList {
-        margin-left:20px;
+        margin-left: 20px;
     }
+
     #searchResultsPanel #resultsLv .win-surface {
-        margin-left:0;
-        margin-bottom:0;
+        margin-left: 0;
+        margin-bottom: 0;
     }
 
     #searchResultsPanel #noResults {
-        margin-left:20px;
+        margin-left: 20px;
     }
 }
 
 @media all and (-ms-view-state: fullscreen-portrait) {
     #searchResultsPanel header h1 {
-        margin-top:60px;
-        padding-right:30px;
-        font-size:24pt;
+        margin-top: 60px;
+        padding-right: 30px;
+        font-size: 24pt;
     }
+
     #searchResultsPanel #resultsCount {
-        font-size:14pt;
+        font-size: 14pt;
     }
 
     #searchResultsPanel #filterList {
-        margin-left:100px;
+        margin-left: 100px;
     }
 
     #searchResultsPanel #resultsLv .win-surface {
-        margin-left:100px;
+        margin-left: 100px;
     }
 
     #searchResultsPanel #noResults {
-        margin-left:100px;
+        margin-left: 100px;
     }
 }

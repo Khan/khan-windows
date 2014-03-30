@@ -388,6 +388,10 @@ module VideoPage {
             }
             tutItem.innerHTML = parent.children[i].title;
 
+            if (KA.User.isVideoWatched(parent.children[i].id)) {
+                WinJS.Utilities.addClass(tutItem, 'watched');
+            }
+
             tutItem.addEventListener('pointerdown', function (e) {
                 if (e.pointerType == "mouse") {
                     if (curIndex != e.currentTarget.attributes['data-index']) {
