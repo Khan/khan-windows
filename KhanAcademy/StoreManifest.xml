@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<StoreManifest
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="StoreManifest.xsd"
+  xmlns="http://schemas.microsoft.com/appx/2010/StoreManifest">
+
+  <ProductFeatures>
+    <ExclusiveOptOut>true</ExclusiveOptOut>
+    <PreinstallOptOut>false</PreinstallOptOut>
+  </ProductFeatures>
+
+</StoreManifest>
