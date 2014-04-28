@@ -1,3 +1,8 @@
+// Type definitions for WinRT
+// Project: http://msdn.microsoft.com/en-us/library/windows/apps/br211377.aspx
+// Definitions by: TypeScript samples <https://www.typescriptlang.org/>
+// Definitions: https://github.com/borisyankov/DefinitelyTyped
+
 /* *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved. 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
@@ -75,8 +80,8 @@ declare module Windows {
                 every(callbackfn: (value: T, index: number, array: T[]) => boolean, thisArg: any): boolean;
                 some(callbackfn: (value: T, index: number, array: T[]) => boolean): boolean;
                 some(callbackfn: (value: T, index: number, array: T[]) => boolean, thisArg: any): boolean;
-                forEach(callbackfn: (value: T, index: number, array: T[]) => void): void;
-                forEach(callbackfn: (value: T, index: number, array: T[]) => void, thisArg: any): void;
+                forEach(callbackfn: (value: T, index: number, array: T[]) => void ): void;
+                forEach(callbackfn: (value: T, index: number, array: T[]) => void , thisArg: any): void;
                 map(callbackfn: (value: T, index: number, array: T[]) => any): any[];
                 map(callbackfn: (value: T, index: number, array: T[]) => any, thisArg: any): any[];
                 filter(callbackfn: (value: T, index: number, array: T[]) => boolean): T[];
@@ -122,8 +127,8 @@ declare module Windows {
                 every(callbackfn: (value: T, index: number, array: T[]) => boolean, thisArg: any): boolean;
                 some(callbackfn: (value: T, index: number, array: T[]) => boolean): boolean;
                 some(callbackfn: (value: T, index: number, array: T[]) => boolean, thisArg: any): boolean;
-                forEach(callbackfn: (value: T, index: number, array: T[]) => void): void;
-                forEach(callbackfn: (value: T, index: number, array: T[]) => void, thisArg: any): void;
+                forEach(callbackfn: (value: T, index: number, array: T[]) => void ): void;
+                forEach(callbackfn: (value: T, index: number, array: T[]) => void , thisArg: any): void;
                 map(callbackfn: (value: T, index: number, array: T[]) => any): any[];
                 map(callbackfn: (value: T, index: number, array: T[]) => any, thisArg: any): any[];
                 filter(callbackfn: (value: T, index: number, array: T[]) => boolean): T[];
@@ -222,8 +227,8 @@ declare module Windows {
             every(callbackfn: (value: Windows.Foundation.IWwwFormUrlDecoderEntry, index: number, array: Windows.Foundation.IWwwFormUrlDecoderEntry[]) => boolean, thisArg: any): boolean;
             some(callbackfn: (value: Windows.Foundation.IWwwFormUrlDecoderEntry, index: number, array: Windows.Foundation.IWwwFormUrlDecoderEntry[]) => boolean): boolean;
             some(callbackfn: (value: Windows.Foundation.IWwwFormUrlDecoderEntry, index: number, array: Windows.Foundation.IWwwFormUrlDecoderEntry[]) => boolean, thisArg: any): boolean;
-            forEach(callbackfn: (value: Windows.Foundation.IWwwFormUrlDecoderEntry, index: number, array: Windows.Foundation.IWwwFormUrlDecoderEntry[]) => void): void;
-            forEach(callbackfn: (value: Windows.Foundation.IWwwFormUrlDecoderEntry, index: number, array: Windows.Foundation.IWwwFormUrlDecoderEntry[]) => void, thisArg: any): void;
+            forEach(callbackfn: (value: Windows.Foundation.IWwwFormUrlDecoderEntry, index: number, array: Windows.Foundation.IWwwFormUrlDecoderEntry[]) => void ): void;
+            forEach(callbackfn: (value: Windows.Foundation.IWwwFormUrlDecoderEntry, index: number, array: Windows.Foundation.IWwwFormUrlDecoderEntry[]) => void , thisArg: any): void;
             map(callbackfn: (value: Windows.Foundation.IWwwFormUrlDecoderEntry, index: number, array: Windows.Foundation.IWwwFormUrlDecoderEntry[]) => any): any[];
             map(callbackfn: (value: Windows.Foundation.IWwwFormUrlDecoderEntry, index: number, array: Windows.Foundation.IWwwFormUrlDecoderEntry[]) => any, thisArg: any): any[];
             filter(callbackfn: (value: Windows.Foundation.IWwwFormUrlDecoderEntry, index: number, array: Windows.Foundation.IWwwFormUrlDecoderEntry[]) => boolean): Windows.Foundation.IWwwFormUrlDecoderEntry[];
@@ -496,6 +501,14 @@ declare module Windows {
             close(): void;
         }
         export interface IAsyncAction extends Windows.Foundation.IAsyncInfo {
+            then<U>(success?: () => IPromise<U>, error?: (error: any) => IPromise<U>, progress?: (progress: any) => void): IPromise<U>;
+            then<U>(success?: () => IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void): IPromise<U>;
+            then<U>(success?: () => U, error?: (error: any) => IPromise<U>, progress?: (progress: any) => void): IPromise<U>;
+            then<U>(success?: () => U, error?: (error: any) => U, progress?: (progress: any) => void): IPromise<U>;
+            done? <U>(success?: () => any, error?: (error: any) => any, progress?: (progress: any) => void): void;
+
+            cancel(): void;
+
             completed: Windows.Foundation.AsyncActionCompletedHandler;
             getResults(): void;
         }
@@ -521,7 +534,7 @@ declare module Windows {
         export interface AsyncActionWithProgressCompletedHandler<TProgress> {
             (asyncInfo: Windows.Foundation.IAsyncActionWithProgress<TProgress>, asyncStatus: Windows.Foundation.AsyncStatus): void;
         }
-        export interface IAsyncActionWithProgress<TProgress> extends Windows.Foundation.IAsyncInfo {
+        export interface IAsyncActionWithProgress<TProgress> extends Windows.Foundation.IAsyncInfo, Windows.Foundation.IPromise<void> {
             progress: Windows.Foundation.AsyncActionProgressHandler<TProgress>;
             completed: Windows.Foundation.AsyncActionWithProgressCompletedHandler<TProgress>;
             getResults(): void;
@@ -1760,16 +1773,31 @@ declare module Windows {
         }
         export interface IPackage {
             dependencies: Windows.Foundation.Collections.IVectorView<Windows.ApplicationModel.Package>;
+			description: string;
+			displayName: string;
             id: Windows.ApplicationModel.PackageId;
             installedLocation: Windows.Storage.StorageFolder;
+			isBundle: boolean;
+			isDevelopmentMode: boolean;
             isFramework: boolean;
+			isResourcePackage: boolean;
+			logo: Windows.Foundation.Uri;
+			publisherDisplayName: string;
         }
         export class Package implements Windows.ApplicationModel.IPackage {
+			static current: Windows.ApplicationModel.Package;
+
             dependencies: Windows.Foundation.Collections.IVectorView<Windows.ApplicationModel.Package>;
+			description: string;
+			displayName: string;
             id: Windows.ApplicationModel.PackageId;
             installedLocation: Windows.Storage.StorageFolder;
+			isBundle: boolean;
+			isDevelopmentMode: boolean;
             isFramework: boolean;
-            static current: Windows.ApplicationModel.Package;
+			isResourcePackage: boolean;
+			logo: Windows.Foundation.Uri;
+			publisherDisplayName: string;
         }
         export interface IPackageStatics {
             current: Windows.ApplicationModel.Package;
@@ -1976,8 +2004,8 @@ declare module Windows {
                     every(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceQualifier, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceQualifier[]) => boolean, thisArg: any): boolean;
                     some(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceQualifier, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceQualifier[]) => boolean): boolean;
                     some(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceQualifier, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceQualifier[]) => boolean, thisArg: any): boolean;
-                    forEach(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceQualifier, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceQualifier[]) => void): void;
-                    forEach(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceQualifier, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceQualifier[]) => void, thisArg: any): void;
+                    forEach(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceQualifier, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceQualifier[]) => void ): void;
+                    forEach(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceQualifier, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceQualifier[]) => void , thisArg: any): void;
                     map(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceQualifier, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceQualifier[]) => any): any[];
                     map(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceQualifier, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceQualifier[]) => any, thisArg: any): any[];
                     filter(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceQualifier, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceQualifier[]) => boolean): Windows.ApplicationModel.Resources.Core.ResourceQualifier[];
@@ -2015,8 +2043,8 @@ declare module Windows {
                     every(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceCandidate, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceCandidate[]) => boolean, thisArg: any): boolean;
                     some(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceCandidate, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceCandidate[]) => boolean): boolean;
                     some(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceCandidate, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceCandidate[]) => boolean, thisArg: any): boolean;
-                    forEach(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceCandidate, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceCandidate[]) => void): void;
-                    forEach(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceCandidate, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceCandidate[]) => void, thisArg: any): void;
+                    forEach(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceCandidate, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceCandidate[]) => void ): void;
+                    forEach(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceCandidate, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceCandidate[]) => void , thisArg: any): void;
                     map(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceCandidate, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceCandidate[]) => any): any[];
                     map(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceCandidate, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceCandidate[]) => any, thisArg: any): any[];
                     filter(callbackfn: (value: Windows.ApplicationModel.Resources.Core.ResourceCandidate, index: number, array: Windows.ApplicationModel.Resources.Core.ResourceCandidate[]) => boolean): Windows.ApplicationModel.Resources.Core.ResourceCandidate[];
@@ -2054,8 +2082,8 @@ declare module Windows {
                     every(callbackfn: (value: string, index: number, array: string[]) => boolean, thisArg: any): boolean;
                     some(callbackfn: (value: string, index: number, array: string[]) => boolean): boolean;
                     some(callbackfn: (value: string, index: number, array: string[]) => boolean, thisArg: any): boolean;
-                    forEach(callbackfn: (value: string, index: number, array: string[]) => void): void;
-                    forEach(callbackfn: (value: string, index: number, array: string[]) => void, thisArg: any): void;
+                    forEach(callbackfn: (value: string, index: number, array: string[]) => void ): void;
+                    forEach(callbackfn: (value: string, index: number, array: string[]) => void , thisArg: any): void;
                     map(callbackfn: (value: string, index: number, array: string[]) => any): any[];
                     map(callbackfn: (value: string, index: number, array: string[]) => any, thisArg: any): any[];
                     filter(callbackfn: (value: string, index: number, array: string[]) => boolean): string[];
@@ -2307,8 +2335,8 @@ declare module Windows {
                 every(callbackfn: (value: Windows.Data.Json.IJsonValue, index: number, array: Windows.Data.Json.IJsonValue[]) => boolean, thisArg: any): boolean;
                 some(callbackfn: (value: Windows.Data.Json.IJsonValue, index: number, array: Windows.Data.Json.IJsonValue[]) => boolean): boolean;
                 some(callbackfn: (value: Windows.Data.Json.IJsonValue, index: number, array: Windows.Data.Json.IJsonValue[]) => boolean, thisArg: any): boolean;
-                forEach(callbackfn: (value: Windows.Data.Json.IJsonValue, index: number, array: Windows.Data.Json.IJsonValue[]) => void): void;
-                forEach(callbackfn: (value: Windows.Data.Json.IJsonValue, index: number, array: Windows.Data.Json.IJsonValue[]) => void, thisArg: any): void;
+                forEach(callbackfn: (value: Windows.Data.Json.IJsonValue, index: number, array: Windows.Data.Json.IJsonValue[]) => void ): void;
+                forEach(callbackfn: (value: Windows.Data.Json.IJsonValue, index: number, array: Windows.Data.Json.IJsonValue[]) => void , thisArg: any): void;
                 map(callbackfn: (value: Windows.Data.Json.IJsonValue, index: number, array: Windows.Data.Json.IJsonValue[]) => any): any[];
                 map(callbackfn: (value: Windows.Data.Json.IJsonValue, index: number, array: Windows.Data.Json.IJsonValue[]) => any, thisArg: any): any[];
                 filter(callbackfn: (value: Windows.Data.Json.IJsonValue, index: number, array: Windows.Data.Json.IJsonValue[]) => boolean): Windows.Data.Json.IJsonValue[];
@@ -2453,8 +2481,8 @@ declare module Windows {
                     every(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => boolean, thisArg: any): boolean;
                     some(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => boolean): boolean;
                     some(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => boolean, thisArg: any): boolean;
-                    forEach(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => void): void;
-                    forEach(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => void, thisArg: any): void;
+                    forEach(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => void ): void;
+                    forEach(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => void , thisArg: any): void;
                     map(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => any): any[];
                     map(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => any, thisArg: any): any[];
                     filter(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => boolean): Windows.Data.Xml.Dom.IXmlNode[];
@@ -2499,8 +2527,8 @@ declare module Windows {
                     every(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => boolean, thisArg: any): boolean;
                     some(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => boolean): boolean;
                     some(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => boolean, thisArg: any): boolean;
-                    forEach(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => void): void;
-                    forEach(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => void, thisArg: any): void;
+                    forEach(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => void ): void;
+                    forEach(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => void , thisArg: any): void;
                     map(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => any): any[];
                     map(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => any, thisArg: any): any[];
                     filter(callbackfn: (value: Windows.Data.Xml.Dom.IXmlNode, index: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => boolean): Windows.Data.Xml.Dom.IXmlNode[];
@@ -2509,7 +2537,7 @@ declare module Windows {
                     reduce(callbackfn: (previousValue: any, currentValue: any, currentIndex: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => any, initialValue: any): any;
                     reduceRight(callbackfn: (previousValue: any, currentValue: any, currentIndex: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => any): any;
                     reduceRight(callbackfn: (previousValue: any, currentValue: any, currentIndex: number, array: Windows.Data.Xml.Dom.IXmlNode[]) => any, initialValue: any): any;
-                }
+                 }
                 export class XmlDocument implements Windows.Data.Xml.Dom.IXmlDocument, Windows.Data.Xml.Dom.IXmlNode, Windows.Data.Xml.Dom.IXmlNodeSelector, Windows.Data.Xml.Dom.IXmlNodeSerializer, Windows.Data.Xml.Dom.IXmlDocumentIO {
                     doctype: Windows.Data.Xml.Dom.XmlDocumentType;
                     documentElement: Windows.Data.Xml.Dom.XmlElement;
@@ -3191,11 +3219,11 @@ declare module Windows {
                 getResults(): void;
                 cancel(): void;
                 close(): void;
-                then<U>(success?: (value: any) => U, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: any) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: any) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: any) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                done<U>(success?: (value: any) => any, error?: (error: any) => any, progress?: (progress: any) => void): void;
+                then<U>(success?: (value: any) => U, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: any) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: any) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: any) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                done<U>(success?: (value: any) => any, error?: (error: any) => any, progress?: (progress: any) => void ): void;
                 operation: {
                     completed: Windows.Foundation.AsyncOperationCompletedHandler<any>;
                     getResults(): any;
@@ -3209,11 +3237,11 @@ declare module Windows {
                 getResults(): void;
                 cancel(): void;
                 close(): void;
-                then<U>(success?: (value: any) => U, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: any) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: any) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: any) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                done<U>(success?: (value: any) => any, error?: (error: any) => any, progress?: (progress: any) => void): void;
+                then<U>(success?: (value: any) => U, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: any) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: any) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: any) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                done<U>(success?: (value: any) => any, error?: (error: any) => any, progress?: (progress: any) => void ): void;
                 operation: {
                     completed: Windows.Foundation.AsyncOperationCompletedHandler<any>;
                     getResults(): any;
@@ -3227,11 +3255,11 @@ declare module Windows {
                 getResults(): Windows.Devices.Sms.ISmsMessage;
                 cancel(): void;
                 close(): void;
-                then<U>(success?: (value: Windows.Devices.Sms.ISmsMessage) => U, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: Windows.Devices.Sms.ISmsMessage) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: Windows.Devices.Sms.ISmsMessage) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: Windows.Devices.Sms.ISmsMessage) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                done<U>(success?: (value: Windows.Devices.Sms.ISmsMessage) => any, error?: (error: any) => any, progress?: (progress: any) => void): void;
+                then<U>(success?: (value: Windows.Devices.Sms.ISmsMessage) => U, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: Windows.Devices.Sms.ISmsMessage) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: Windows.Devices.Sms.ISmsMessage) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: Windows.Devices.Sms.ISmsMessage) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                done<U>(success?: (value: Windows.Devices.Sms.ISmsMessage) => any, error?: (error: any) => any, progress?: (progress: any) => void ): void;
                 operation: {
                     completed: Windows.Foundation.AsyncOperationCompletedHandler<Windows.Devices.Sms.ISmsMessage>;
                     getResults(): Windows.Devices.Sms.ISmsMessage;
@@ -3246,11 +3274,11 @@ declare module Windows {
                 getResults(): Windows.Foundation.Collections.IVectorView<Windows.Devices.Sms.ISmsMessage>;
                 cancel(): void;
                 close(): void;
-                then<U>(success?: (value: Windows.Foundation.Collections.IVectorView<Windows.Devices.Sms.ISmsMessage>) => U, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: Windows.Foundation.Collections.IVectorView<Windows.Devices.Sms.ISmsMessage>) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: Windows.Foundation.Collections.IVectorView<Windows.Devices.Sms.ISmsMessage>) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: Windows.Foundation.Collections.IVectorView<Windows.Devices.Sms.ISmsMessage>) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                done<U>(success?: (value: Windows.Foundation.Collections.IVectorView<Windows.Devices.Sms.ISmsMessage>) => any, error?: (error: any) => any, progress?: (progress: any) => void): void;
+                then<U>(success?: (value: Windows.Foundation.Collections.IVectorView<Windows.Devices.Sms.ISmsMessage>) => U, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: Windows.Foundation.Collections.IVectorView<Windows.Devices.Sms.ISmsMessage>) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: Windows.Foundation.Collections.IVectorView<Windows.Devices.Sms.ISmsMessage>) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: Windows.Foundation.Collections.IVectorView<Windows.Devices.Sms.ISmsMessage>) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                done<U>(success?: (value: Windows.Foundation.Collections.IVectorView<Windows.Devices.Sms.ISmsMessage>) => any, error?: (error: any) => any, progress?: (progress: any) => void ): void;
                 operation: {
                     progress: Windows.Foundation.AsyncOperationProgressHandler<Windows.Foundation.Collections.IVectorView<Windows.Devices.Sms.ISmsMessage>, number>;
                     completed: Windows.Foundation.AsyncOperationCompletedHandler<Windows.Foundation.Collections.IVectorView<Windows.Devices.Sms.ISmsMessage>>;
@@ -3301,11 +3329,11 @@ declare module Windows {
                 getResults(): void;
                 cancel(): void;
                 close(): void;
-                then<U>(success: (value: any) => U, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success: (value: any) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success: (value: any) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success: (value: any) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                done<U>(success: (value: any) => any, error?: (error: any) => any, progress?: (progress: any) => void): void;
+                then<U>(success?: () => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
+                then<U>(success?: () => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
+                then<U>(success?: () => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
+                then<U>(success?: () => U, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
+                done<U>(success?: () => any, error?: (error: any) => any, progress?: (progress: any) => void): void ;
                 operation: {
                     completed: Windows.Foundation.AsyncOperationCompletedHandler<any>;
                     getResults(): any;
@@ -3346,11 +3374,11 @@ declare module Windows {
                 getResults(): Windows.Devices.Sms.SmsDevice;
                 cancel(): void;
                 close(): void;
-                then<U>(success?: (value: Windows.Devices.Sms.SmsDevice) => U, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: Windows.Devices.Sms.SmsDevice) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: Windows.Devices.Sms.SmsDevice) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: Windows.Devices.Sms.SmsDevice) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                done<U>(success?: (value: Windows.Devices.Sms.SmsDevice) => any, error?: (error: any) => any, progress?: (progress: any) => void): void;
+                then<U>(success?: (value: Windows.Devices.Sms.SmsDevice) => U, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: Windows.Devices.Sms.SmsDevice) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: Windows.Devices.Sms.SmsDevice) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: Windows.Devices.Sms.SmsDevice) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                done<U>(success?: (value: Windows.Devices.Sms.SmsDevice) => any, error?: (error: any) => any, progress?: (progress: any) => void ): void;
                 operation: {
                     completed: Windows.Foundation.AsyncOperationCompletedHandler<Windows.Devices.Sms.SmsDevice>;
                     getResults(): Windows.Devices.Sms.SmsDevice;
@@ -3470,8 +3498,8 @@ declare module Windows {
                 every(callbackfn: (value: Windows.Devices.Enumeration.DeviceInformation, index: number, array: Windows.Devices.Enumeration.DeviceInformation[]) => boolean, thisArg: any): boolean;
                 some(callbackfn: (value: Windows.Devices.Enumeration.DeviceInformation, index: number, array: Windows.Devices.Enumeration.DeviceInformation[]) => boolean): boolean;
                 some(callbackfn: (value: Windows.Devices.Enumeration.DeviceInformation, index: number, array: Windows.Devices.Enumeration.DeviceInformation[]) => boolean, thisArg: any): boolean;
-                forEach(callbackfn: (value: Windows.Devices.Enumeration.DeviceInformation, index: number, array: Windows.Devices.Enumeration.DeviceInformation[]) => void): void;
-                forEach(callbackfn: (value: Windows.Devices.Enumeration.DeviceInformation, index: number, array: Windows.Devices.Enumeration.DeviceInformation[]) => void, thisArg: any): void;
+                forEach(callbackfn: (value: Windows.Devices.Enumeration.DeviceInformation, index: number, array: Windows.Devices.Enumeration.DeviceInformation[]) => void ): void;
+                forEach(callbackfn: (value: Windows.Devices.Enumeration.DeviceInformation, index: number, array: Windows.Devices.Enumeration.DeviceInformation[]) => void , thisArg: any): void;
                 map(callbackfn: (value: Windows.Devices.Enumeration.DeviceInformation, index: number, array: Windows.Devices.Enumeration.DeviceInformation[]) => any): any[];
                 map(callbackfn: (value: Windows.Devices.Enumeration.DeviceInformation, index: number, array: Windows.Devices.Enumeration.DeviceInformation[]) => any, thisArg: any): any[];
                 filter(callbackfn: (value: Windows.Devices.Enumeration.DeviceInformation, index: number, array: Windows.Devices.Enumeration.DeviceInformation[]) => boolean): Windows.Devices.Enumeration.DeviceInformation[];
@@ -3597,8 +3625,8 @@ declare module Windows {
                     every(callbackfn: (value: Windows.Devices.Enumeration.Pnp.PnpObject, index: number, array: Windows.Devices.Enumeration.Pnp.PnpObject[]) => boolean, thisArg: any): boolean;
                     some(callbackfn: (value: Windows.Devices.Enumeration.Pnp.PnpObject, index: number, array: Windows.Devices.Enumeration.Pnp.PnpObject[]) => boolean): boolean;
                     some(callbackfn: (value: Windows.Devices.Enumeration.Pnp.PnpObject, index: number, array: Windows.Devices.Enumeration.Pnp.PnpObject[]) => boolean, thisArg: any): boolean;
-                    forEach(callbackfn: (value: Windows.Devices.Enumeration.Pnp.PnpObject, index: number, array: Windows.Devices.Enumeration.Pnp.PnpObject[]) => void): void;
-                    forEach(callbackfn: (value: Windows.Devices.Enumeration.Pnp.PnpObject, index: number, array: Windows.Devices.Enumeration.Pnp.PnpObject[]) => void, thisArg: any): void;
+                    forEach(callbackfn: (value: Windows.Devices.Enumeration.Pnp.PnpObject, index: number, array: Windows.Devices.Enumeration.Pnp.PnpObject[]) => void ): void;
+                    forEach(callbackfn: (value: Windows.Devices.Enumeration.Pnp.PnpObject, index: number, array: Windows.Devices.Enumeration.Pnp.PnpObject[]) => void , thisArg: any): void;
                     map(callbackfn: (value: Windows.Devices.Enumeration.Pnp.PnpObject, index: number, array: Windows.Devices.Enumeration.Pnp.PnpObject[]) => any): any[];
                     map(callbackfn: (value: Windows.Devices.Enumeration.Pnp.PnpObject, index: number, array: Windows.Devices.Enumeration.Pnp.PnpObject[]) => any, thisArg: any): any[];
                     filter(callbackfn: (value: Windows.Devices.Enumeration.Pnp.PnpObject, index: number, array: Windows.Devices.Enumeration.Pnp.PnpObject[]) => boolean): Windows.Devices.Enumeration.Pnp.PnpObject[];
@@ -4810,8 +4838,8 @@ declare module Windows {
                 every(callbackfn: (value: Windows.Globalization.Collation.CharacterGrouping, index: number, array: Windows.Globalization.Collation.CharacterGrouping[]) => boolean, thisArg: any): boolean;
                 some(callbackfn: (value: Windows.Globalization.Collation.CharacterGrouping, index: number, array: Windows.Globalization.Collation.CharacterGrouping[]) => boolean): boolean;
                 some(callbackfn: (value: Windows.Globalization.Collation.CharacterGrouping, index: number, array: Windows.Globalization.Collation.CharacterGrouping[]) => boolean, thisArg: any): boolean;
-                forEach(callbackfn: (value: Windows.Globalization.Collation.CharacterGrouping, index: number, array: Windows.Globalization.Collation.CharacterGrouping[]) => void): void;
-                forEach(callbackfn: (value: Windows.Globalization.Collation.CharacterGrouping, index: number, array: Windows.Globalization.Collation.CharacterGrouping[]) => void, thisArg: any): void;
+                forEach(callbackfn: (value: Windows.Globalization.Collation.CharacterGrouping, index: number, array: Windows.Globalization.Collation.CharacterGrouping[]) => void ): void;
+                forEach(callbackfn: (value: Windows.Globalization.Collation.CharacterGrouping, index: number, array: Windows.Globalization.Collation.CharacterGrouping[]) => void , thisArg: any): void;
                 map(callbackfn: (value: Windows.Globalization.Collation.CharacterGrouping, index: number, array: Windows.Globalization.Collation.CharacterGrouping[]) => any): any[];
                 map(callbackfn: (value: Windows.Globalization.Collation.CharacterGrouping, index: number, array: Windows.Globalization.Collation.CharacterGrouping[]) => any, thisArg: any): any[];
                 filter(callbackfn: (value: Windows.Globalization.Collation.CharacterGrouping, index: number, array: Windows.Globalization.Collation.CharacterGrouping[]) => boolean): Windows.Globalization.Collation.CharacterGrouping[];
@@ -8367,11 +8395,11 @@ declare module Windows {
                     getResults(): Windows.Security.Authentication.OnlineId.UserIdentity;
                     cancel(): void;
                     close(): void;
-                    then<U>(success?: (value: Windows.Security.Authentication.OnlineId.UserIdentity) => U, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                    then<U>(success?: (value: Windows.Security.Authentication.OnlineId.UserIdentity) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                    then<U>(success?: (value: Windows.Security.Authentication.OnlineId.UserIdentity) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                    then<U>(success?: (value: Windows.Security.Authentication.OnlineId.UserIdentity) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                    done<U>(success?: (value: Windows.Security.Authentication.OnlineId.UserIdentity) => any, error?: (error: any) => any, progress?: (progress: any) => void): void;
+                    then<U>(success?: (value: Windows.Security.Authentication.OnlineId.UserIdentity) => U, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                    then<U>(success?: (value: Windows.Security.Authentication.OnlineId.UserIdentity) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                    then<U>(success?: (value: Windows.Security.Authentication.OnlineId.UserIdentity) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                    then<U>(success?: (value: Windows.Security.Authentication.OnlineId.UserIdentity) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                    done<U>(success?: (value: Windows.Security.Authentication.OnlineId.UserIdentity) => any, error?: (error: any) => any, progress?: (progress: any) => void ): void;
                     operation: {
                         completed: Windows.Foundation.AsyncOperationCompletedHandler<Windows.Security.Authentication.OnlineId.UserIdentity>;
                         getResults(): Windows.Security.Authentication.OnlineId.UserIdentity;
@@ -8385,11 +8413,11 @@ declare module Windows {
                     getResults(): void;
                     cancel(): void;
                     close(): void;
-                    then<U>(success: (value: any) => U, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                    then<U>(success: (value: any) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                    then<U>(success: (value: any) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                    then<U>(success: (value: any) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                    done<U>(success: (value: any) => any, error?: (error: any) => any, progress?: (progress: any) => void): void;
+                    then<U>(success?: () => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
+                    then<U>(success?: () => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
+                    then<U>(success?: () => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
+                    then<U>(success?: () => U, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
+                    done<U>(success?: () => any, error?: (error: any) => any, progress?: (progress: any) => void): void;
                     operation: {
                         completed: Windows.Foundation.AsyncOperationCompletedHandler<any>;
                         getResults(): any;
@@ -9220,11 +9248,11 @@ declare module Windows {
                 getResults(): number;
                 cancel(): void;
                 close(): void;
-                then<U>(success?: (value: number) => U, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: number) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: number) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: number) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                done<U>(success?: (value: number) => any, error?: (error: any) => any, progress?: (progress: any) => void): void;
+                then<U>(success?: (value: number) => U, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: number) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: number) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: number) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                done<U>(success?: (value: number) => any, error?: (error: any) => any, progress?: (progress: any) => void ): void;
                 operation: {
                     completed: Windows.Foundation.AsyncOperationCompletedHandler<number>;
                     getResults(): number;
@@ -9298,11 +9326,11 @@ declare module Windows {
                 getResults(): number;
                 cancel(): void;
                 close(): void;
-                then<U>(success?: (value: number) => U, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: number) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: number) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                then<U>(success?: (value: number) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-                done<U>(success?: (value: number) => any, error?: (error: any) => any, progress?: (progress: any) => void): void;
+                then<U>(success?: (value: number) => U, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: number) => Windows.Foundation.IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: number) => U, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                then<U>(success?: (value: number) => Windows.Foundation.IPromise<U>, error?: (error: any) => Windows.Foundation.IPromise<U>, progress?: (progress: any) => void ): Windows.Foundation.IPromise<U>;
+                done<U>(success?: (value: number) => any, error?: (error: any) => any, progress?: (progress: any) => void ): void;
                 operation: {
                     completed: Windows.Foundation.AsyncOperationCompletedHandler<number>;
                     getResults(): number;
@@ -10541,8 +10569,8 @@ declare module Windows {
                 every(callbackfn: (value: Windows.Storage.Search.SortEntry, index: number, array: Windows.Storage.Search.SortEntry[]) => boolean, thisArg: any): boolean;
                 some(callbackfn: (value: Windows.Storage.Search.SortEntry, index: number, array: Windows.Storage.Search.SortEntry[]) => boolean): boolean;
                 some(callbackfn: (value: Windows.Storage.Search.SortEntry, index: number, array: Windows.Storage.Search.SortEntry[]) => boolean, thisArg: any): boolean;
-                forEach(callbackfn: (value: Windows.Storage.Search.SortEntry, index: number, array: Windows.Storage.Search.SortEntry[]) => void): void;
-                forEach(callbackfn: (value: Windows.Storage.Search.SortEntry, index: number, array: Windows.Storage.Search.SortEntry[]) => void, thisArg: any): void;
+                forEach(callbackfn: (value: Windows.Storage.Search.SortEntry, index: number, array: Windows.Storage.Search.SortEntry[]) => void ): void;
+                forEach(callbackfn: (value: Windows.Storage.Search.SortEntry, index: number, array: Windows.Storage.Search.SortEntry[]) => void , thisArg: any): void;
                 map(callbackfn: (value: Windows.Storage.Search.SortEntry, index: number, array: Windows.Storage.Search.SortEntry[]) => any): any[];
                 map(callbackfn: (value: Windows.Storage.Search.SortEntry, index: number, array: Windows.Storage.Search.SortEntry[]) => any, thisArg: any): any[];
                 filter(callbackfn: (value: Windows.Storage.Search.SortEntry, index: number, array: Windows.Storage.Search.SortEntry[]) => boolean): Windows.Storage.Search.SortEntry[];
@@ -10593,8 +10621,8 @@ declare module Windows {
                 every(callbackfn: (value: Windows.Storage.AccessCache.AccessListEntry, index: number, array: Windows.Storage.AccessCache.AccessListEntry[]) => boolean, thisArg: any): boolean;
                 some(callbackfn: (value: Windows.Storage.AccessCache.AccessListEntry, index: number, array: Windows.Storage.AccessCache.AccessListEntry[]) => boolean): boolean;
                 some(callbackfn: (value: Windows.Storage.AccessCache.AccessListEntry, index: number, array: Windows.Storage.AccessCache.AccessListEntry[]) => boolean, thisArg: any): boolean;
-                forEach(callbackfn: (value: Windows.Storage.AccessCache.AccessListEntry, index: number, array: Windows.Storage.AccessCache.AccessListEntry[]) => void): void;
-                forEach(callbackfn: (value: Windows.Storage.AccessCache.AccessListEntry, index: number, array: Windows.Storage.AccessCache.AccessListEntry[]) => void, thisArg: any): void;
+                forEach(callbackfn: (value: Windows.Storage.AccessCache.AccessListEntry, index: number, array: Windows.Storage.AccessCache.AccessListEntry[]) => void ): void;
+                forEach(callbackfn: (value: Windows.Storage.AccessCache.AccessListEntry, index: number, array: Windows.Storage.AccessCache.AccessListEntry[]) => void , thisArg: any): void;
                 map(callbackfn: (value: Windows.Storage.AccessCache.AccessListEntry, index: number, array: Windows.Storage.AccessCache.AccessListEntry[]) => any): any[];
                 map(callbackfn: (value: Windows.Storage.AccessCache.AccessListEntry, index: number, array: Windows.Storage.AccessCache.AccessListEntry[]) => any, thisArg: any): any[];
                 filter(callbackfn: (value: Windows.Storage.AccessCache.AccessListEntry, index: number, array: Windows.Storage.AccessCache.AccessListEntry[]) => boolean): Windows.Storage.AccessCache.AccessListEntry[];
@@ -10871,8 +10899,8 @@ declare module Windows {
                 every(callbackfn: (value: Windows.Storage.StorageFile, index: number, array: Windows.Storage.StorageFile[]) => boolean, thisArg: any): boolean;
                 some(callbackfn: (value: Windows.Storage.StorageFile, index: number, array: Windows.Storage.StorageFile[]) => boolean): boolean;
                 some(callbackfn: (value: Windows.Storage.StorageFile, index: number, array: Windows.Storage.StorageFile[]) => boolean, thisArg: any): boolean;
-                forEach(callbackfn: (value: Windows.Storage.StorageFile, index: number, array: Windows.Storage.StorageFile[]) => void): void;
-                forEach(callbackfn: (value: Windows.Storage.StorageFile, index: number, array: Windows.Storage.StorageFile[]) => void, thisArg: any): void;
+                forEach(callbackfn: (value: Windows.Storage.StorageFile, index: number, array: Windows.Storage.StorageFile[]) => void ): void;
+                forEach(callbackfn: (value: Windows.Storage.StorageFile, index: number, array: Windows.Storage.StorageFile[]) => void , thisArg: any): void;
                 map(callbackfn: (value: Windows.Storage.StorageFile, index: number, array: Windows.Storage.StorageFile[]) => any): any[];
                 map(callbackfn: (value: Windows.Storage.StorageFile, index: number, array: Windows.Storage.StorageFile[]) => any, thisArg: any): any[];
                 filter(callbackfn: (value: Windows.Storage.StorageFile, index: number, array: Windows.Storage.StorageFile[]) => boolean): Windows.Storage.StorageFile[];
@@ -10928,8 +10956,8 @@ declare module Windows {
                 every(callbackfn: (value: string, index: number, array: string[]) => boolean, thisArg: any): boolean;
                 some(callbackfn: (value: string, index: number, array: string[]) => boolean): boolean;
                 some(callbackfn: (value: string, index: number, array: string[]) => boolean, thisArg: any): boolean;
-                forEach(callbackfn: (value: string, index: number, array: string[]) => void): void;
-                forEach(callbackfn: (value: string, index: number, array: string[]) => void, thisArg: any): void;
+                forEach(callbackfn: (value: string, index: number, array: string[]) => void ): void;
+                forEach(callbackfn: (value: string, index: number, array: string[]) => void , thisArg: any): void;
                 map(callbackfn: (value: string, index: number, array: string[]) => any): any[];
                 map(callbackfn: (value: string, index: number, array: string[]) => any, thisArg: any): any[];
                 filter(callbackfn: (value: string, index: number, array: string[]) => boolean): string[];
@@ -11511,13 +11539,78 @@ declare module Windows {
                 snapped,
                 fullScreenPortrait,
             }
-            export interface IApplicationViewStatics {
-                value: Windows.UI.ViewManagement.ApplicationViewState;
-                tryUnsnap(): boolean;
-            }
+
+			/**
+			 * Defines an instance of a window (app view) and the information that describes it.
+			**/
             export class ApplicationView {
+				/**
+				 * Gets the window (app view) for the current app.
+				**/
+				static getForCurrentView(): ApplicationView;
+				
+				/**
+				 * Attempts to unsnap a previously snapped app. This call will only succeed when the app is running in the foreground.
+				**/
+				static tryUnsnap(): boolean;
+				
+				/**
+				 * Gets the state of the current app view.
+				**/
                 static value: Windows.UI.ViewManagement.ApplicationViewState;
-                static tryUnsnap(): boolean;
+
+				/**
+				 * Indicates whether the app terminates when the last window is closed.
+				**/
+				static terminateAppOnFinalViewClose: boolean;
+
+				/**
+				 * Gets the current orientation of the window (app view) with respect to the display.
+				**/
+				orientation: ApplicationViewOrientation;
+
+				/**
+				 * Gets or sets the displayed title of the window.
+				**/
+				title: string;
+
+				/**
+				 * Gets or sets whether screen capture is enabled for the window (app view).
+				**/
+				isScreenCaptureEnabled: boolean;
+
+				/**
+				 * Gets whether the window (app view) is on the Windows lock screen.
+				**/
+				isOnLockScreen: boolean;
+
+				/**
+				 * Gets whether the window(app view) is full screen or not.
+				**/
+				isFullScreen: boolean;
+
+				/**
+				 * Gets the current ID of the window (app view) .
+				**/
+				id: number;
+
+				/**
+				 * Gets whether the current window (app view) is adjacent to the right edge of the screen.
+				**/
+				adjacentToRightDisplayEdge: boolean;
+
+				/**
+				 * Gets whether the current window (app view) is adjacent to the left edge of the screen.
+				**/
+				adjacentToLeftDisplayEdge: number;
+			}
+
+			/**
+			 * Defines the set of display orientation modes for a window (app view).
+			**/
+			export enum ApplicationViewOrientation {
+				landscape,
+				portrait
             }
             export interface IInputPaneVisibilityEventArgs {
                 ensuredFocusedElementInView: boolean;
@@ -14635,10 +14728,17 @@ declare module Windows {
 }
 declare module Windows.Foundation {
     export interface IPromise<T> {
-        then<U>(success?: (value: T) => IPromise<U>, error?: (error: any) => IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-        then<U>(success?: (value: T) => IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-        then<U>(success?: (value: T) => U, error?: (error: any) => IPromise<U>, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-        then<U>(success?: (value: T) => U, error?: (error: any) => U, progress?: (progress: any) => void): Windows.Foundation.IPromise<U>;
-        done? <U>(success?: (value: T) => any, error?: (error: any) => any, progress?: (progress: any) => void): void;
+        then<U>(success?: (value: T) => IPromise<U>, error?: (error: any) => IPromise<U>, progress?: (progress: any) => void ): IPromise<U>;
+        then<U>(success?: (value: T) => IPromise<U>, error?: (error: any) => U, progress?: (progress: any) => void ): IPromise<U>;
+        then<U>(success?: (value: T) => U, error?: (error: any) => IPromise<U>, progress?: (progress: any) => void ): IPromise<U>;
+        then<U>(success?: (value: T) => U, error?: (error: any) => U, progress?: (progress: any) => void ): IPromise<U>;
+        done?<U>(success?: (value: T) => any, error?: (error: any) => any, progress?: (progress: any) => void): void;
+
+        cancel(): void;
+
+        onerror?(eventInfo: CustomEvent): void;
+        addEventListener?(type: string, listener: Function, capture?: boolean): void;
+        dispatchEvent?(type: string, details: any): boolean;
+        removeEventListener?(eventType: string, listener: Function, capture?: boolean): void;
     }
 }

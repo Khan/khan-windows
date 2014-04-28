@@ -93,10 +93,12 @@
     <Content Include="images\xd1039e22.png" />
     <Content Include="images\x5ca94af1.png" />
     <Content Include="images\widelogo.png" />
-    <Content Include="StoreManifest.xml" />
-    <None Include="packages.config" />
+    <None Include="scripts\moment-with-langs.js" />
+    <None Include="scripts\moment-with-langs.min.js" />
     <None Include="scripts\moment.js" />
     <Content Include="scripts\moment.min.js" />
+    <Content Include="StoreManifest.xml" />
+    <None Include="packages.config" />
     <Content Include="secrets.json" />
     <TypeScriptCompile Include="js\global.ts" />
     <Content Include="js\global.js">
@@ -198,9 +200,9 @@
     <Content Include="pages\videoPage\videoPage.js">
       <DependentUpon>videoPage.ts</DependentUpon>
     </Content>
-    <None Include="scripts\typings\winjs.d.ts" />
-    <None Include="scripts\typings\winrt.d.ts" />
     <TypeScriptCompile Include="scripts\typings\moment\moment.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\winjs\winjs.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\winrt\winrt.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="Microsoft.WinJS.1.0, Version=1.0" />

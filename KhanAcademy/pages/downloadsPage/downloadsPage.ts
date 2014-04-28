@@ -27,6 +27,7 @@ module DownloadsPage {
                     downloadedVideos.push(v);
                 }
             }
+
             if (downloadedVideos.length > 0) {
                 videoList = new WinJS.Binding.List(downloadedVideos);
                 downloadsLv.winControl.itemDataSource = videoList.dataSource;
