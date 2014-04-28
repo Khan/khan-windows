@@ -1,8 +1,4 @@
-﻿/// <reference path="../../scripts/typings/winjs.d.ts" />
-/// <reference path="../../scripts/typings/winrt.d.ts" />
-/// <reference path="../../scripts/typings/moment/moment.d.ts" />
-
-module KA {
+﻿module KA {
     'use strict';
     var app: any = WinJS.Application;
     var networkInfo: any = Windows.Networking.Connectivity.NetworkInformation;
@@ -345,7 +341,7 @@ module KA {
                 if (!KA.Settings.isInDesigner) {
                     WinJS.Application.queueEvent({ type: "newDataCheckRequested" });
 
-                    ApiClient.getTopicTreeAsync(service.lastSyncETag).done(function(data) {
+                    ApiClient.getTopicTreeAsync(service.lastSyncETag).done(function(data: any) {
                         if (data && data.topicTree && data.eTag) {
                             service.lastSyncETag = data.eTag;
                             service.lastSyncDate = new Date();
