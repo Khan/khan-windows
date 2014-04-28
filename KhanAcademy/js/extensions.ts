@@ -1,4 +1,4 @@
-﻿interface Array {
+﻿interface Array<T> {
     contains(element): boolean;
 }
 
@@ -9,7 +9,7 @@ Array.prototype.contains = function (element) {
         }
     }
     return false;
-}
+};
 
 interface Date {
     setISO8601(dString): Date;
