@@ -8,7 +8,7 @@
     export class PageControlNavigator {
         home: string = "";
         _element: HTMLElement = null;
-        _lastNavigationPromise: WinJS.Promise<any> = WinJS.Promise.as();
+        _lastNavigationPromise: Windows.Foundation.IPromise<any> = WinJS.Promise.as(undefined);
         _lastWidth: number = 0;
         _lastHeight: number = 0;
 
@@ -102,22 +102,20 @@
 
             this._lastNavigationPromise.cancel();
 
-            this._lastNavigationPromise = WinJS.Promise.timeout().then(function () {
-                return WinJS.UI.Pages.render(args.detail.location, newElement, args.detail.state, parented);
-            }, function (err) {
-                KA.logError(err);
-            }).then((control) => {
-                var oldElement = <HTMLElement>this.pageElement;
-                if (oldElement.winControl && oldElement.winControl.unload) {
-                    oldElement.winControl.unload();
-                }
-                this._element.appendChild(newElement);
-                this._element.removeChild(oldElement);
-                oldElement.innerText = "";
-                this._updateBackButton();
-                parentedComplete();
-                WinJS.UI.Animation.enterPage(this._getAnimationElements()).done();
-            }.bind(this));
+            this._lastNavigationPromise = WinJS.Promise.timeout(0)
+                .then(() => WinJS.UI.Pages.render(args.detail.location, newElement, args.detail.state, parented), err => { KA.logError(err); })
+                .then(control => {
+                    var oldElement = <HTMLElement>this.pageElement;
+                    if (oldElement.winControl && oldElement.winControl.unload) {
+                        oldElement.winControl.unload();
+                    }
+                    this._element.appendChild(newElement);
+                    this._element.removeChild(oldElement);
+                    oldElement.innerText = "";
+                    this._updateBackButton();
+                    parentedComplete();
+                    WinJS.UI.Animation.enterPage(this._getAnimationElements(), null).done();
+                });
 
             args.detail.setPromise(this._lastNavigationPromise);
         }
@@ -128,7 +126,7 @@
 
             if (this.pageControl && this.pageControl.updateLayout) {
                 var dimensionsChanged = this._lastWidth != this.pageElement.clientWidth ||
-                                        this._lastHeight != this.pageElement.clientHeight;
+                    this._lastHeight != this.pageElement.clientHeight;
                 this.pageControl.updateLayout.call(this.pageControl, this.pageElement, dimensionsChanged);
             }
             this._lastWidth = this.pageElement.clientWidth;

@@ -162,14 +162,14 @@ module VideoPage {
                 if (e.pointerType == e.MSPOINTER_TYPE_MOUSE) {
                     KA.Downloads.downloadVideo(video.id, video.vidUrl);
                 } else if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
-                    WinJS.Utilities.addClass(e.currentTarget, "touchShade");
+                    WinJS.Utilities.addClass(<HTMLElement>e.currentTarget, "touchShade");
                 }
             }
         });
         videoDownload.addEventListener('MSPointerUp', function (e: MSPointerEvent) {
             if (video != null) {
                 if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
-                    WinJS.Utilities.removeClass(e.currentTarget, "touchShade");
+                    WinJS.Utilities.removeClass(<HTMLElement>e.currentTarget, "touchShade");
                     KA.Downloads.downloadVideo(video.id, video.vidUrl);
                 }
             }
@@ -186,14 +186,14 @@ module VideoPage {
                         console.log(err);
                     });
                 } else if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
-                    WinJS.Utilities.addClass(e.currentTarget, "touchShade");
+                    WinJS.Utilities.addClass(<HTMLElement>e.currentTarget, "touchShade");
                 }
             }
         });
         videoDelete.addEventListener('MSPointerUp', function (e: MSPointerEvent) {
             if (video != null) {
                 if (e.pointerType == e.MSPOINTER_TYPE_TOUCH) {
-                    WinJS.Utilities.removeClass(e.currentTarget, "touchShade");
+                    WinJS.Utilities.removeClass(<HTMLElement>e.currentTarget, "touchShade");
                     KA.Downloads.deleteVideo(video.id).done(function () {
                         toggleDownloadCmd(true);
                     }, function (err) {
