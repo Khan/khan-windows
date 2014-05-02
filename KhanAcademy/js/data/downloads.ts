@@ -158,7 +158,7 @@
                     }, function (err) {
                         //file does not exist in cache, go to web to find it
                         var transcriptUrl = 'http://khanacademy.org/api/v1/videos/' + video.youTubeId + '/transcript';
-                        WinJS.xhr({ url: transcriptUrl }).done(function (result) {
+                        WinJS.xhr({ url: transcriptUrl, data: undefined }).done(function (result) {
                             if (result.status === 200) {
                                 //store in temp folder
                                 app.temp.writeText(scriptFileName, result.responseText)

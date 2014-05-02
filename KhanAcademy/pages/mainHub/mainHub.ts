@@ -238,7 +238,7 @@ module MainHub {
     function hideDomainMenu() {
         return new WinJS.Promise(function (c, e) {
             if (isDomainMenuOpen) {
-                WinJS.UI.Animation.exitContent(domainMenus[curDomainMenuIndex]).done(function () {
+                WinJS.UI.Animation.exitContent(domainMenus[curDomainMenuIndex], null).done(function () {
                     domainMenuClickEater.style.visibility = 'collapse';
                     // This extra check is needed because 2 async operations can be queued before
                     // either one is processed.
@@ -274,13 +274,13 @@ module MainHub {
             if (e.pointerType == "mouse") {
                 nav.navigate("/pages/downloadsPage/downloadsPage.html");
             } else if (e.pointerType == "touch") {
-                WinJS.Utilities.addClass(e.currentTarget, "touchShade");
+                WinJS.Utilities.addClass(<HTMLElement>e.currentTarget, "touchShade");
             }
         });
 
         downloadsTitle.addEventListener('pointerdown', function (e: MSPointerEvent) {
             if (e.pointerType == "touch") {
-                WinJS.Utilities.removeClass(e.currentTarget, "touchShade");
+                WinJS.Utilities.removeClass(<HTMLElement>e.currentTarget, "touchShade");
                 nav.navigate("/pages/downloadsPage/downloadsPage.html");
             }
         });
@@ -292,13 +292,13 @@ module MainHub {
             if (e.pointerType == "mouse") {
                 nav.navigate("/pages/newsPage/newsPage.html");
             } else if (e.pointerType == "touch") {
-                WinJS.Utilities.addClass(e.currentTarget, "touchShade");
+                WinJS.Utilities.addClass(<HTMLElement>e.currentTarget, "touchShade");
             }
         });
 
         newsTitle.addEventListener('pointerdown', function (e: MSPointerEvent) {
             if (e.pointerType == "touch") {
-                WinJS.Utilities.removeClass(e.currentTarget, "touchShade");
+                WinJS.Utilities.removeClass(<HTMLElement>e.currentTarget, "touchShade");
                 nav.navigate("/pages/newsPage/newsPage.html");
             }
         });
@@ -373,7 +373,7 @@ module MainHub {
             hideDomainMenu().done(function () {
                 domainMenuClickEater.style.visibility = 'visible';
                 domainMenus[domainIndex].style.visibility = 'visible';
-                WinJS.UI.Animation.enterContent(domainMenus[domainIndex]);
+                WinJS.UI.Animation.enterContent(domainMenus[domainIndex], null);
 
                 curDomainMenuIndex = domainIndex;
                 isDomainMenuOpen = true;

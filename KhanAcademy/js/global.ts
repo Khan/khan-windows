@@ -80,7 +80,7 @@
             service = new KA.Global();
 
             // start WinJS logging as there is other code which might fail and try to log errors
-            WinJS.Utilities.startLog({ type: "error", tags: "Khan Academy" });
+            WinJS.Utilities.startLog({ type: "error", tags: "Khan Academy", excludeTags: "" });
 
             return new WinJS.Promise(function (c, e) {
                 //init user log in menu
@@ -107,7 +107,8 @@
                         };
 
                         //init logging
-                        WinJS.Promise.onerror = KA.handleError;
+                        var promise: any = WinJS.Promise;
+                        promise.onerror = KA.handleError;
                         WinJS.Application.onerror = KA.handleError;
                         window.onerror = function (err) {
                             KA.handleError(err);

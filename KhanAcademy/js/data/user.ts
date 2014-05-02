@@ -13,7 +13,7 @@
 
         fetchUserInfo() {
             return new WinJS.Promise(function (complete, error) {
-                ApiClient.getUserInfoAsync().then(function (user) {
+                ApiClient.getUserInfoAsync().then(function (user: UserInfo) {
                     service.userInfo = user;
                     WinJS.Application.queueEvent({ type: "userInfoUpdated", userInfo: service.userInfo });
                     complete();
@@ -25,7 +25,7 @@
 
         fetchUserVideos() {
             return new WinJS.Promise(function (complete, error) {
-                ApiClient.getUserVideosAsync().done(function (result) {
+                ApiClient.getUserVideosAsync().done(function (result: any) {
                     service.watchedList = [];
                     if (result && result.userVideos) {
                         result.userVideos.forEach(function (v) {
