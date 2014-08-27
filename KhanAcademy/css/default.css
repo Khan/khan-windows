@@ -384,57 +384,84 @@ a {
 
 /* math */
 .x7a488390 {
-    background-color: #347192;
+    background-color: #1c758a;
 }
 
 .x7a488390-subject {
-    background-color: #30a7de;
+    background-color: #46a8bf;
 }
 
 /* science */
 .xb92336a2 {
-    background-color: #ba3d66;
+    background-color: #94424f;
 }
 
 .xb92336a2-subject {
-    background-color: #ba3d66;
+    background-color: #9d4a5a;
 }
 
 /* economics and finance */
 
 .x5ca94af1 {
-    background-color: #8e4c9b;
+    background-color: #c78d46;
 }
 
 .x5ca94af1-subject {
-    background-color: #8e4c9b;
+    background-color: #e1a158;
 }
 
 /* humanities */
 .x905db83d {
-    background-color: #4e55a1;
+    background-color: #cf5044;
 }
 
 .x905db83d-subject {
-    background-color: #4e55a1;
+    background-color: #e65a4c;
 }
 
-/* talks and interviews */
-.xd1039e22 {
-    background-color: #13967e;
+/* Computing */
+.x45aed616 {
+    background-color: #699c52;
 }
 
-.xd1039e22-subject {
-    background-color: #13967e;
+.x45aed616-subject {
+    background-color: #77b05d;
+}
+
+/* Test prep */
+.x7626d097 {
+    background-color: #644172;
+}
+
+.x7626d097-subject {
+    background-color: #7e5f8e;
 }
 
 /* partner content */
 .x54390c7e {
-    background-color: #13967e;
+    background-color: #49a88f;
 }
 
 .x54390c7e-subject {
     background-color: #13967e;
+}
+
+/* talks and interviews */
+.xd1039e22 {
+    background-color: #4d6779;
+}
+
+.xd1039e22-subject {
+    background-color: #4d6779;
+}
+
+/* Coach and classroom resources */
+.x6a4a5e33 {
+    background-color: #4d6779;
+}
+
+.x6a4a5e33-subject {
+    background-color: #4d6779;
 }
 
 ::selection, option:checked, select:focus::-ms-value, option:checked:hover, select:focus option:checked:hover {
@@ -527,10 +554,11 @@ a {
 
 @media screen and (-ms-view-state: fullscreen-portrait) {
     .fragment header[role=banner] {
-        -ms-grid-columns: 100px 1fr;
+        -ms-grid-columns: 40px 60px 1fr;
     }
 
         .fragment header[role=banner] .win-backbutton {
+            -ms-grid-column: 1;
             margin-left: 29px;
         }
 
