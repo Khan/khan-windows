@@ -17,8 +17,11 @@
             'xb92336a2', // Science
             'x5ca94af1', // Economics and Finance
             'x905db83d', // Humanities
+            'x45aed616', // Computing
+            'x7626d097', // Test prep
+            'x54390c7e', // Partner content
             'xd1039e22', // Talks and Interviews
-            'xae887ec6', // Projects & Discovery Lab
+            'x6a4a5e33' // Coach and classroom resources
         ];
 
         private domains: Domain[] = null;

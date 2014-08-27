@@ -1,29 +1,32 @@
 ﻿#mainHubPanel {
-    -ms-grid-rows: 1fr;
-}
+        display: -ms-grid;
+        -ms-grid-rows: 128px 1fr;
+	}
+
+    #mainHubPanel #banner {
+        background-image: url('/images/header-logo.svg');
+        background-repeat: no-repeat;
+        background-position-y: bottom;
+        -ms-grid-row: 1;
+        margin-left: 70px;
+        margin-top: 65px;
+        height: 36px;
+        width: 360px;
+    }
 
     #mainHubPanel section[role=main] {
-        -ms-grid-row: 1;
+        -ms-grid-row: 2;
         overflow-x: auto;
         overflow-y: hidden;
     }
 
     #mainHubPanel .mainGrid {
+        -ms-grid-row: 2;
         display: -ms-grid;
         -ms-grid-columns: 120px auto 58px 472px 59px 790px;
-        -ms-grid-rows: 140px 1fr;
+        -ms-grid-rows: 1fr;
         height: 100%;
     }
-
-        #mainHubPanel .mainGrid #banner {
-            background-image: url('/images/header-logo.svg');
-            background-repeat: no-repeat;
-            background-position-y: bottom;
-            -ms-grid-column-span: 3;
-            margin-left: 40px;
-            margin-bottom: 40px;
-            background-size: contain;
-        }
 
         #mainHubPanel .mainGrid h2 {
             font-size: 12pt;
@@ -45,12 +48,12 @@
 
 #domainPane {
     -ms-grid-column: 2;
-    -ms-grid-row: 2;
+    -ms-grid-row: 1;
 }
 
 #domainList {
     display: -ms-flexbox;
-    width: 384px;
+    width: 576px;
     -ms-flex-wrap: wrap;
 }
 
@@ -114,7 +117,7 @@
 
 #newsPane {
     -ms-grid-column: 4;
-    -ms-grid-row: 2;
+    -ms-grid-row: 1;
 }
 
 #newsList {
@@ -157,7 +160,7 @@
 
 #downloadsPane {
     -ms-grid-column: 6;
-    -ms-grid-row: 2;
+    -ms-grid-row: 1;
     display: -ms-grid;
     -ms-grid-columns: 1fr;
     -ms-grid-rows: 30px 1fr 60px;
@@ -172,9 +175,9 @@
     height: 100%;
 }
 
-	#mainHubPanel #downloadsLv .win-surface {
-		margin-right: 60px;
-	}
+    #mainHubPanel #downloadsLv .win-surface {
+        margin-right: 60px;
+    }
 
 #mainHubPanel #noDownloads {
     display: none;
@@ -184,24 +187,28 @@
 }
 
 @media screen and (-ms-view-state: snapped) {
+#mainHubPanel {
+        -ms-grid-rows: 108px 1fr;
+	}
+
     #mainHubPanel section[role=main] {
         overflow-x: hidden;
         overflow-y: auto;
     }
 
-    #mainHubPanel .mainGrid {
-        -ms-grid-columns: 20px auto 20px;
-        -ms-grid-rows: 100px 500px auto auto;
-    }
-
-        #mainHubPanel .mainGrid #banner {
+        #mainHubPanel #banner {
             -ms-grid-column-span: 1;
             background-size: contain;
             margin-top: 12px;
-            margin-left: 20px;
+            margin-left: -8px;
             width: 280px;
             height: 65px;
         }
+
+    #mainHubPanel .mainGrid {
+        -ms-grid-columns: 20px auto 20px;
+        -ms-grid-rows: auto auto auto;
+    }
 
     #domainList {
         width: 280px;
@@ -229,7 +236,7 @@
 
     #newsPane {
         -ms-grid-column: 2;
-        -ms-grid-row: 3;
+        -ms-grid-row: 2;
         margin-bottom: 12px;
     }
 
@@ -273,7 +280,7 @@
     #downloadsPane {
         -ms-grid-column: 1;
         -ms-grid-column-span: 3;
-        -ms-grid-row: 4;
+        -ms-grid-row: 3;
         display: -ms-grid;
         -ms-grid-columns: 1fr;
         -ms-grid-rows: 30px 1fr 70px;
@@ -290,14 +297,14 @@
         overflow-y: auto;
     }
 
-    #mainHubPanel .mainGrid {
-        -ms-grid-columns: 50px 1fr 40px;
-        -ms-grid-rows: 100px auto auto 600px;
-    }
-
-        #mainHubPanel .mainGrid #banner {
-            margin-left: 44px;
+        #mainHubPanel #banner {
+            margin-left: 10px;
         }
+
+    #mainHubPanel .mainGrid {
+        -ms-grid-columns: 60px 1fr 30px;
+        -ms-grid-rows: auto auto 600px;
+    }
 
     #newsList {
         width: 100%;
@@ -320,14 +327,14 @@
 
     #newsPane {
         -ms-grid-column: 2;
-        -ms-grid-row: 3;
+        -ms-grid-row: 2;
         margin-bottom: 36px;
     }
 
     #downloadsPane {
         -ms-grid-column: 2;
         -ms-grid-column-span: 1;
-        -ms-grid-row: 4;
+        -ms-grid-row: 3;
         -ms-grid-columns: 1fr;
         -ms-grid-rows: 30px 1fr 70px;
     }
