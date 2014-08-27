@@ -554,10 +554,11 @@ a {
 
 @media screen and (-ms-view-state: fullscreen-portrait) {
     .fragment header[role=banner] {
-        -ms-grid-columns: 100px 1fr;
+        -ms-grid-columns: 40px 60px 1fr;
     }
 
         .fragment header[role=banner] .win-backbutton {
+            -ms-grid-column: 1;
             margin-left: 29px;
         }
 
