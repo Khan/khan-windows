@@ -167,7 +167,6 @@
       <DependentUpon>downloadsPage.ts</DependentUpon>
     </Content>
     <Content Include="pages\flyouts\about.html" />
-    <Content Include="pages\flyouts\feedback.html" />
     <Content Include="pages\flyouts\privacy.html" />
     <Content Include="pages\flyouts\terms.html" />
     <Content Include="pages\mainHub\mainHub.css" />

@@ -97,12 +97,30 @@
                 }).done(function () {
                         //init settings flyout
                         WinJS.Application.onsettings = function (e) {
-                            e.detail.applicationcommands = {
-                                "terms": { title: "Terms of Service", href: "/pages/flyouts/terms.html" },
-                                "privacy": { title: "Privacy Policy", href: "/pages/flyouts/privacy.html" },
-                                "about": { title: "About", href: "/pages/flyouts/about.html" },
-                                "feedback": { title: "Feedback", href: "/pages/flyouts/feedback.html" }
+
+                            // all the commands we need to show in settings charm
+                            var commands: { id: string; title: string }[] = [
+                                { id: "terms", title: "Terms of Service" },
+                                { id: "privacy", title: "Privacy Policy" },
+                                { id: "about", title: "About" },
+                                { id: "help", title: "Help Center" }];
+
+                            //handler for the settings command. help launches an external page, others open a flyout
+                            var handler = command => {
+                                if (command.id === "help") {
+                                    var uri = new Windows.Foundation.Uri('https://www.khanacademy.org/r/help');
+                                    Windows.System.Launcher.launchUriAsync(uri);
+                                } else {
+                                    WinJS.UI.SettingsFlyout.showSettings(command.id, "/pages/flyouts/" + command.id + ".html");
+                                }
                             };
+
+                            // add all commands to the event parameter
+                            for (var i = 0; i < commands.length; i++) {
+                                e.detail.e.request.applicationCommands.append(new Windows.UI.ApplicationSettings.SettingsCommand(commands[i].id, commands[i].title, handler));
+                            }
+
+                            // populate the settings charm
                             WinJS.UI.SettingsFlyout.populateSettings(e);
                         };
 
